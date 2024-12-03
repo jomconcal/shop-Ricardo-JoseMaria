@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products Category</title>
+</head>
+<body>
+
+<main>
+    <div id="productCategories" th:each="productCategorie : ${productCategories}">
+        <ul class="product-Category">
+            <li th:text="${productCategorie.name}"></li>
+            <li th:text="${productCategorie.description}"></li>
+            <li>
+                <img th:src="${productCategorie.image}" th:alt="${productCategorie.name}">
+            </li>
+        </ul>
+    </div>
+</main>
+
+</body>
+</html>

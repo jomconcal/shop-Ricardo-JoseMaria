@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.ProductCategory;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.generic.ProductCategoryRepImpl;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.generic.ProductCategoryRep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private final ProductCategoryRepImpl productCategoryRep;
+    //La variable es de tipo interfaz, pero la inicialización será de la clase.
+    private final ProductCategoryRep productCategoryRep;
 
     @Override
     public long count() {
