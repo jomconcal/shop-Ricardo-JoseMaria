@@ -1,27 +1,31 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.base;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Entity;
 
-public class RepositoryImpl<T> implements Repository<T> {
+import java.util.*;
+
+public class RepositoryImpl<T extends Entity<ID>,ID> implements Repository<T,ID> {
+        Map<ID, T> productCategories = new HashMap<>();
+
     @Override
     public long count() {
-        return 0;
+        return productCategories.size();
     }
 
     @Override
-    public void save(T t) {
-
+    public void save(T T) {
+        productCategories.put(T.getId(), T);
     }
 
     @Override
     public Collection<T> findAll() {
-        return List.of();
+        return productCategories.values();
     }
 
     @Override
-    public Optional<T> findById(Long id) {
+    public Optional<T> findById(ID id) {
+        if(productCategories.containsKey(id))
+            return Optional.of(productCategories.get(id));
         return Optional.empty();
     }
 }

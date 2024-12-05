@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString
-public class ProductCategory {
-    private long id;
+public class Category implements Entity<Long> {
+    private Long id;
     private String name;
     private String description;
     private String image;

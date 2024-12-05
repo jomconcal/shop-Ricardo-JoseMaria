@@ -1,6 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.ProductCategory;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 
-public interface CategoryService extends Service<ProductCategory>{
+public interface CategoryService extends Service<Category>{
 }
