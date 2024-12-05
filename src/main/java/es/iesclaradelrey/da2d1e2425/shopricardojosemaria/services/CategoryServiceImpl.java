@@ -6,19 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    //La variable es de tipo interfaz, pero la inicialización será de la clase.
     private final CategoryRepository categoryRepository;
-
-    @Override
-    public long count() {
-        return categoryRepository.count();
-    }
 
     @Override
     public void save(Category category) {
@@ -30,8 +23,4 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll();
     }
 
-    @Override
-    public Optional<Category> findById(Long id) {
-        return categoryRepository.findById(id);
-    }
 }

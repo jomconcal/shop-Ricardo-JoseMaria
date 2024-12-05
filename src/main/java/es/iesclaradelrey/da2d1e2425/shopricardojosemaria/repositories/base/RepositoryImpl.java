@@ -4,8 +4,8 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Entity;
 
 import java.util.*;
 
-public class RepositoryImpl<T extends Entity<ID>,ID> implements Repository<T,ID> {
-        Map<ID, T> productCategories = new HashMap<>();
+public class RepositoryImpl<T extends Entity<ID>, ID> implements Repository<T, ID> {
+    Map<ID, T> productCategories = new HashMap<>();
 
     @Override
     public long count() {
@@ -24,7 +24,7 @@ public class RepositoryImpl<T extends Entity<ID>,ID> implements Repository<T,ID>
 
     @Override
     public Optional<T> findById(ID id) {
-        if(productCategories.containsKey(id))
+        if (productCategories.containsKey(id))
             return Optional.of(productCategories.get(id));
         return Optional.empty();
     }
