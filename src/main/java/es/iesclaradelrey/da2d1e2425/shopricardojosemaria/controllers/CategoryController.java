@@ -11,16 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/product-category")
+@RequestMapping("/categories")
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
 
     @GetMapping({"", "/"})
-    public ModelAndView getAllProductCategories() {
+    public ModelAndView getAllCategories() {
 
         Collection<Category> categories = categoryService.findAll();
-        return new ModelAndView("product-category","categories",categories);
+        return new ModelAndView("categories","categories",categories);
     }
 }
+

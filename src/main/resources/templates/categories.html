@@ -2,17 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products Category</title>
+    <title>Categories</title>
 </head>
 <body>
 
 <main>
-    <div id="categories" th:each="category : ${categories}">
-        <ul class="product-Category">
+    <div th:each="category : ${categories}">
+        <ul>
             <li th:text="${category.name}"></li>
             <li th:text="${category.description}"></li>
             <li>
-                <img th:src="${category.image}" th:alt="${category.name}">
+                <img th:src="${category.imageUrl}" th:alt="${category.name}">
             </li>
         </ul>
     </div>
