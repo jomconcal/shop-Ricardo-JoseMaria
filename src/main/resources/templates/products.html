@@ -13,7 +13,7 @@
             <li th:text="${product.description}"></li>
             <li th:text="${product.price}"></li>
             <li >
-                <img th:src="${product.imageUrl}">
+                <img th:src="${product.imageUrl}" th:alt="${product.name}">
             </li>
         </ul>
     </div>
