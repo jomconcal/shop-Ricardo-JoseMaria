@@ -1,0 +1,62 @@
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.category {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    width: 25%; /* Ancho estrecho */
+    height: auto;  /* Ajusta la altura según el contenido */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Mejor alineación */
+    text-align: center;
+    min-height: 20rem; /* Altura mínima */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el hover */
+}
+
+.category:hover {
+    cursor: pointer;
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta la sombra para el efecto de hover */
+}
+
+.category img {
+    width: 100%; /* Ancho completo para la imagen */
+    height: 10rem; /* Altura fija para la imagen */
+    object-fit: cover; /* La imagen se ajusta a este espacio sin distorsionarse */
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    background-color: #ddd; /* Color de fondo si no hay imagen */
+}
+
+.category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.category li:first-child {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.category li:last-child {
+    font-style: italic;
+    color: #666;
+}

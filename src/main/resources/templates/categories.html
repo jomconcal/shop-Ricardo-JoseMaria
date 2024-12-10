@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
+    <link rel="stylesheet" href="css/categories.css">
 </head>
 <body>
 
 <main>
-    <div th:each="category : ${categories}">
-        <ul>
-            <li th:text="${category.name}"></li>
-            <li th:text="${category.description}"></li>
-            <li>
-                <img th:src="${category.imageUrl}" th:alt="${category.name}">
-            </li>
-        </ul>
+    <div class="categories">
+        <div th:each="category : ${categories}" class="category">
+            <ul>
+                <li th:text="${category.name}"></li>
+                <li>
+                    <img th:src="${category.imageUrl}" th:alt="${category.name}">
+                </li>
+                <li th:text="${category.description}"></li>
+            </ul>
+        </div>
     </div>
 </main>
 
