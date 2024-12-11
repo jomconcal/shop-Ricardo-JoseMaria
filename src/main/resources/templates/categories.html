@@ -12,7 +12,7 @@
         <div th:each="category : ${categories}" class="category">
             <ul>
                 <li th:text="${category.name}"></li>
-                <li>
+                <li class="image-container">
                     <img th:src="${category.imageUrl}" th:alt="${category.name}">
                 </li>
                 <li th:text="${category.description}"></li>

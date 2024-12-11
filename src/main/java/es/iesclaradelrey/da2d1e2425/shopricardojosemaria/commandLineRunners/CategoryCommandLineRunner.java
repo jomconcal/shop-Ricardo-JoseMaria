@@ -21,11 +21,11 @@ public class CategoryCommandLineRunner implements CommandLineRunner {
         long id = 1L;
 
 // Categorías
-        Category coffee = new Category(id++, "Coffees", "Enjoy the finest coffee blends", "/img/coffee.jpg");
-        Category tea = new Category(id++, "Teas", "Discover the magic of our tea selections", "/img/tea.jpg");
-        Category cocktail = new Category(id++, "Cocktails", "Crafted cocktails for every occasion", "/img/cocktail.jpg");
-        Category pintxo = new Category(id++, "Pintxos", "Basque-inspired gourmet bites", "/img/pintxo.jpg");
-        Category dessert = new Category(id++, "Desserts", "Sweet delights to end your meal", "/img/dessert.jpg");
+        Category coffee = new Category(id++, "Coffees", "Enjoy the finest coffee blends", "/img/categories/coffee.png");
+        Category tea = new Category(id++, "Teas", "Discover the magic of our tea selections", "/img/categories/tea.webp");
+        Category cocktail = new Category(id++, "Cocktails", "Crafted cocktails for every occasion", "/img/categories/cocktail.jpg");
+        Category pintxo = new Category(id++, "Pintxos", "Basque-inspired gourmet bites", "/img/categories/pintxos.jpg");
+        Category dessert = new Category(id++, "Desserts", "Sweet delights to end your meal", "/img/categories/dessert.webp");
 
 // Productos de Coffees
         Product espresso = new Product(id++, coffee, "Espresso", "Classic Italian coffee", 4.50, "/img/espresso.jpg");
