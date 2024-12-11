@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <title>Categories</title>
     <link rel="stylesheet" href="css/categories.css">
+    <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
-
+<head>
+    <nav th:replace="~{nav.html}"></nav>
+</head>
 <main>
     <div class="categories">
         <div th:each="category : ${categories}" class="category">

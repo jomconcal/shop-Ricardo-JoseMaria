@@ -1,0 +1,27 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(111, 79, 31, 0.8);
+    color: white;
+    padding: 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+nav a:hover {
+    color: #ffeb3b;
+}
+
+body {
+    padding-top: 80px;
+}

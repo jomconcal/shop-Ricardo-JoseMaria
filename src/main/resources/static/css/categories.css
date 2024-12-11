@@ -1,6 +1,7 @@
 body {
     background-image: url('/img/categories/fondo.jpg');
     background-attachment: fixed;
+    height:1000px;
 }
 .categories {
     display: flex;
@@ -12,7 +13,6 @@ body {
 }
 
 .category {
-    background-color: #d7ccc8;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     width: 25%;
@@ -25,6 +25,7 @@ body {
     justify-content: flex-start;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #d7ccc8;
 }
 
 .category:hover {
