@@ -1,0 +1,9 @@
+body {
+    background-image: url('/img/products/cocktails/fondo.jpg');
+    color: #f5e6c4;
+}
+
+.products {
+    background: rgba(32, 32, 64, 0.9);
+    color: #ffd700;
+}

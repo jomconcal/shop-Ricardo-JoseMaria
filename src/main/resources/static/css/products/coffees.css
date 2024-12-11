@@ -1,0 +1,10 @@
+body {
+    background-image: url('/img/products/coffees/fondo.jpg');
+    color: #333;
+}
+
+.products {
+    background: rgba(96, 64, 32, 0.8);
+    color: #fff;
+}
+

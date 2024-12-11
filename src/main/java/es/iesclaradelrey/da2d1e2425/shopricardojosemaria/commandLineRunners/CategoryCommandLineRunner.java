@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 @RequiredArgsConstructor
 public class CategoryCommandLineRunner implements CommandLineRunner {
@@ -28,25 +30,25 @@ public class CategoryCommandLineRunner implements CommandLineRunner {
         Category dessert = new Category(id++, "Desserts", "Sweet delights to end your meal", "/img/categories/dessert.webp");
 
 // Productos de Coffees
-        Product espresso = new Product(id++, coffee, "Espresso", "Classic Italian coffee", 4.50, "/img/espresso.jpg");
-        Product cappuccino = new Product(id++, coffee, "Cappuccino", "Perfect blend of coffee and milk foam", 5.50, "/img/cappuccino.jpg");
-        Product latte = new Product(id++, coffee, "Latte", "Smooth coffee with steamed milk", 5.00, "/img/latte.jpg");
-        Product americano = new Product(id++, coffee, "Americano", "Simple and bold black coffee", 4.00, "/img/americano.jpg");
-        Product mocha = new Product(id++, coffee, "Mocha", "Coffee with a chocolate twist", 5.75, "/img/mocha.jpg");
+        Product espresso = new Product(id++, coffee, "Espresso", "Classic Italian coffee", 4.50, "/img/products/coffees/espresso.webp");
+        Product cappuccino = new Product(id++, coffee, "Cappuccino", "Perfect blend of coffee and milk foam", 5.50, "/img/products/coffees/cappuccino.jpg");
+        Product latte = new Product(id++, coffee, "Latte", "Smooth coffee with steamed milk", 5.00, "/img/products/coffees/latte.jpg");
+        Product americano = new Product(id++, coffee, "Americano", "Simple and bold black coffee", 4.00, "/img/products/coffees/americano.jpeg");
+        Product mocha = new Product(id++, coffee, "Mocha", "Coffee with a chocolate twist", 5.75, "/img/products/coffees/mocha.jpg");
 
 // Productos de Teas
-        Product greenTea = new Product(id++, tea, "Green Tea", "Refreshing and healthy", 3.50, "/img/green-tea.jpg");
-        Product blackTea = new Product(id++, tea, "Black Tea", "Strong and full-bodied", 3.75, "/img/black-tea.jpg");
-        Product chamomile = new Product(id++, tea, "Chamomile", "Calming herbal tea", 4.00, "/img/chamomile.jpg");
-        Product oolong = new Product(id++, tea, "Oolong", "A perfect balance of flavor", 4.25, "/img/oolong.jpg");
-        Product mintTea = new Product(id++, tea, "Mint Tea", "Refreshing mint flavor", 3.50, "/img/mint-tea.jpg");
+        Product greenTea = new Product(id++, tea, "Green Tea", "Refreshing and healthy", 3.50, "/img/products/teas/green-tea.webp");
+        Product blackTea = new Product(id++, tea, "Black Tea", "Strong and full-bodied", 3.75, "/img/products/teas/black-tea.png");
+        Product chamomile = new Product(id++, tea, "Chamomile", "Calming herbal tea", 4.00, "/img/products/teas/chamomile.jpg");
+        Product oolong = new Product(id++, tea, "Oolong", "A perfect balance of flavor", 4.25, "/img/products/teas/oolong.jpeg");
+        Product mintTea = new Product(id++, tea, "Mint Tea", "Refreshing mint flavor", 3.50, "/img/products/teas/mint-tea.jpg");
 
 // Productos de Cocktails
-        Product mojito = new Product(id++, cocktail, "Mojito", "Classic Cuban cocktail", 8.00, "/img/mojito.jpg");
-        Product margarita = new Product(id++, cocktail, "Margarita", "A citrusy favorite", 9.00, "/img/margarita.jpg");
-        Product negroni = new Product(id++, cocktail, "Negroni", "Bold and sophisticated", 10.00, "/img/negroni.jpg");
-        Product piñaColada = new Product(id++, cocktail, "Piña Colada", "Tropical pineapple delight", 8.50, "/img/pina-colada.jpg");
-        Product daiquiri = new Product(id++, cocktail, "Daiquiri", "Refreshing lime cocktail", 9.50, "/img/daiquiri.jpg");
+        Product mojito = new Product(id++, cocktail, "Mojito", "Classic Cuban cocktail", 8.00, "/img/products/cocktails/mojito.jpg");
+        Product margarita = new Product(id++, cocktail, "Margarita", "A citrusy favorite", 9.00, "/img/products/cocktails/margarita.jpg");
+        Product negroni = new Product(id++, cocktail, "Negroni", "Bold and sophisticated", 10.00, "/img/products/cocktails/negroni.jpg");
+        Product piñaColada = new Product(id++, cocktail, "Piña Colada", "Tropical pineapple delight", 8.50, "/img/products/cocktails/pina-colada.webp");
+        Product daiquiri = new Product(id++, cocktail, "Daiquiri", "Refreshing lime cocktail", 9.50, "/img/products/cocktails/daiquiri.jpg");
 
 // Productos de Pintxos
         Product jamonPintxo = new Product(id++, pintxo, "Jamon Pintxo", "Ham on crusty bread", 3.50, "/img/jamon-pintxo.jpg");
