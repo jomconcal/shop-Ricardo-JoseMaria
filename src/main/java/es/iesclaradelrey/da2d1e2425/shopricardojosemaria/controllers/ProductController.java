@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -22,22 +23,27 @@ public class ProductController {
     private final CategoryService categoryService;
 
     @GetMapping({"", "/"})
-    public ModelAndView getAllProducts(@RequestParam(name = "categoryId", required = true) Long categoryId) {
+    public ModelAndView getAllProducts(@RequestParam(name = "categoryId", required = false) Long categoryId) {
         Collection<Product> products;
-        String categoryName="";
+        ModelAndView mav = new ModelAndView("products");
+
         if (categoryId != null) {
             products = productService.findByCategory(categoryId);
             Optional<Category> optionalCategory = categoryService.findById(categoryId);
-            categoryName = optionalCategory.isPresent() ? optionalCategory.get().getName() : "";
+            Category category = optionalCategory.orElse(null);
+            Collection<Category> categories= new ArrayList<Category>();
+            categories.add(category);
+            mav.addObject("products", products);
+            mav.addObject("categories", categories);
+            assert category != null;
+            mav.addObject("title", category.getName());
         } else {
             products = productService.findAll();
-            categoryName="Products";
+            Collection<Category> categories = categoryService.findAll();
+            mav.addObject("products", products);
+            mav.addObject("categories", categories);
+            mav.addObject("title", "All Products");
         }
-        ModelAndView mav = new ModelAndView("products");
-        mav.addObject("products", products);
-        mav.addObject("categoryName", categoryName);
-        mav.addObject("title", categoryName);
         return mav;
-
     }
 }

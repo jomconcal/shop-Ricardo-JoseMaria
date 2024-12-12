@@ -3,37 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link rel="stylesheet" href="css/products/products.css">
-    <link rel="stylesheet" th:if="${categoryName == 'Coffees'}" th:href="@{/css/products/coffees.css}" />
-    <link rel="stylesheet" th:if="${categoryName == 'Teas'}" th:href="@{/css/products/teas.css}" />
-    <link rel="stylesheet" th:if="${categoryName == 'Cocktails'}" th:href="@{/css/products/cocktails.css}" />
-    <link rel="stylesheet" th:if="${categoryName == 'Pintxos'}" th:href="@{/css/products/pintxos.css}" />
-    <link rel="stylesheet" th:if="${categoryName == 'Desserts'}" th:href="@{/css/products/desserts.css}" />
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/category.css">
     <link rel="stylesheet" href="css/nav.css">
 </head>
-<body>
+<body th:class="|body${title}|">
 <header>
     <nav th:replace="~{nav.html}"></nav>
 </header>
 <main>
-    <div class="products">
-        <div th:each="product:${products}" class="product">
-            <ul>
-                <li class="description">
+    <div class="categories">
+        <div th:each="category:${categories}" th:class="category">
+            <div th:class="|${category.name} products|">
+                <div th:each="product:${products}" th:if="${product.category.id}==${category.id}"
+                     th:class="|${product.name} product|">
                     <ul>
-                        <li>
-                            <h2 th:text="${product.name}"></h2>
+                        <li class="description">
+                            <ul>
+                                <li>
+                                    <h2 th:text="${product.name}"></h2>
+                                </li>
+                                <li th:text="${product.description}"></li>
+                            </ul>
                         </li>
-                        <li th:text="${product.description}"></li>
+                        <li class="image-container">
+                            <img th:src="${product.imageUrl}" th:alt="${product.name}">
+                        </li>
+                        <li th:text="${product.price}" class="price"></li>
                     </ul>
-                </li>
-                <li class="image-container">
-                    <img th:src="${product.imageUrl}" th:alt="${product.name}">
-                </li>
-                <li th:text="${product.price}" class="price"></li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
+
 </main>
 </body>
 </html>

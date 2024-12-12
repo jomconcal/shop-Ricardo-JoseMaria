@@ -4,6 +4,15 @@ body {
     padding: 0;
 }
 
+.categories {
+    margin: 0;
+    padding: 0;
+}
+
+.category{
+    margin: 0;
+    padding: 0;
+}
 .products {
     max-width: 800px;
     margin: 2rem auto;
@@ -38,7 +47,8 @@ body {
 .product:not(:first-of-type) {
     margin-top: 2rem;
 }
-.product{
+
+.product {
     padding-bottom: 2rem;
 }
 
@@ -49,9 +59,11 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
-.product .description h2{
+
+.product .description h2 {
     margin-top: 0;
 }
+
 .product .description ul {
     list-style: none;
     margin: 0;
