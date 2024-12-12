@@ -51,11 +51,11 @@ public class CategoryCommandLineRunner implements CommandLineRunner {
         Product daiquiri = new Product(id++, cocktail, "Daiquiri", "Refreshing lime cocktail", 9.50, "/img/products/cocktails/daiquiri.jpg");
 
 // Productos de Pintxos
-        Product jamonPintxo = new Product(id++, pintxo, "Jamon Pintxo", "Ham on crusty bread", 3.50, "/img/jamon-pintxo.jpg");
-        Product tortillaPintxo = new Product(id++, pintxo, "Tortilla Pintxo", "Spanish omelette bite", 3.75, "/img/tortilla-pintxo.jpg");
-        Product shrimpPintxo = new Product(id++, pintxo, "Shrimp Pintxo", "Shrimp with garlic", 4.00, "/img/shrimp-pintxo.jpg");
-        Product chorizoPintxo = new Product(id++, pintxo, "Chorizo Pintxo", "Spicy sausage and pepper", 4.25, "/img/chorizo-pintxo.jpg");
-        Product cheesePintxo = new Product(id++, pintxo, "Cheese Pintxo", "Artisan cheese selection", 4.50, "/img/cheese-pintxo.jpg");
+        Product jamonPintxo = new Product(id++, pintxo, "Jamon Pintxo", "Ham on crusty bread", 3.50, "/img/products/pintxos/jamon-pintxo.jpg");
+        Product tortillaPintxo = new Product(id++, pintxo, "Tortilla Pintxo", "Spanish omelette bite", 3.75, "/img/products/pintxos/tortilla-pintxo.webp");
+        Product shrimpPintxo = new Product(id++, pintxo, "Shrimp Pintxo", "Shrimp with garlic", 4.00, "/img/products/pintxos/shrimp-pintxo.jpg");
+        Product chorizoPintxo = new Product(id++, pintxo, "Chorizo Pintxo", "Spicy sausage and pepper", 4.25, "/img/products/pintxos/chorizo-pintxo.jpg");
+        Product cheesePintxo = new Product(id++, pintxo, "Cheese Pintxo", "Artisan cheese selection", 4.50, "/img/products/pintxos/cheese-pintxo.jpg");
 
 // Productos de Desserts
         Product brownie = new Product(id++, dessert, "Brownie", "Rich chocolate dessert", 4.50, "/img/brownie.jpg");
