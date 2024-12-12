@@ -58,11 +58,11 @@ public class CategoryCommandLineRunner implements CommandLineRunner {
         Product cheesePintxo = new Product(id++, pintxo, "Cheese Pintxo", "Artisan cheese selection", 4.50, "/img/products/pintxos/cheese-pintxo.jpg");
 
 // Productos de Desserts
-        Product brownie = new Product(id++, dessert, "Brownie", "Rich chocolate dessert", 4.50, "/img/brownie.jpg");
-        Product cheesecake = new Product(id++, dessert, "Cheesecake", "Creamy and indulgent", 5.00, "/img/cheesecake.jpg");
-        Product tiramisu = new Product(id++, dessert, "Tiramisu", "Classic Italian dessert", 5.50, "/img/tiramisu.jpg");
-        Product pannaCotta = new Product(id++, dessert, "Panna Cotta", "Silky and smooth", 5.25, "/img/panna-cotta.jpg");
-        Product iceCream = new Product(id++, dessert, "Ice Cream", "Assorted gourmet flavors", 4.00, "/img/ice-cream.jpg");
+        Product brownie = new Product(id++, dessert, "Brownie", "Rich chocolate dessert", 4.50, "/img/products/desserts/brownie.png");
+        Product cheesecake = new Product(id++, dessert, "Cheesecake", "Creamy and indulgent", 5.00, "/img/products/desserts/cheesecake.jpg");
+        Product tiramisu = new Product(id++, dessert, "Tiramisu", "Classic Italian dessert", 5.50, "/img/products/desserts/tiramisu.jpg");
+        Product pannaCotta = new Product(id++, dessert, "Panna Cotta", "Silky and smooth", 5.25, "/img/products/desserts/panna-cotta.jpg");
+        Product iceCream = new Product(id++, dessert, "Ice Cream", "Assorted gourmet flavors", 4.00, "/img/products/desserts/ice-cream.webp");
 
 // Guardar categorías
         categoryService.save(coffee);

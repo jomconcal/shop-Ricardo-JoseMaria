@@ -22,7 +22,7 @@ public class ProductController {
     private final CategoryService categoryService;
 
     @GetMapping({"", "/"})
-    public ModelAndView getAllProducts(@RequestParam(name = "categoryId", required = false) Long categoryId) {
+    public ModelAndView getAllProducts(@RequestParam(name = "categoryId", required = true) Long categoryId) {
         Collection<Product> products;
         String categoryName="";
         if (categoryId != null) {
@@ -31,10 +31,12 @@ public class ProductController {
             categoryName = optionalCategory.isPresent() ? optionalCategory.get().getName() : "";
         } else {
             products = productService.findAll();
+            categoryName="Products";
         }
         ModelAndView mav = new ModelAndView("products");
         mav.addObject("products", products);
         mav.addObject("categoryName", categoryName);
+        mav.addObject("title", categoryName);
         return mav;
 
     }

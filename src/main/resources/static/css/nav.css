@@ -8,8 +8,21 @@ nav {
     padding: 1.5rem;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
 }
 
+nav>*{
+    margin: 0;
+    padding: 0;
+    align-content: center;
+}
+
+nav > div {
+    flex: 3;
+}
+nav>h1{
+    flex:4;
+}
 nav a {
     color: white;
     text-decoration: none;

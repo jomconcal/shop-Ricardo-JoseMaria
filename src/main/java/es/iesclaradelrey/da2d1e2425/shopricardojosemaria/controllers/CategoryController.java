@@ -21,7 +21,9 @@ public class CategoryController {
     public ModelAndView getAllCategories() {
 
         Collection<Category> categories = categoryService.findAll();
-        return new ModelAndView("index","categories",categories);
+        ModelAndView mav= new ModelAndView("index","categories",categories);
+        mav.addObject("title","Coffe Shop");
+        return  mav;
     }
 }
 
