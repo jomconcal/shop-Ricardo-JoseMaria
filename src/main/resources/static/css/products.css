@@ -12,8 +12,43 @@ body {
 .category{
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
+
+.right, .left{
+    flex:1;
+    display: flex;
+}
+
+.left{
+    justify-content: flex-end;
+}
+.right>a, .left>a{
+    margin: 0.5rem;
+    top: 45%;
+    position: fixed;
+    height: fit-content;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 2rem 1rem;
+    border-radius: 5px;
+    background-color: #000000;
+    opacity: 0.7;
+}
+.right > a:hover, .left > a:hover {
+    background-color: #444444;
+    color: #ffffff;
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
 .products {
+    flex: 8;
     max-width: 800px;
     margin: 2rem auto;
     padding: 2rem;
