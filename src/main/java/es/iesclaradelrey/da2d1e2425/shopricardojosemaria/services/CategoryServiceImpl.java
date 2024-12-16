@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.generic.CategoryRepository;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
