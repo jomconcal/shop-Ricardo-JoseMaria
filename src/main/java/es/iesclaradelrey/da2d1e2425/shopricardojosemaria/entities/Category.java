@@ -3,6 +3,8 @@ package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -22,5 +24,8 @@ public class Category{
         this.description = description;
         this.imageUrl = imageUrl;
     }
+
+    @OneToMany(mappedBy = "category")
+    private Set<Product> products;
 
 }
