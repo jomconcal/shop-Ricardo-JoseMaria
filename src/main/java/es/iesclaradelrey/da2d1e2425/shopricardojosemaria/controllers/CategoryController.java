@@ -5,13 +5,11 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryServic
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/")
 @RequiredArgsConstructor
 public class CategoryController {
 
@@ -22,7 +20,7 @@ public class CategoryController {
 
         Collection<Category> categories = categoryService.findAll();
         ModelAndView mav= new ModelAndView("index","categories",categories);
-        mav.addObject("title","Coffe Shop");
+        mav.addObject("title","Coffee Shop");
         return  mav;
     }
 }
