@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,12 +25,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Optional<Product> findById(long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
     public Collection<Product> findAll() {
         return productRepository.findAll();
     }
 
     @Override
-    public Collection<Product> findByCategory(Long categoryId) {
-        return findAll().stream().filter(product -> product.getCategory().getId().equals(categoryId)).collect(Collectors.toList());
+    public Collection<Product> findByCategoryId(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
     }
 }

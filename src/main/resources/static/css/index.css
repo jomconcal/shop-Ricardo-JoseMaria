@@ -13,12 +13,13 @@ body {
 }
 
 .category {
+    text-decoration: none;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     width: 25%;
     height: 20rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,8 +37,12 @@ body {
 
 .category ul {
     height: 100%;
+    width: 100%;
 }
 
+.category ul li {
+    width: 100%;
+}
 .image-container {
     height: 80%;
 }
@@ -60,6 +65,7 @@ body {
     margin-bottom: 0.5rem;
     font-size: 1rem;
     color: #333;
+    transition: color 0.3s ease;
 }
 
 .category li:first-child {
@@ -70,4 +76,8 @@ body {
 .category li:last-child {
     font-style: italic;
     color: #666;
+}
+
+.category:hover li{
+    color: #5D4037;
 }

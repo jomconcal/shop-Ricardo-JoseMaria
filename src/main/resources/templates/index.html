@@ -12,17 +12,15 @@
 </header>
 <main>
     <div class="categories">
-        <div th:each="category : ${categories}" class="category">
+        <a th:each="category : ${categories}" class="category" th:href="@{/products(categoryId=${category.id})}">
             <ul>
                 <li th:text="${category.name}"></li>
                 <li class="image-container">
-                    <a th:href="@{/products(categoryId=${category.id})}">
-                        <img th:src="${category.imageUrl}" th:alt="${category.name}">
-                    </a>
+                    <img th:src="${category.imageUrl}" th:alt="${category.name}">
                 </li>
                 <li th:text="${category.description}"></li>
             </ul>
-        </div>
+        </a>
     </div>
 </main>
 

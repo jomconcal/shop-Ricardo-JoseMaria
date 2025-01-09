@@ -31,7 +31,9 @@
                             </ul>
                         </li>
                         <li class="image-container">
-                            <img th:src="${product.imageUrl}" th:alt="${product.name}">
+                            <a th:href="@{/product-detail(productId=${product.getId()})}">
+                                <img th:src="${product.imageUrl}" th:alt="${product.name}">
+                            </a>
                         </li>
                         <li th:text="${product.price}" class="price"></li>
                     </ul>

@@ -26,7 +26,7 @@ public class ProductController {
         ModelAndView mav = new ModelAndView("products");
 
         if (categoryId != null) {
-            products = productService.findByCategory(categoryId);
+            products = productService.findByCategoryId(categoryId);
             Optional<Category> optionalCategory = categoryService.findById(categoryId);
             Category category = optionalCategory.orElse(null);
             Collection<Category> categories = new ArrayList<Category>();
