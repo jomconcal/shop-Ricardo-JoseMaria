@@ -1,4 +1,19 @@
-img{
-    width: 100%;
+body,html {
     height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+main{
+    height: 100%;
+    padding:0 2rem;
+}
+.products{
+    height:80%
+}
+
+img{
+    width: 50%;
+    height: auto;
+    max-height: 50%;
 }

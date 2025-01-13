@@ -11,11 +11,13 @@
 
 <main>
     <div th:class="|${title} products|">
+        <button id="close-dialog">X</button>
         <p th:text="${product.name}"></p>
         <p th:text="${product.description}"></p>
         <img th:alt="${product.name}" th:src="${product.imageUrl}">
         <p th:text="${product.productDetail}"></p>
     </div>
 </main>
+<script th:src="@{/js/product-detail.js}"></script>
 </body>
 </html>

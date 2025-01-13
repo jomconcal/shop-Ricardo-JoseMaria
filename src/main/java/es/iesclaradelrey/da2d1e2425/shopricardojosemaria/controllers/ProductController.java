@@ -29,7 +29,7 @@ public class ProductController {
             products = productService.findByCategoryId(categoryId);
             Optional<Category> optionalCategory = categoryService.findById(categoryId);
             Category category = optionalCategory.orElse(null);
-            Collection<Category> categories = new ArrayList<Category>();
+            Collection<Category> categories = new ArrayList<>();
             categories.add(category);
             Collection<Category> allCategories = categoryService.findAll();
 
