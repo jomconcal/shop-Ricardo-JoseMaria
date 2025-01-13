@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link rel="stylesheet" href="css/products.css">
-    <link rel="stylesheet" href="css/category.css">
-    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" th:href="@{/css/products.css}">
+    <link rel="stylesheet" th:href="@{/css/category.css}">
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
 </head>
 <body th:class="|body${title}|">
 <header>
@@ -31,9 +31,10 @@
                             </ul>
                         </li>
                         <li class="image-container">
-                            <a th:href="@{/product-detail(productId=${product.getId()})}">
+<!--                            <a th:href="@{/product-detail(productId=${product.getId()})}">-->
+                            <div  class="product-link" th:data-iframe-src="${product.getId()}">
                                 <img th:src="${product.imageUrl}" th:alt="${product.name}">
-                            </a>
+                            </div>
                         </li>
                         <li th:text="${product.price}" class="price"></li>
                     </ul>
@@ -44,7 +45,13 @@
             </div>
         </div>
     </div>
-
+    <dialog id="product-dialog">
+        <iframe id="product-iframe" th:url="@{/product-detail}"></iframe>
+        <div class="dialog-footer">
+            <button class="close-btn" id="close-dialog">Close</button>
+        </div>
+    </dialog>
 </main>
+<script th:src="@{/js/product-detail.js}"></script>
 </body>
 </html>
