@@ -16,9 +16,9 @@
 
         <div th:each="category:${categories}" th:class="category">
             <div class="left" th:if="${title}!= 'All Products'">
-                <a th:href="@{/products(categoryId=${previousCategoryId})}">&lt;</a>
+                <a th:href="@{/products(categoryId=${previousCategoryId},direction='slide-left')}">&lt;</a>
             </div>
-            <div th:class="|${category.name} products|">
+            <div th:class="|${category.name} products ${direction}|">
                 <div th:each="product:${products}" th:if="${product.category.id}==${category.id}"
                      th:class="|${product.name} product|">
                     <ul>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="right" th:if="${title}!= 'All Products'">
-                <a th:href="@{/products(categoryId=${nextCategoryId})}">&gt;</a>
+                <a th:href="@{/products(categoryId=${nextCategoryId},direction='slide-right')}">&gt;</a>
             </div>
         </div>
     </div>

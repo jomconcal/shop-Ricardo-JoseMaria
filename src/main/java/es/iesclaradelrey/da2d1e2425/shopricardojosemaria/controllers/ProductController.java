@@ -21,10 +21,14 @@ public class ProductController {
     private final CategoryService categoryService;
 
     @GetMapping({"", "/"})
-    public ModelAndView getAllProducts(@RequestParam(name = "categoryId", required = false) Long categoryId) {
+    public ModelAndView getAllProducts(
+            @RequestParam(name = "categoryId", required = false) Long categoryId,
+            @RequestParam(name = "direction", required = false) String direction) {
         Collection<Product> products;
         ModelAndView mav = new ModelAndView("products");
 
+        direction=direction==null?"slide-down":direction;
+        mav.addObject("direction", direction);
         if (categoryId != null) {
             products = productService.findByCategoryId(categoryId);
             Optional<Category> optionalCategory = categoryService.findById(categoryId);
@@ -52,21 +56,21 @@ public class ProductController {
     }
 
     private static Long previousCategoryId(Category category, Collection<Category> categories) {
-       ArrayList<Category>allCategories=new ArrayList<>(categories);
-       int index=allCategories.indexOf(category);
-       if(index>0){
-           return allCategories.get(index-1).getId();
-       }else{
-           return allCategories.getLast().getId();
-       }
+        ArrayList<Category> allCategories = new ArrayList<>(categories);
+        int index = allCategories.indexOf(category);
+        if (index > 0) {
+            return allCategories.get(index - 1).getId();
+        } else {
+            return allCategories.getLast().getId();
+        }
     }
 
     private static Long nextCategoryId(Category category, Collection<Category> categories) {
-        ArrayList<Category>allCategories=new ArrayList<>(categories);
-        int index=allCategories.indexOf(category);
-        if(index<allCategories.size()-1){
-            return allCategories.get(index+1).getId();
-        }else{
+        ArrayList<Category> allCategories = new ArrayList<>(categories);
+        int index = allCategories.indexOf(category);
+        if (index < allCategories.size() - 1) {
+            return allCategories.get(index + 1).getId();
+        } else {
             return allCategories.getFirst().getId();
         }
     }

@@ -22,8 +22,10 @@ body {
 }
 
 .right, .left {
+    position: relative;
     flex: 1;
     display: flex;
+    top: calc(50% - 2rem);
 }
 
 .left {
@@ -61,7 +63,22 @@ body {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: slideIn 1s ease-out forwards;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    width: 100%;
+    will-change: transform;
+}
+
+.products.slide-left {
+    animation-name: slideInLeft;
+}
+
+.products.slide-right {
+    animation-name: slideInRight;
+}
+
+.products.slide-down {
+    animation-name: slideDown;
 }
 
 .product {
@@ -166,7 +183,8 @@ dialog {
     padding: 0;
     border-radius: 0.5rem;
 }
-dialog.show{
+
+dialog.show {
     width: 80%;
     height: 80%;
     opacity: 1;
@@ -193,16 +211,35 @@ iframe {
     display: block;
 }
 
-@keyframes slideIn {
+@keyframes slideInLeft {
     0% {
         transform: translateX(-100%);
-        background-position: -100% center;
         opacity: 0;
     }
     100% {
-        background-attachment: fixed;
         transform: translateX(0);
         opacity: 1;
-        background-position: left center;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
