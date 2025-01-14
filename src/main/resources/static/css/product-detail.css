@@ -12,8 +12,65 @@ main{
     height:80%
 }
 
+p{
+    margin: 0;
+}
+.header{
+    display: flex;
+    padding: 0.5rem 0;
+    justify-content: space-between;
+    font-size: 2rem;
+    text-transform: uppercase;
+    align-items: center;
+}
+
+#close-dialog{
+    font-weight: normal;
+    box-sizing: border-box;
+    all: unset;
+    color: inherit;
+    padding: 0.5rem 1rem;
+    border: solid 1px transparent;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: brightness(0.5);
+}
+
+#close-dialog:hover{
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border-color: currentColor;
+    transform: scale(1.1);
+    filter: brightness(1);
+}
+
+.description{
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.picture-detail{
+    display: flex;
+    height: 60%;
+}
 img{
-    width: 50%;
-    height: auto;
-    max-height: 50%;
+    flex: 6;
+    height: 100%;
+    border-radius: 0.5rem;
+}
+
+.price{
+    display: flex;
+    font-size: 3rem;
+    padding: 1rem;
+    flex: 4;
+    align-items: flex-end;
+}
+
+.price::after{
+    content: "€";
+    margin-left: 0.25rem;
+}
+.detail{
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
 }

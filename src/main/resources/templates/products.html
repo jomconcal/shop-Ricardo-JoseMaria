@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/category.css}">
     <link rel="stylesheet" th:href="@{/css/nav.css}">
 </head>
-<body th:class="|body${title}|">
+<body th:class="|body${title.split(' ')[0]}|">
 <header>
     <nav th:replace="~{nav.html}"></nav>
 </header>

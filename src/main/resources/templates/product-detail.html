@@ -11,11 +11,16 @@
 
 <main>
     <div th:class="|${title} products|">
-        <button id="close-dialog">X</button>
-        <p th:text="${product.name}"></p>
-        <p th:text="${product.description}"></p>
-        <img th:alt="${product.name}" th:src="${product.imageUrl}">
-        <p th:text="${product.productDetail}"></p>
+        <div th:class="header">
+            <p th:text="${product.name}"></p>
+            <button id="close-dialog">X</button>
+        </div>
+        <p th:text="${product.description}" th:class="description"></p>
+        <div th:class="picture-detail">
+            <img th:alt="${product.name}" th:src="${product.imageUrl}">
+            <p th:text="${product.price}" th:class="price"></p>
+        </div>
+        <p th:text="${product.productDetail}" th:class="detail"></p>
     </div>
 </main>
 <script th:src="@{/js/product-detail.js}"></script>
