@@ -1,21 +1,23 @@
-body,html {
+body, html {
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
-main{
+main {
     height: 100%;
-    padding:0 2rem;
-}
-.products{
-    height:80%
+    padding: 0 2rem;
 }
 
-p{
+.products {
+    height: 80%
+}
+
+p {
     margin: 0;
 }
-.header{
+
+.header {
     display: flex;
     padding: 0.5rem 0;
     justify-content: space-between;
@@ -24,7 +26,7 @@ p{
     align-items: center;
 }
 
-#close-dialog{
+#close-dialog {
     font-weight: normal;
     box-sizing: border-box;
     all: unset;
@@ -35,7 +37,7 @@ p{
     filter: brightness(0.5);
 }
 
-#close-dialog:hover{
+#close-dialog:hover {
     cursor: pointer;
     border-radius: 0.5rem;
     border-color: currentColor;
@@ -43,34 +45,37 @@ p{
     filter: brightness(1);
 }
 
-.description{
+.description {
     font-style: italic;
     margin-bottom: 0.5rem;
 }
 
-.picture-detail{
+.picture-detail {
     display: flex;
     height: 60%;
 }
-img{
-    flex: 6;
+
+img {
+    width: 80%;
     height: 100%;
     border-radius: 0.5rem;
 }
 
-.price{
+.price {
     display: flex;
     font-size: 3rem;
     padding: 1rem;
-    flex: 4;
+    width: 20%;
     align-items: flex-end;
 }
 
-.price::after{
+.price::after {
     content: "€";
     margin-left: 0.25rem;
 }
-.detail{
+
+.detail {
     margin-top: 0.5rem;
     font-size: 1.25rem;
+    line-height: 1.8;
 }

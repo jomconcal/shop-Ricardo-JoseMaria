@@ -1,3 +1,8 @@
+main {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-attachment: fixed;
     margin: 0;
@@ -56,6 +61,7 @@ body {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 1s ease-out forwards;
 }
 
 .product {
@@ -187,4 +193,16 @@ iframe {
     display: block;
 }
 
-
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        background-position: -100% center;
+        opacity: 0;
+    }
+    100% {
+        background-attachment: fixed;
+        transform: translateX(0);
+        opacity: 1;
+        background-position: left center;
+    }
+}
