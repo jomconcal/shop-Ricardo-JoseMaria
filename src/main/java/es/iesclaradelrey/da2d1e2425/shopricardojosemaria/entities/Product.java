@@ -3,6 +3,8 @@ package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,6 +23,9 @@ public class Product {
     private String productDetail;
     private Double price;
     private String imageUrl;
+    @OneToMany(mappedBy = "product")
+    private Set<Rating> ratings;
+
 
     public Product(Category category, String name, String description, String productDetail, Double price, String imageUrl) {
         this.category = category;
