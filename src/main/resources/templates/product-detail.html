@@ -21,6 +21,8 @@
             <p th:text="${product.price}" th:class="price"></p>
         </div>
         <p th:text="${product.productDetail}" th:class="detail"></p>
+        <div th:class="rating">
+        </div>
     </div>
 </main>
 <script th:src="@{/js/product-detail.js}"></script>
