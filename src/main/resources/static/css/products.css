@@ -12,6 +12,7 @@ body {
 .categories {
     margin: 0;
     padding: 0;
+    min-height: 100vh
 }
 
 .category {
@@ -25,7 +26,9 @@ body {
     position: relative;
     flex: 1;
     display: flex;
-    top: calc(50% - 2rem);
+    height: 100vh;
+    align-items: center;
+    z-index: 10;
 }
 
 .left {
@@ -34,8 +37,7 @@ body {
 
 .right > a, .left > a {
     margin: 0.5rem;
-    top: 45%;
-    position: fixed;
+    transform: translateY(-50%);
     height: fit-content;
     text-decoration: none;
     color: white;
@@ -45,13 +47,14 @@ body {
     border-radius: 5px;
     background-color: #000000;
     opacity: 0.7;
+    position: fixed;
 }
 
 .right > a:hover, .left > a:hover {
     background-color: #444444;
     color: #ffffff;
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-50%);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
