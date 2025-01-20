@@ -79,3 +79,25 @@ img {
     font-size: 1.25rem;
     line-height: 1.8;
 }
+
+.rating{
+    position: relative;
+}
+
+#empty-stars, #filled-stars {
+    display: flex;
+
+}
+
+#empty-stars i, #filled-stars i{
+    height: auto;
+    width: 2rem;
+}
+
+#filled-stars{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    overflow: hidden;
+}

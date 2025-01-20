@@ -7,6 +7,7 @@ body {
     background-attachment: fixed;
     margin: 0;
     padding: 0;
+    will-change: background-color;
 }
 
 .categories {
@@ -185,6 +186,7 @@ dialog {
     overflow: hidden;
     padding: 0;
     border-radius: 0.5rem;
+    will-change: height, width, opacity, transform;
 }
 
 dialog.show {

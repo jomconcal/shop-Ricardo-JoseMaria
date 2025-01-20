@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/category.css}">
     <link rel="stylesheet" th:href="@{/css/products.css}">
     <link rel="stylesheet" th:href="@{/css/product-detail.css}">
+    <script src="https://kit.fontawesome.com/bf3751b51f.js" crossorigin="anonymous"></script>
 </head>
 <body th:class="|body${title}|">
 
@@ -22,6 +23,13 @@
         </div>
         <p th:text="${product.productDetail}" th:class="detail"></p>
         <div th:class="rating">
+            <p th:text="${avg}"></p>
+            <div id="empty-stars">
+                <i th:each="star:${#numbers.sequence(1,5)}" class="fa-solid fa-star fa-2xl" style="color: #8d897c;"></i>
+            </div>
+            <div id="filled-stars">
+                <i th:each="star:${#numbers.sequence(1,5)}" class="fa-solid fa-star fa-2xl" style="color: #FFD43B;"></i>
+            </div>
         </div>
     </div>
 </main>

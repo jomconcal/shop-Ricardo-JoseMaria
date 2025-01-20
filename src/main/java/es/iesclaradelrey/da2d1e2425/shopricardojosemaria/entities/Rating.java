@@ -23,7 +23,7 @@ public class Rating {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     public Rating(double rating, String userName, String comment, LocalDateTime date, Product product) {
