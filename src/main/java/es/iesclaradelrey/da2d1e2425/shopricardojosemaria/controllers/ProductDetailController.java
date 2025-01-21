@@ -32,8 +32,13 @@ public class ProductDetailController {
         Category category = product.orElseThrow().getCategory();
         ModelAndView mav = new ModelAndView("product-detail");
         mav.addObject("product", product.orElseThrow());
-        OptionalDouble avg= ratingService.avg(productId);
-        mav.addObject("avg",avg.orElseThrow());
+        Optional<Double> avg= ratingService.averageRatingByProductId(productId);
+
+        if(avg.isPresent()) {
+            mav.addObject("avg", avg.get());
+        }else{
+            mav.addObject("avg", -1);
+        }
         mav.addObject("title", category.getName());
         return mav;
     }

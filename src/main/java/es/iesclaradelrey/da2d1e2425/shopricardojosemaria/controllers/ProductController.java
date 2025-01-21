@@ -32,14 +32,13 @@ public class ProductController {
         if (categoryId != null) {
             products = productService.findByCategoryId(categoryId);
             Optional<Category> optionalCategory = categoryService.findById(categoryId);
-            Category category = optionalCategory.orElse(null);
+            Category category = optionalCategory.orElseThrow();
             Collection<Category> categories = new ArrayList<>();
             categories.add(category);
             Collection<Category> allCategories = categoryService.findAll();
 
             mav.addObject("products", products);
             mav.addObject("categories", categories);
-            assert category != null;
             Long previousCategoryId = previousCategoryId(category, allCategories);
             Long nextCategoryId = nextCategoryId(category, allCategories);
             mav.addObject("title", category.getName());

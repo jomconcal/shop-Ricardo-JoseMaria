@@ -1,8 +1,7 @@
 INSERT INTO ratings (rating, user_name, comment, date, product_id)
 VALUES
-    (4.5, 'user1', 'Great Espresso, smooth and rich flavor. Loved it!', '2025-01-15 14:30:00',
-     (SELECT id FROM products WHERE name = 'Espresso')),
-    (3.0, 'user1', 'Cappuccino was good, but the foam could be thicker.', '2025-01-15 14:31:00',
+
+    (0.0, 'user1', 'Cappuccino was good, but the foam could be thicker.', '2025-01-15 14:31:00',
      (SELECT id FROM products WHERE name = 'Cappuccino')),
     (4.0, 'user2', 'Latte was perfect, just the right balance of coffee and milk!', '2025-01-15 14:32:00',
      (SELECT id FROM products WHERE name = 'Latte')),

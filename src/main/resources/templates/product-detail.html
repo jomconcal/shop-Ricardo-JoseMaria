@@ -23,14 +23,17 @@
         </div>
         <p th:text="${product.productDetail}" th:class="detail"></p>
         <div th:class="rating">
-            <div id="empty-stars">
+            <div id="empty-stars" th:if="${avg>=0}">
                 <i th:each="star:${#numbers.sequence(1,5)}"
                    class="fa-solid fa-star fa-2xl"></i>
             </div>
-            <div id="filled-stars" th:rating="${avg}">
+            <div id="filled-stars" th:rating="${avg}" th:if="${avg>=0}">
                 <i th:each="star:${#numbers.sequence(1,5)}"
                    class="fa-solid fa-star fa-2xl"></i>
             </div>
+        </div>
+        <div th:if="${avg<0}">
+            <p class="unrated">There is no rating for this product</p>
         </div>
     </div>
 </main>
