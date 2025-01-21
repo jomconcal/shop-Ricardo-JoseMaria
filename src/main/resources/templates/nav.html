@@ -1,4 +1,4 @@
-<nav>
+<nav th:fragment="nav(title)">
     <div>
         <a href="/" th:class="${title=='Coffee Shop'}?'active':''">CATEGORIES</a>
         <a href="/products" th:class="${title=='All Products'}?'active':''">ALL PRODUCTS</a>

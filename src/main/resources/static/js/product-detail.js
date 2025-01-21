@@ -5,9 +5,11 @@ btn.addEventListener("click",()=>{
 
 function setRating(){
     const filledStars=document.getElementById("filled-stars")
-    const rating=filledStars.getAttribute("rating")
-    const width=rating/5*100;
-    filledStars.style.width=`${width}%`
+    if(filledStars){
+        const rating=filledStars.getAttribute("rating")
+        const width=rating/5*100;
+        filledStars.style.width=`${width}%`
+    }
 }
 
 setRating()

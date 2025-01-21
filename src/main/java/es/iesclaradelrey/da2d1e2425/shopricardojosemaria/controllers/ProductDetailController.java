@@ -35,7 +35,7 @@ public class ProductDetailController {
         Optional<Double> avg= ratingService.averageRatingByProductId(productId);
 
         if(avg.isPresent()) {
-            mav.addObject("avg", avg.get());
+            mav.addObject("avg", ((int)(avg.get()*100))/100.00);
         }else{
             mav.addObject("avg", -1);
         }

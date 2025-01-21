@@ -9,7 +9,7 @@
 </head>
 <body th:class="|body${title.split(' ')[0]}|">
 <header>
-    <nav th:replace="~{nav.html}"></nav>
+    <nav th:replace="~{nav :: nav(${title})}"></nav>
 </header>
 <main>
     <div class="categories">
