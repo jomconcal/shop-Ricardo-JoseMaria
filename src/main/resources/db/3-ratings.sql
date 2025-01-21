@@ -50,3 +50,32 @@ VALUES
      (SELECT id FROM products WHERE name = 'Panna Cotta')),
     (5.0, 'user13', 'Ice Cream was amazing, creamy and rich in flavor. Loved every bite!', '2025-01-15 14:54:00',
      (SELECT id FROM products WHERE name = 'Ice Cream'));
+
+INSERT INTO ratings (rating, user_name, comment, date, product_id)
+VALUES
+    (4.0, 'user1', 'Latte was smooth and had a great aroma. I enjoyed it a lot!', '2025-01-16 10:00:00',
+     (SELECT id FROM products WHERE name = 'Latte')),
+    (4.5, 'user2', 'Green Tea was delightful and had a refreshing flavor.', '2025-01-16 10:05:00',
+     (SELECT id FROM products WHERE name = 'Green Tea')),
+    (3.5, 'user3', 'Americano was too strong for me, but it was well-prepared.', '2025-01-16 10:10:00',
+     (SELECT id FROM products WHERE name = 'Americano')),
+    (4.0, 'user4', 'Mint Tea was very soothing and refreshing. A great drink!', '2025-01-16 10:15:00',
+     (SELECT id FROM products WHERE name = 'Mint Tea')),
+    (3.0, 'user5', 'Black Tea was nice, but I felt it lacked a stronger taste.', '2025-01-16 10:20:00',
+     (SELECT id FROM products WHERE name = 'Black Tea')),
+    (5.0, 'user6', 'Tiramisu was absolutely amazing! Perfectly balanced flavors.', '2025-01-16 10:25:00',
+     (SELECT id FROM products WHERE name = 'Tiramisu')),
+    (4.5, 'user7', 'Cheesecake was creamy and delicious, with a wonderful crust.', '2025-01-16 10:30:00',
+     (SELECT id FROM products WHERE name = 'Cheesecake')),
+    (3.5, 'user8', 'Piña Colada was quite good, but a bit too sweet for me.', '2025-01-16 10:35:00',
+     (SELECT id FROM products WHERE name = 'Piña Colada')),
+    (4.0, 'user9', 'Jamon Pintxo was delightful, with a fantastic balance of flavors.', '2025-01-16 10:40:00',
+     (SELECT id FROM products WHERE name = 'Jamon Pintxo')),
+    (3.5, 'user10', 'Brownie was a bit dry for my taste, but still enjoyable.', '2025-01-16 10:45:00',
+     (SELECT id FROM products WHERE name = 'Brownie')),
+    (4.0, 'user11', 'Shrimp Pintxo was surprisingly good, with a great seasoning.', '2025-01-16 10:50:00',
+     (SELECT id FROM products WHERE name = 'Shrimp Pintxo')),
+    (5.0, 'user12', 'Daiquiri was perfectly balanced, with a refreshing citrus kick!', '2025-01-16 10:55:00',
+     (SELECT id FROM products WHERE name = 'Daiquiri')),
+    (4.5, 'user13', 'Margarita was fantastic, with the right mix of tangy and sweet.', '2025-01-16 11:00:00',
+     (SELECT id FROM products WHERE name = 'Margarita'));

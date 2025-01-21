@@ -23,12 +23,13 @@
         </div>
         <p th:text="${product.productDetail}" th:class="detail"></p>
         <div th:class="rating">
-            <p th:text="${avg}"></p>
             <div id="empty-stars">
-                <i th:each="star:${#numbers.sequence(1,5)}" class="fa-solid fa-star fa-2xl" style="color: #8d897c;"></i>
+                <i th:each="star:${#numbers.sequence(1,5)}"
+                   class="fa-solid fa-star fa-2xl"></i>
             </div>
-            <div id="filled-stars">
-                <i th:each="star:${#numbers.sequence(1,5)}" class="fa-solid fa-star fa-2xl" style="color: #FFD43B;"></i>
+            <div id="filled-stars" th:rating="${avg}">
+                <i th:each="star:${#numbers.sequence(1,5)}"
+                   class="fa-solid fa-star fa-2xl"></i>
             </div>
         </div>
     </div>
