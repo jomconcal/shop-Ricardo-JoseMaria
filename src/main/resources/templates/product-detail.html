@@ -19,7 +19,10 @@
         <p th:text="${product.description}" th:class="description"></p>
         <div th:class="picture-detail">
             <img th:alt="${product.name}" th:src="${product.imageUrl}">
-            <p th:text="${product.price}" th:class="price"></p>
+            <div th:class="price-button">
+                <p th:text="${product.price}" th:class="price"></p>
+                <button th:class="btnAdd" type="button">Add</button>
+            </div>
         </div>
         <p th:text="${product.productDetail}" th:class="detail"></p>
         <div class="rating" th:if="${avg>=0}">

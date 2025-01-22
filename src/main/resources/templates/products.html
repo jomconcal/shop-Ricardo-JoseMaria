@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/products.css}">
     <link rel="stylesheet" th:href="@{/css/category.css}">
     <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <script src="https://kit.fontawesome.com/bf3751b51f.js" crossorigin="anonymous"></script>
 </head>
 <body th:class="|body${title.split(' ')[0]}|">
 <header>
@@ -31,12 +32,19 @@
                             </ul>
                         </li>
                         <li class="image-container">
-<!--                            <a th:href="@{/product-detail(productId=${product.getId()})}">-->
                             <div  class="product-link" th:data-iframe-src="${product.getId()}">
                                 <img th:src="${product.imageUrl}" th:alt="${product.name}">
                             </div>
                         </li>
-                        <li th:text="${product.price}" class="price"></li>
+                        <li th:class="price-button">
+                            <p th:text="${product.price}" th:class="price"></p>
+                            <button th:class="btnAdd" type="button">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </li>
+
+
+
                     </ul>
                 </div>
             </div>

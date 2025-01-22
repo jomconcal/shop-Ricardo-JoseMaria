@@ -14,11 +14,6 @@ import java.util.OptionalDouble;
 public class RatingServiceImpl implements RatingService {
     RatingRepository ratingRepository;
 
-    public OptionalDouble avg(Long productId) {
-        List<Rating>ratings= ratingRepository.findByProductId(productId);
-        return ratings.stream().mapToDouble(Rating::getRating).average();
-    }
-
     @Override
     public Optional<Double> averageRatingByProductId(Long id) {
         return ratingRepository.averageRatingByProductId(id);

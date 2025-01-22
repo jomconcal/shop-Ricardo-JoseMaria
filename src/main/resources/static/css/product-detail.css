@@ -67,18 +67,41 @@ img {
     border-radius: 0.5rem;
 }
 
-.price {
+.price-button {
     display: flex;
+    gap: 0.25em;
     font-size: 3rem;
     padding: 1rem;
     width: 20%;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .price::after {
-    content: "€";
+    content: " €";
     margin-left: 0.25rem;
 }
+
+.btnAdd {
+    border: solid 1px transparent;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: inherit;
+    margin: 0 1rem;
+    filter: brightness(0.5);
+    transition: all ease 0.5s;
+}
+
+.btnAdd:hover {
+    border-color: currentColor;
+    filter: brightness(1);
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
 
 .detail {
     margin-top: 0.5rem;
@@ -86,9 +109,10 @@ img {
     line-height: 1.8;
 }
 
-.rating{
+.rating {
     display: flex;
 }
+
 .stars-container {
     width: fit-content;
     position: relative;
@@ -124,13 +148,14 @@ img {
     z-index: 8;
 }
 
-#avg{
+#avg {
     padding: 0 1em;
     float: left;
     display: flex;
     align-items: center;
     text-align: center;
 }
-.unrated{
+
+.unrated {
     filter: brightness(0.5);
 }

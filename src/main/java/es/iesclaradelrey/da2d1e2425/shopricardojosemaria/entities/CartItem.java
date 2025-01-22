@@ -7,23 +7,19 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "ratings", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name","product_id"})})
-public class Rating {
+@Getter
+@Setter
+@Table(name = "cart-item", uniqueConstraints = @UniqueConstraint(columnNames = {"product_id"}))
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double rating;
-    private String userName;
-    @Column(length = 1000)
-    private String comment;
-    private LocalDateTime date;
-
+    private int quantity;
+    private LocalDateTime addingDate;
+    private LocalDateTime updatingDate;
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id",nullable = false)
     private Product product;
-
 }

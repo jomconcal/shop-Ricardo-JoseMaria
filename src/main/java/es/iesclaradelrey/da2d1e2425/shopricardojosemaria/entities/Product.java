@@ -25,14 +25,7 @@ public class Product {
     private String imageUrl;
     @OneToMany(mappedBy = "product")
     private Set<Rating> ratings;
+    @OneToMany(mappedBy = "product")
+    private Set<CartItem> cartItems;
 
-
-    public Product(Category category, String name, String description, String productDetail, Double price, String imageUrl) {
-        this.category = category;
-        this.name = name;
-        this.description = description;
-        this.productDetail = productDetail;
-        this.price = price;
-        this.imageUrl = imageUrl;
-    }
 }
