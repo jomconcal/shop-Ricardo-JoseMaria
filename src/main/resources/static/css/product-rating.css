@@ -1,0 +1,50 @@
+.rating {
+    display: flex;
+}
+
+.stars-container {
+    width: fit-content;
+    position: relative;
+}
+
+#empty-stars, #filled-stars {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: flex-start;
+    height: 33px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+#empty-stars i, #filled-stars i {
+    font-size: 32px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+#empty-stars i {
+    color: #8d897c;
+}
+
+#filled-stars {
+    z-index: 10;
+}
+
+#empty-stars {
+    position: relative;
+    z-index: 8;
+}
+
+#avg {
+    padding: 0 1em;
+    float: left;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.unrated {
+    filter: brightness(0.5);
+}
