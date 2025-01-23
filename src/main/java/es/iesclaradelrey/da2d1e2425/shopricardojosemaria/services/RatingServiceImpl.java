@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 
 @Service
 @AllArgsConstructor
@@ -17,5 +16,10 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public Optional<Double> averageRatingByProductId(Long id) {
         return ratingRepository.averageRatingByProductId(id);
+    }
+
+    @Override
+    public List<Rating> getRatingsByProductId(Long id) {
+        return ratingRepository.findRatingByProductId(id);
     }
 }

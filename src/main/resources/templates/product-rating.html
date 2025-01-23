@@ -6,23 +6,42 @@
     <script src="https://kit.fontawesome.com/bf3751b51f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
+<header class="avg">
     <div class="rating" th:if="${avg>=0}">
-        <div th:class="stars-container" >
-            <div id="empty-stars" >
+        <div th:class="stars-container">
+            <div class="empty-stars">
                 <i th:each="star:${#numbers.sequence(1,5)}"
                    class="fa-solid fa-star fa-2xl"></i>
             </div>
-            <div id="filled-stars" th:rating="${avg}">
+            <div class="filled-stars" th:rating="${avg}">
                 <i th:each="star:${#numbers.sequence(1,5)}"
                    class="fa-solid fa-star fa-2xl"></i>
             </div>
         </div>
-        <p th:text="${avg}" id="avg"></p>
+        <p th:text="${avg}" th:class="rating-value"></p>
     </div>
     <div th:if="${avg<0}">
         <p class="unrated">There is no rating for this product</p>
     </div>
 </header>
+<main th:class="ratings" th:if="${avg>=0}">
+    <div class="rating" th:each="rating:${ratings}">
+        <p th:text="${rating.comment}" th:class="comment"></p>
+        <div th:class="stars-rating">
+            <div th:class="stars-container">
+                <div id="empty-stars">
+                    <i th:each="star:${#numbers.sequence(1,5)}"
+                       class="fa-solid fa-star fa-2xl"></i>
+                </div>
+                <div id="filled-stars" th:rating="${rating.rating}">
+                    <i th:each="star:${#numbers.sequence(1,5)}"
+                       class="fa-solid fa-star fa-2xl"></i>
+                </div>
+            </div>
+            <p th:text="${rating.rating}" th:class="rating-value"></p>
+        </div>
+        <p th:class="user" th:text="${rating.userName}"></p>
+    </div>
+</main>
 </body>
 </html>

@@ -28,7 +28,8 @@
                 </div>
                 <p th:text="${product.productDetail}" th:class="detail"></p>
             </div>
-            <iframe th:url="@{/product-rating.html}" th:class="rating"></iframe>
+            <iframe th:src="@{/rating(productId=${product.id})}" th:class="rating"></iframe>
+
         </div>
     </div>
 </main>

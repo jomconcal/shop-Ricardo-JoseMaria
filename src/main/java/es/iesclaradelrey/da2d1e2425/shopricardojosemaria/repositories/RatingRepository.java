@@ -11,4 +11,7 @@ import java.util.Optional;
 public interface RatingRepository extends ListCrudRepository<Rating, Long> {
     @Query("select avg (r.rating) from Rating r where r.product.id= :productId")
     Optional<Double> averageRatingByProductId(@Param("productId") Long id);
+
+    List<Rating> findRatingByProductId(Long productId);
+
 }
