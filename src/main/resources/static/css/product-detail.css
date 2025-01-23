@@ -30,7 +30,6 @@ p {
     display: flex;
     padding: 0;
     justify-content: space-between;
-    font-size: 2rem;
     text-transform: uppercase;
     align-items: center;
     height: 10%;
@@ -39,6 +38,13 @@ p {
 .product-rating {
     display: flex;
     height: 90%;
+    gap: 1rem;
+}
+
+.header .title{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .header #close-dialog {
@@ -60,6 +66,25 @@ p {
     filter: brightness(1);
 }
 
+.header .title .btnAdd {
+    height: fit-content;
+    border: solid 1px transparent;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: inherit;
+    margin: 0 1rem;
+    filter: brightness(0.5);
+    transition: all ease 0.5s;
+}
+
+.header .title .btnAdd:hover {
+    border-color: currentColor;
+    filter: brightness(1);
+    cursor: pointer;
+    transform: scale(1.25);
+}
 
 .product-rating .general{
     height: 100%;
@@ -103,29 +128,13 @@ p {
     justify-content: space-between;
 }
 
-/*.price::after {*/
-/*    content: " €";*/
-/*    margin-left: 0.25rem;*/
-/*}*/
+.product-rating .general .picture-price .price::after {
+    content: " €";
+}
 
-/*.btnAdd {*/
-/*    border: solid 1px transparent;*/
-/*    border-radius: 0.5rem;*/
-/*    font-size: 1.5rem;*/
-/*    padding: 0.5rem 1rem;*/
-/*    background-color: transparent;*/
-/*    color: inherit;*/
-/*    margin: 0 1rem;*/
-/*    filter: brightness(0.5);*/
-/*    transition: all ease 0.5s;*/
-/*}*/
 
-/*.btnAdd:hover {*/
-/*    border-color: currentColor;*/
-/*    filter: brightness(1);*/
-/*    cursor: pointer;*/
-/*    transform: scale(1.25);*/
-/*}*/
+
+
 
 
 /*.detail {*/

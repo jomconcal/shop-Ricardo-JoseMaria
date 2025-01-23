@@ -22,8 +22,6 @@ import java.util.OptionalDouble;
 public class ProductDetailController {
 
     ProductServiceImpl productService;
-    RatingServiceImpl ratingService;
-
 
     @GetMapping({"/", ""})
     public ModelAndView getProductDetail(@RequestParam(name = "productId", required = true) Long productId) {
@@ -32,13 +30,7 @@ public class ProductDetailController {
         Category category = product.orElseThrow().getCategory();
         ModelAndView mav = new ModelAndView("product-detail");
         mav.addObject("product", product.orElseThrow());
-        Optional<Double> avg= ratingService.averageRatingByProductId(productId);
 
-        if(avg.isPresent()) {
-            mav.addObject("avg", ((int)(avg.get()*100))/100.00);
-        }else{
-            mav.addObject("avg", -1);
-        }
         mav.addObject("title", category.getName());
         return mav;
     }

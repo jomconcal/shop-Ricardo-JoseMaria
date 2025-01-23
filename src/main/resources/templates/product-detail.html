@@ -11,7 +11,10 @@
 <main>
     <div th:class="|${title} product|">
         <div th:class="header">
-            <p th:text="${product.name}"></p>
+            <div th:class="title">
+                <h1 th:text="${product.name}"></h1>
+                <button th:class="btnAdd" type="button">Add</button>
+            </div>
             <button id="close-dialog">X</button>
         </div>
         <div th:class="product-rating">
@@ -21,7 +24,6 @@
                     <img th:alt="${product.name}" th:src="${product.imageUrl}">
                     <div th:class="price-button">
                         <p th:text="${product.price}" th:class="price"></p>
-                        <button th:class="btnAdd" type="button">Add</button>
                     </div>
                 </div>
                 <p th:text="${product.productDetail}" th:class="detail"></p>
