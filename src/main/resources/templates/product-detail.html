@@ -13,7 +13,7 @@
         <div th:class="header">
             <div th:class="title">
                 <h1 th:text="${product.name}"></h1>
-                <button th:class="btnAdd" type="button">Add</button>
+                <a th:ref="@{/add-product-to-cart(${product.id})}" th:class="btnAdd">Add</a>
             </div>
             <button id="close-dialog">X</button>
         </div>
