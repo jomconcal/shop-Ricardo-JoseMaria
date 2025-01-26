@@ -1,6 +1,9 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Rating;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.RatingService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.RatingServiceImpl;
 import lombok.AllArgsConstructor;
@@ -19,11 +22,15 @@ import java.util.Optional;
 public class RatingController {
 
     private final RatingServiceImpl ratingService;
+    private final CategoryService categoryService;
+    private final ProductService productService;
 
     @GetMapping({"/",""})
     public ModelAndView getRating(@RequestParam(name = "productId", required = true) Long productId) {
         ModelAndView mv = new ModelAndView("product-rating");
         Optional<Double> avg = ratingService.averageRatingByProductId(productId);
+        String category= productService.findById(productId).orElseThrow().getCategory().getName();
+        mv.addObject("category", category);
 
         if(avg.isPresent()) {
             mv.addObject("avg", avg.get());

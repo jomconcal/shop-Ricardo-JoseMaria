@@ -2,10 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:title="${title}"></title>
+    <title th:title="${category}"></title>
     <script src="https://kit.fontawesome.com/bf3751b51f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/product-rating.css}">
+    <link rel="stylesheet" th:href="@{/css/category.css}">
+
 </head>
-<body>
+<body th:class="${category}">
 <header class="avg">
     <div class="rating" th:if="${avg>=0}">
         <div th:class="stars-container">
@@ -29,11 +32,11 @@
         <p th:text="${rating.comment}" th:class="comment"></p>
         <div th:class="stars-rating">
             <div th:class="stars-container">
-                <div id="empty-stars">
+                <div th:class="empty-stars">
                     <i th:each="star:${#numbers.sequence(1,5)}"
                        class="fa-solid fa-star fa-2xl"></i>
                 </div>
-                <div id="filled-stars" th:rating="${rating.rating}">
+                <div th:class="filled-stars" th:rating="${rating.rating}">
                     <i th:each="star:${#numbers.sequence(1,5)}"
                        class="fa-solid fa-star fa-2xl"></i>
                 </div>
@@ -43,5 +46,7 @@
         <p th:class="user" th:text="${rating.userName}"></p>
     </div>
 </main>
+
+<script th:src="@{/js/rating.js}"></script>
 </body>
 </html>
