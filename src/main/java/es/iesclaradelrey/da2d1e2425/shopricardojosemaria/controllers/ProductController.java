@@ -46,12 +46,14 @@ public class ProductController {
             mav.addObject("title", category.getName());
             mav.addObject("previousCategoryId", previousCategoryId);
             mav.addObject("nextCategoryId", nextCategoryId);
+            mav.addObject("from","/products?categoryId="+categoryId);
         } else {
             products = productService.findAll();
             Collection<Category> categories = categoryService.findAll();
             mav.addObject("products", products);
             mav.addObject("categories", categories);
             mav.addObject("title", "All Products");
+            mav.addObject("from","/products");
         }
         return mav;
     }

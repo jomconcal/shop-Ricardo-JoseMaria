@@ -11,15 +11,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "cart-item", uniqueConstraints = @UniqueConstraint(columnNames = {"product_id"}))
+@Table(name = "cart_item", uniqueConstraints = @UniqueConstraint(columnNames = {"product_id"}))
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp",insertable = false, updatable = false)
     private LocalDateTime addingDate;
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp on update current_timestamp",insertable = false, updatable = false)
     private LocalDateTime updatingDate;
     @ManyToOne
     @JoinColumn(name = "product_id",nullable = false)
     private Product product;
+
+    public CartItem(int quantity, Product product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
 }

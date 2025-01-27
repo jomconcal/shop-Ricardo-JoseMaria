@@ -67,6 +67,7 @@ p {
 }
 
 .header .title .btnAdd {
+    text-decoration: none;
     height: fit-content;
     border: solid 1px transparent;
     border-radius: 0.5rem;

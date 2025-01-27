@@ -28,6 +28,7 @@ public class ProductDetailController {
         mav.addObject("product", product.orElseThrow());
 
         mav.addObject("title", category.getName());
+        mav.addObject("from","/product-detail?productId="+productId);
         return mav;
     }
 }

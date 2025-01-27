@@ -32,16 +32,15 @@
                             </ul>
                         </li>
                         <li class="image-container">
-                            <div  class="product-link" th:data-iframe-src="${product.getId()}">
+                            <div class="product-link" th:data-iframe-src="${product.getId()}">
                                 <img th:src="${product.imageUrl}" th:alt="${product.name}">
                             </div>
                         </li>
                         <li th:class="price-button">
                             <p th:text="${product.price}" th:class="price"></p>
-                            <button th:class="btnAdd" type="button">
-                                <a th:ref="'/add-product-to-cart/'+${product.getId()}" th:class="btnAdd">Add</a>
+                            <a th:href="@{/add-product-to-cart(productId=${product.id},from=${from})}" th:class="btnAdd">
                                 <i class="fa-solid fa-plus"></i>
-                            </button>
+                            </a>
                         </li>
                     </ul>
                 </div>

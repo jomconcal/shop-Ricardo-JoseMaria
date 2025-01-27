@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,15 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public void save(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
+
+        Optional<CartItem> previousCartItem=cartItemRepository.findByProductId(cartItem.getProduct().getId());
+        if(previousCartItem.isPresent()){
+            CartItem newCartItem=previousCartItem.get();
+            newCartItem.setQuantity(newCartItem.getQuantity()+1);
+            cartItemRepository.save(newCartItem);
+        }else{
+            cartItemRepository.save(cartItem);
+        }
     }
 
     @Override
