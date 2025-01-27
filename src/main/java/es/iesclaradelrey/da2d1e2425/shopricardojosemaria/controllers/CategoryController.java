@@ -17,11 +17,10 @@ public class CategoryController {
 
     @GetMapping({"", "/"})
     public ModelAndView getAllCategories() {
-
         Collection<Category> categories = categoryService.findAll();
         ModelAndView mav= new ModelAndView("index","categories",categories);
         mav.addObject("title","Coffee Shop");
-        return  mav;
+        return mav;
     }
 }
 

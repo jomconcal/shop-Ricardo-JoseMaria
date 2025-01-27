@@ -39,6 +39,7 @@
                         <li th:class="price-button">
                             <p th:text="${product.price}" th:class="price"></p>
                             <button th:class="btnAdd" type="button">
+                                <a th:ref="'/add-product-to-cart/'+${product.getId()}" th:class="btnAdd">Add</a>
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </li>
