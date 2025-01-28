@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,5 +35,10 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public Optional<CartItem> findById(long id) {
         return cartItemRepository.findById(id);
+    }
+
+    @Override
+    public Double pricePerCart(Collection<CartItem> cartItems) {
+       return cartItems.stream().mapToDouble(p->p.getProduct().getPrice()*p.getQuantity()).sum();
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+</head>
+<body>
+<header>
+    <nav th:replace="~{nav :: nav(${title})}"></nav>
+</header>
+<main>
+    <div th:each="cartItem:${cartItems}">
+        <p th:text="|Product: ${cartItem.product.name}|"></p>
+        <p th:text="|Quantity: ${cartItem.quantity}|"></p>
+        <p th:text="|Unit price: ${cartItem.product.price}|"></p>
+        <p th:text="|Total product price: ${cartItem.product.price*cartItem.quantity}|"></p>
+    </div>
+    <div>
+        <p th:text="|Total price: ${totalPrice}|"></p>
+    </div>
+</main>
+</body>
+</html>

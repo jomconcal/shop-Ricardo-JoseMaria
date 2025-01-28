@@ -1,7 +1,8 @@
 <nav th:fragment="nav(title)">
     <div>
-        <a href="/" th:class="${title=='Coffee Shop'}?'active':''">CATEGORIES</a>
-        <a href="/products" th:class="${title=='All Products'}?'active':''">ALL PRODUCTS</a>
+        <a th:href="@{/}" th:class="${title=='Coffee Shop'}?'active':''">CATEGORIES</a>
+        <a th:href="@{/products}" th:class="${title=='All Products'}?'active':''">ALL PRODUCTS</a>
+        <a th:href="@{/cart}" th:class="${title=='Cart'}?'active':''">CART</a>
     </div>
     <h1 th:text="${title}"></h1>
 </nav>
