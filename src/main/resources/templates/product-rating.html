@@ -43,7 +43,10 @@
             </div>
             <p th:text="${rating.rating}" th:class="rating-value"></p>
         </div>
-        <p th:class="user" th:text="${rating.userName}"></p>
+        <div th:class="user-date">
+            <p th:text="${rating.userName}" th:class="user"></p>
+            <p th:text="${#temporals.format(rating.date,'yyyy/MM/dd')}" th:class="date"></p>
+        </div>
     </div>
 </main>
 

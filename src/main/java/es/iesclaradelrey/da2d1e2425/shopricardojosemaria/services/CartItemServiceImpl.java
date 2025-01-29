@@ -41,4 +41,15 @@ public class CartItemServiceImpl implements CartItemService {
     public Double pricePerCart(Collection<CartItem> cartItems) {
        return cartItems.stream().mapToDouble(p->p.getProduct().getPrice()*p.getQuantity()).sum();
     }
+
+    @Override
+    public void removeItemFromCart(Long cartItemId) {
+        cartItemRepository.deleteById(cartItemId);
+    }
+
+    @Override
+    public void removeCart() {
+        cartItemRepository.deleteAll();
+    }
+
 }

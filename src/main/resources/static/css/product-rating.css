@@ -40,3 +40,15 @@
 .unrated {
     filter: brightness(0.5);
 }
+
+.user-date{
+    display: flex;
+}
+
+.user-date .user::after{
+    content: " -";
+}
+
+.user-date .date::before{
+    content: "- ";
+}
