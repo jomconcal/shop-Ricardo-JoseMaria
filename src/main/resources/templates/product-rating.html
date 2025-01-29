@@ -27,6 +27,8 @@
         <p class="unrated">There is no rating for this product</p>
     </div>
 </header>
+<!--revisar en el caso que no se muestren-->
+<!--<main th:class="ratings" th:if="${avg}.ies"></main>-->
 <main th:class="ratings" th:if="${avg>=0}">
     <div class="rating" th:each="rating:${ratings}">
         <p th:text="${rating.comment}" th:class="comment"></p>

@@ -26,7 +26,13 @@ public class RatingController {
 
     @GetMapping({"/",""})
     public ModelAndView getRating(@RequestParam(name = "productId", required = true) Long productId) {
-        ModelAndView mv = new ModelAndView("product-rating");
+          ModelAndView mv = new ModelAndView("product-rating");
+
+//        mv.addObject("category", productService.findById(productId).orElseThrow().getCategory().getName());
+//        mv.addObject("ratings", ratingService.getRatingsByProductId(productId));
+//        mv .addObject("avg", ratingService.averageRatingByProductId(productId));
+//        return mv;
+
         Optional<Double> avg = ratingService.averageRatingByProductId(productId);
         String category= productService.findById(productId).orElseThrow().getCategory().getName();
         mv.addObject("category", category);

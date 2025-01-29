@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cart")
@@ -32,8 +33,17 @@ public class CartController {
 
     @GetMapping({"/delete-cartItem"})
     public String deleteCartItem(@RequestParam(name = "cartItem", required=true) Long cartItemId) {
+        Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
 
-        cartItemService.removeItemFromCart(cartItemId);
+        if (cartItem.isPresent()) {
+            if(cartItem.get().getQuantity() > 1){
+                cartItem.get().setQuantity(cartItem.get().getQuantity() -1);
+                cartItemService.save(cartItem.get());
+            }else{
+                cartItemService.removeItemFromCart(cartItemId);
+            }
+        }
+
         return "redirect:/cart";
     }
 
