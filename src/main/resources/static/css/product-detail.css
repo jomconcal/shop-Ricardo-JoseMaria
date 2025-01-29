@@ -118,6 +118,7 @@ p {
     height: auto;
     max-height:90%;
     border-radius: 0.5rem;
+    object-fit: cover;
 }
 
 .product-rating .general .picture-price .price-button {

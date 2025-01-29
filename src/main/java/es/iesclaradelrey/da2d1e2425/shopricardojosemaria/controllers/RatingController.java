@@ -22,7 +22,6 @@ import java.util.Optional;
 public class RatingController {
 
     private final RatingServiceImpl ratingService;
-    private final CategoryService categoryService;
     private final ProductService productService;
 
     @GetMapping({"/",""})

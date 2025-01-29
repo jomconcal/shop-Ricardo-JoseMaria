@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <title>Cart</title>
     <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <script src="https://kit.fontawesome.com/bf3751b51f.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
     <nav th:replace="~{nav :: nav(${title})}"></nav>
 </header>
 <main>
-    <div th:each="cartItem:${cartItems}">
-        <p th:text="|Product: ${cartItem.product.name}|"></p>
-        <p th:text="|Quantity: ${cartItem.quantity}|"></p>
-        <p th:text="|Unit price: ${cartItem.product.price}|"></p>
-        <p th:text="|Total product price: ${cartItem.product.price*cartItem.quantity}|"></p>
+    <div th:class="cartItems" th:if="${cartItems.size()>0}">
+        <div th:each="cartItem:${cartItems}" th:class="cartItem">
+            <div th:class="data-container">
+                <p th:text="|Product: ${cartItem.product.name}|"></p>
+                <p th:text="|Quantity: ${cartItem.quantity}|"></p>
+                <p th:text="|Unit price: ${cartItem.product.price}|"></p>
+                <p th:text="|Total product price: ${cartItem.product.price*cartItem.quantity}|" th:class="price"></p>
+            </div>
+            <img th:src="@{${cartItem.product.imageUrl}}" th:alt="${cartItem.product.name}">
+            <a th:href="@{/delete-cartItem(cartItem=${cartItem.id})}"><i class="fa-solid fa-trash"></i></a>
+        </div>
     </div>
-    <div>
-        <p th:text="|Total price: ${totalPrice}|"></p>
+    <div th:class="total-price">
+        <p th:text="|Total price: ${totalPrice}|" th:class="price"></p>
+        <a th:href="@{/delete-cart}" th:if="${totalPrice!=0.0}"><i class="fa-solid fa-trash"></i></a>
     </div>
 </main>
 </body>
