@@ -15,4 +15,6 @@ public interface CartItemService {
     void removeItemFromCart(Long cartItem);
 
     void removeCart();
+
+    void changeQuantity(Long cartItemId, boolean increase);
 }

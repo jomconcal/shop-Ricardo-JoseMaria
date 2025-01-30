@@ -21,8 +21,23 @@
                 <p th:text="|Total product price: ${#numbers.formatDecimal(cartItem.product.price*cartItem.quantity,1,2,'POINT')}|" th:class="price"></p>
             </div>
             <img th:src="@{${cartItem.product.imageUrl}}" th:alt="${cartItem.product.name}">
-            <a th:href="@{/cart/delete-cartItem(cartItem=${cartItem.id})}"><i class="fa-solid fa-trash"></i></a>
+            <div th:class="delete-update">
+                <div th:class="update">
+                    <a th:href="@{/cart/update-cartItem(increase=true,cartItemId=${cartItem.id})}">
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                    <a th:href="@{/cart/update-cartItem(increase=false,cartItemId=${cartItem.id})}">
+                        <i class="fa-solid fa-minus"></i>
+                    </a>
+                </div>
+                <a th:href="@{/cart/delete-cartItem(cartItem=${cartItem.id})}">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+            </div>
         </div>
+    </div>
+    <div th:class="cartItems" th:unless="${cartItems.size()>0}">
+        <p th:class="cartItem">No products in Cart</p>
     </div>
     <div th:class="total-price">
         <p th:text="|Total price: ${#numbers.formatDecimal(totalPrice,1,2,'POINT')}|" th:class="price"></p>

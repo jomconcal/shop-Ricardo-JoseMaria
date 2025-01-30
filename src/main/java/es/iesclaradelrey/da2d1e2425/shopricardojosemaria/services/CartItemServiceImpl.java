@@ -17,12 +17,12 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void save(CartItem cartItem) {
 
-        Optional<CartItem> previousCartItem=cartItemRepository.findByProductId(cartItem.getProduct().getId());
-        if(previousCartItem.isPresent()){
-            CartItem newCartItem=previousCartItem.get();
-            newCartItem.setQuantity(newCartItem.getQuantity()+1);
+        Optional<CartItem> previousCartItem = cartItemRepository.findByProductId(cartItem.getProduct().getId());
+        if (previousCartItem.isPresent()) {
+            CartItem newCartItem = previousCartItem.get();
+            newCartItem.setQuantity(newCartItem.getQuantity() + 1);
             cartItemRepository.save(newCartItem);
-        }else{
+        } else {
             cartItemRepository.save(cartItem);
         }
     }
@@ -39,7 +39,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public Double pricePerCart(Collection<CartItem> cartItems) {
-       return cartItems.stream().mapToDouble(p->p.getProduct().getPrice()*p.getQuantity()).sum();
+        return cartItems.stream().mapToDouble(p -> p.getProduct().getPrice() * p.getQuantity()).sum();
     }
 
     @Override
@@ -52,4 +52,15 @@ public class CartItemServiceImpl implements CartItemService {
         cartItemRepository.deleteAll();
     }
 
+    @Override
+    public void changeQuantity(Long cartItemId, boolean increase) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
+        if (increase) {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+            cartItemRepository.save(cartItem);
+        } else if (cartItem.getQuantity() > 1) {
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
+            cartItemRepository.save(cartItem);
+        }
+    }
 }

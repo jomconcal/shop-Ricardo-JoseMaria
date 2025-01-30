@@ -27,10 +27,9 @@
         <p class="unrated">There is no rating for this product</p>
     </div>
 </header>
-<!--revisar en el caso que no se muestren-->
-<!--<main th:class="ratings" th:if="${avg}.ies"></main>-->
-<main th:class="ratings" th:if="${avg>=0}">
-    <div class="rating" th:each="rating:${ratings}">
+
+<main >
+    <div th:class="ratings" th:if="${avg>=0}" class="rating" th:each="rating:${ratings}">
         <p th:text="${rating.comment}" th:class="comment"></p>
         <div th:class="stars-rating">
             <div th:class="stars-container">
@@ -49,6 +48,9 @@
             <p th:text="${rating.userName}" th:class="user"></p>
             <p th:text="${#temporals.format(rating.date,'yyyy/MM/dd')}" th:class="date"></p>
         </div>
+    </div>
+    <div th:class="ratings" th:unless="${avg>=0}">
+        <p >Please rate this product if you have tasted it</p>
     </div>
 </main>
 

@@ -36,14 +36,15 @@ body {
     margin-left: 15px;
 }
 
-.cartItem a {
+.delete-update> a {
     color: #d32f2f;
     font-size: 1.5em;
     margin-left: 10px;
     transition: transform 0.2s;
+    text-align: center;
 }
 
-.cartItem a:hover {
+.delete-update> a:hover {
     transform: scale(1.2);
     color: #b71c1c;
 }
@@ -75,4 +76,27 @@ body {
 
 .price::after {
     content: " €";
+}
+
+.delete-update{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.update{
+    padding: 1rem;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.update a{
+    transition: all ease 0.3s;
+    border: 1px solid transparent;
+    padding: 0.5rem;
+}
+
+.update a:hover{
+    border-color: currentColor;
 }

@@ -19,7 +19,7 @@ public class CartController {
 
     private final CartItemService cartItemService;
 
-    @GetMapping({"/",""})
+    @GetMapping({"/", ""})
     public ModelAndView getCart() {
         ModelAndView mv = new ModelAndView("cart");
         Collection<CartItem> cartItems = cartItemService.findAll();
@@ -32,17 +32,10 @@ public class CartController {
     }
 
     @GetMapping({"/delete-cartItem"})
-    public String deleteCartItem(@RequestParam(name = "cartItem", required=true) Long cartItemId) {
+    public String deleteCartItem(@RequestParam(name = "cartItem", required = true) Long cartItemId) {
         Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
 
-        if (cartItem.isPresent()) {
-            if(cartItem.get().getQuantity() > 1){
-                cartItem.get().setQuantity(cartItem.get().getQuantity() -1);
-                cartItemService.save(cartItem.get());
-            }else{
-                cartItemService.removeItemFromCart(cartItemId);
-            }
-        }
+        cartItemService.removeItemFromCart(cartItemId);
 
         return "redirect:/cart";
     }
@@ -53,5 +46,15 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @GetMapping({"/update-cartItem"})
+    public String changeQuantity(
+            @RequestParam(name = "increase", required = true) Boolean increase,
+            @RequestParam(name = "cartItemId", required = true) Long cartItemId) {
+
+        cartItemService.changeQuantity(cartItemId,increase);
+
+        return "redirect:/cart";
+
+    }
 }
 
