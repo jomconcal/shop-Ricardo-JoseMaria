@@ -21,10 +21,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)
     private String name;
     private String description;
     private String productDetail;
+    @Column(nullable = false)
     private Double price;
     private String imageUrl;
     @OneToMany(mappedBy = "product")

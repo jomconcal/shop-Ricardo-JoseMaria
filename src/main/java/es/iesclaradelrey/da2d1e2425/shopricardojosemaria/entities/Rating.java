@@ -16,10 +16,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private double rating;
+    @Column(nullable = false)
     private String userName;
     @Column(length = 1000)
     private String comment;
+    @Column(nullable = false)
     private LocalDateTime date;
 
     @ManyToOne
