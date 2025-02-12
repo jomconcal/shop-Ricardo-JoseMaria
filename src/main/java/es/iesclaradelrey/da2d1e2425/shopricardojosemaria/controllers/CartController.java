@@ -32,16 +32,8 @@ public class CartController {
         return mv;
     }
 
-//    @GetMapping({"/delete-cartItem"})
-//    public String deleteCartItem(@RequestParam(name = "cartItem", required = true) Long cartItemId) {
-//        Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
-//        cartItemService.removeItemFromCart(cartItemId);
-//        return "redirect:/cart";
-//    }
-
     @GetMapping({"/delete-cartItem/{cartItemId}"})
-    public String deleteCartItem(@PathVariable(name="cartItemId") Long cartItemId) {
-        Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
+    public String deleteCartItem(@PathVariable Long cartItemId) {
         cartItemService.removeItemFromCart(cartItemId);
         return "redirect:/cart";
     }
