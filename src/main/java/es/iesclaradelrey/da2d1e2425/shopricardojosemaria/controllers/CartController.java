@@ -5,6 +5,7 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CartItemServic
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,12 +32,17 @@ public class CartController {
         return mv;
     }
 
-    @GetMapping({"/delete-cartItem"})
-    public String deleteCartItem(@RequestParam(name = "cartItem", required = true) Long cartItemId) {
+//    @GetMapping({"/delete-cartItem"})
+//    public String deleteCartItem(@RequestParam(name = "cartItem", required = true) Long cartItemId) {
+//        Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
+//        cartItemService.removeItemFromCart(cartItemId);
+//        return "redirect:/cart";
+//    }
+
+    @GetMapping({"/delete-cartItem/{cartItemId}"})
+    public String deleteCartItem(@PathVariable(name="cartItemId") Long cartItemId) {
         Optional<CartItem> cartItem = cartItemService.findById(cartItemId);
-
         cartItemService.removeItemFromCart(cartItemId);
-
         return "redirect:/cart";
     }
 
