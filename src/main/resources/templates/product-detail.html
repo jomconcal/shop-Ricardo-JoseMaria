@@ -13,7 +13,7 @@
         <div th:class="header">
             <div th:class="title">
                 <h1 th:text="${product.name}"></h1>
-                <a th:href="@{/add-product-to-cart(productId=${product.id},from=${from})}" th:class="btnAdd">Add</a>
+                <a th:href="@{/add-product-to-cart/{productId}(productId=${product.id},from=${from})}" th:class="btnAdd">Add</a>
             </div>
             <button id="close-dialog">X</button>
         </div>

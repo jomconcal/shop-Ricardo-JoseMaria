@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductToCartDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.CartItem;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CartItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -62,5 +63,14 @@ public class CartItemServiceImpl implements CartItemService {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
             cartItemRepository.save(cartItem);
         }
+    }
+
+    @Override
+    public void save(AddProductToCartDto productToCartDto) {
+        this.save(productToCartDto.getProductId(), productToCartDto.getQuantity());
+    }
+
+    private void save(Long productId, Integer quantity) {
+//TODO actualizar aquí el añadir al carrito para el rest
     }
 }

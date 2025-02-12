@@ -9,6 +9,7 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,10 +21,10 @@ public class CartItemController {
     private final CartItemService cartItemService;
     private final ProductService productService;
 
-    @GetMapping({"/", ""})
+    @GetMapping("/{productId}")
     public String addToCartItem(
-            @RequestParam(name = "productId", required = true) Long productId,
-            @RequestParam(name = "from", required = true) String from) {
+            @PathVariable Long productId,
+            @RequestParam(name = "from") String from) {
 
         Product product = productService.findById(productId).orElseThrow();
         CartItem cartItem= new CartItem(1,product);

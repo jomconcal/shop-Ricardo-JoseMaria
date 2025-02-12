@@ -25,6 +25,8 @@ public class Product {
     private String name;
     private String description;
     private String productDetail;
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private Integer stock;
     @Column(nullable = false)
     private Double price;
     private String imageUrl;

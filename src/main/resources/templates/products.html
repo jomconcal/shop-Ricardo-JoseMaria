@@ -38,7 +38,7 @@
                         </li>
                         <li th:class="price-button">
                             <p th:text="${#numbers.formatDecimal(product.price,1,2,'POINT')}" th:class="price"></p>
-                            <a th:href="@{/add-product-to-cart(productId=${product.id},from=${from})}" th:class="btnAdd">
+                            <a th:href="@{/add-product-to-cart/{productId}(productId=${product.id},from=${from})}" th:class="btnAdd">
                                 <i class="fa-solid fa-plus"></i>
                             </a>
                         </li>
