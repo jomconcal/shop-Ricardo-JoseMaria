@@ -27,15 +27,11 @@ public class CartItemServiceImpl implements CartItemService {
 
         Optional<CartItem> previousCartItem = cartItemRepository.findByProductId(cartItem.getProduct().getId());
         if (previousCartItem.isPresent()) {
-            CartItem newCartItem = previousCartItem.get();
-            newCartItem.setQuantity(newCartItem.getQuantity() + cartItem.getQuantity());
-            cartItemRepository.save(newCartItem);
-        } else {
-            cartItemRepository.save(cartItem);
+            cartItem = previousCartItem.get();
+            cartItem.setQuantity(cartItem.getQuantity() + cartItem.getQuantity());
         }
-        Product productChanged = productRepository.findById(cartItem.getProduct().getId()).orElseThrow();
-        productChanged.setStock(productChanged.getStock() - cartItem.getQuantity());
-        productRepository.save(productChanged);
+        cartItemRepository.save(cartItem);
+
     }
 
     @Override
@@ -63,30 +59,33 @@ public class CartItemServiceImpl implements CartItemService {
         cartItemRepository.deleteAll();
     }
 
-    @Override
-    public void changeQuantity(Long cartItemId, boolean increase) {
-        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
-        if (increase) {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-            cartItemRepository.save(cartItem);
-        } else if (cartItem.getQuantity() > 1) {
-            cartItem.setQuantity(cartItem.getQuantity() - 1);
-            cartItemRepository.save(cartItem);
-        }
-    }
 
     @Override
     public void save(ProductInCartDto productInCart) {
-        if (productRepository.findById(productInCart.getProductId()).isEmpty()) {
-            throw new ProductNotFoundException("Product with id " + productInCart.getProductId() + " not found");
-        }else if (productRepository.findById(productInCart.getProductId()).get().getStock() < productInCart.getQuantity()) {
-            throw new InsufficientStock("There's only " + productRepository.findById(productInCart.getProductId()).get().getStock() + " products in stock");
-        }else{
-            CartItem cartItem = new CartItem(productInCart.getQuantity(),productRepository.findById(productInCart.getProductId()).get());
-            save(cartItem);
-        }
+        this.save(productInCart.getProductId(), productInCart.getQuantity());
+
     }
 
+    private void save(Long productId, int quantity) {
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + productId + " not found"));
 
+        if (product.getStock() < quantity) {
+            throw new InsufficientStock("There's only " + product.getStock() + " products in stock");
+        }
+
+        CartItem cartItem = new CartItem(quantity, product);
+
+        save(cartItem);
+
+    }
+
+    @Override
+    public void changeQuantity(Long cartItemId, boolean increase) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
+        cartItem.setQuantity(cartItem.getQuantity() + (increase ? 1 : -1));
+        this.save(cartItem);
+    }
 
 }
