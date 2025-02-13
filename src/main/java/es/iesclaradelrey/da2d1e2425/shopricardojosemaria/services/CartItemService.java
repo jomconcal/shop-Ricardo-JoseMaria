@@ -1,8 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductToCartDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.ProductInCartDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.CartItem;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -19,5 +18,6 @@ public interface CartItemService {
 
     void changeQuantity(Long cartItemId, boolean increase);
 
-    void save(AddProductToCartDto productToCartDto);
+    void save(ProductInCartDto productToCartDto);
+
 }
