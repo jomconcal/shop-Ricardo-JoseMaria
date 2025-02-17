@@ -17,7 +17,7 @@ public class CartRestController {
     public ResponseEntity<String> addProductToCart(@RequestBody ProductInCartDto productToCartDto) {
 
         cartItemService.save(productToCartDto);
-        return ResponseEntity.ok("Product added to Cart");
+        return ResponseEntity.ok("Product with id "+productToCartDto.getProductId()+" added to Cart");
     }
 
 }

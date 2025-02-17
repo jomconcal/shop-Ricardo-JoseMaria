@@ -27,8 +27,9 @@ public class CartItemServiceImpl implements CartItemService {
 
         Optional<CartItem> previousCartItem = cartItemRepository.findByProductId(cartItem.getProduct().getId());
         if (previousCartItem.isPresent()) {
+            int quantity = cartItem.getQuantity();
             cartItem = previousCartItem.get();
-            cartItem.setQuantity(cartItem.getQuantity() + cartItem.getQuantity());
+            cartItem.setQuantity(cartItem.getQuantity() +quantity);
         }
         cartItemRepository.save(cartItem);
 

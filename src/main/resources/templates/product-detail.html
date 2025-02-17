@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -13,7 +13,7 @@
         <div th:class="header">
             <div th:class="title">
                 <h1 th:text="${product.name}"></h1>
-                <a th:href="@{/add-product-to-cart/{productId}(productId=${product.id},from=${from})}" th:class="btnAdd">Add</a>
+                <button type="button" th:class="btnAdd" th:data-productId="${product.id}">Add</button>
             </div>
             <button id="close-dialog">X</button>
         </div>
@@ -32,7 +32,11 @@
 
         </div>
     </div>
+
+
 </main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/js/product-detail.js}"></script>
+<script th:src="@{/js/addToCart.js}"></script>
 </body>
 </html>
