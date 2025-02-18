@@ -1,5 +1,5 @@
 .bodyCocktails {
-    background-image: url('/img/products/cocktails/fondo.jpg');
+    background-image: url('../img/products/cocktails/fondo.jpg');
     color: #f5e6c4;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .bodyCoffees {
-    background-image: url('/img/products/coffees/fondo.jpg');
+    background-image: url('../img/products/coffees/fondo.jpg');
     color: #333;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .bodyDesserts {
-    background-image: url('/img/products/desserts/fondo.png');
+    background-image: url('../img/products/desserts/fondo.png');
     color: #a85a5a;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .bodyPintxos {
-    background-image: url('/img/products/pintxos/fondo.webp');
+    background-image: url('../img/products/pintxos/fondo.webp');
     color: #6b3e26;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .bodyTeas {
-    background-image: url('/img/products/teas/fondo.jpg');
+    background-image: url('../img/products/teas/fondo.jpg');
     color: #2e4d2b;
 }
 
@@ -49,6 +49,6 @@
 }
 
 .bodyAll{
-    background-image: url('/img/categories/fondo.jpg');
+    background-image: url('../img/categories/fondo.jpg');
 }
 

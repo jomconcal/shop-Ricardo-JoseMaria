@@ -86,7 +86,7 @@ public class CartItemServiceImpl implements CartItemService {
     public void changeQuantity(Long cartItemId, boolean increase) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow();
         cartItem.setQuantity(cartItem.getQuantity() + (increase ? 1 : -1));
-        this.save(cartItem);
+        cartItemRepository.save(cartItem);
     }
 
 }

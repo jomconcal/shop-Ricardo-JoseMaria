@@ -21,7 +21,7 @@
             <div th:class="general">
                 <p th:text="${product.description}" th:class="description"></p>
                 <div th:class="picture-price">
-                    <img th:alt="${product.name}" th:src="${product.imageUrl}">
+                    <img th:alt="${product.name}" th:src="@{${product.imageUrl}}">
                     <div th:class="price-button">
                         <p th:text="${#numbers.formatDecimal(product.price,1,2,'POINT')}" th:class="price"></p>
                     </div>
