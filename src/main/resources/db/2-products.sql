@@ -88,7 +88,6 @@ VALUES ((SELECT id FROM categories WHERE name = 'Desserts'), 'Brownie', 'Rich ch
         'Ice Cream comes in a variety of flavors, from classic vanilla to exotic fruit or chocolate varieties. It’s creamy, cold, and perfect for a summer day or any sweet craving.',
         4.00, '/img/products/desserts/ice-cream.webp');
 
-update products
-    set stock = 10
-    where name = 'Espresso';
-
+UPDATE products
+SET stock = 10
+WHERE name IN ('Espresso', 'Ice Cream', 'Tiramisu', 'Brownie');

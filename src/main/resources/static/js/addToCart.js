@@ -3,7 +3,7 @@ const addButtons = document.getElementsByClassName("btnAdd");
 Array.from(addButtons).forEach(button => {
 
     button.addEventListener("click", () => {
-        fetch("api/cart", {
+        fetch(appRootPath + "/api/cart", {
             method: "POST",
             body: JSON.stringify({
                 "productId": button.getAttribute("data-productId"),
