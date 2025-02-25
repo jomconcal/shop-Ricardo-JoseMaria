@@ -3,6 +3,7 @@ const addButtons = document.getElementsByClassName("btnAdd");
 Array.from(addButtons).forEach(button => {
 
     button.addEventListener("click", () => {
+        console.log("appRootPath: "+ appRootPath)
         fetch(appRootPath + "/api/cart", {
             method: "POST",
             body: JSON.stringify({

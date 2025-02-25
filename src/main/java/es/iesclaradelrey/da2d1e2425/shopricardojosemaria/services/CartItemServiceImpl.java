@@ -77,9 +77,7 @@ public class CartItemServiceImpl implements CartItemService {
         }
 
         CartItem cartItem = new CartItem(quantity, product);
-
         save(cartItem);
-
     }
 
     @Override

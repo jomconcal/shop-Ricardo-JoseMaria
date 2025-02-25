@@ -10,6 +10,7 @@
 
 <main>
     <div th:class="|${title} product|">
+
         <div th:class="header">
             <div th:class="title">
                 <h1 th:text="${product.name}"></h1>
@@ -17,6 +18,7 @@
             </div>
             <button id="close-dialog">X</button>
         </div>
+
         <div th:class="product-rating">
             <div th:class="general">
                 <p th:text="${product.description}" th:class="description"></p>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new product</title>
+</head>
+<body>
+<form method="post" th:object="${product}">
+
+    <div>
+        <label for="txt-nombre">Nombre del producto</label>
+    </div>
+    <div>
+        <input type="text" id="txt-nombre" th:field="*{name}" >
+    </div>
+
+    <div><label for="txt-categoria">Nombre de la categoria</label></div>
+    <div>
+       <select id="txt-categoria" th:field="*{categoryId}">
+           <option th:each="category:${categoryList}" th:text="${category.name}"  th:value="${category.id}"></option>
+       </select>
+    </div>
+
+    <div><label for="txt-description">Descripcion</label></div>
+    <div><textarea id="txt-description" th:field="*{description}" ></textarea></div>
+
+    <div><label for="txt-detail">Detalle del producto</label></div>
+    <div><textarea id="txt-detail" th:field="*{productDetail}" ></textarea></div>
+
+    <div><label for="txt-stock">Stock</label></div>
+    <div><input type="text" id="txt-stock" th:field="*{stock}"></div>
+
+    <div><label for="txt-price">Precio</label></div>
+    <div><input type="text" id="txt-price" th:field="*{price}"</div>
+
+    <div><label for="txt-urlImage">Url de imagen</label></div>
+    <div><input type="text" id="txt-urlImage" th:field="*{imageUrl}"></div>
+
+    <button type="submit">Aceptar</button>
+</form>
+</body>
+</html>

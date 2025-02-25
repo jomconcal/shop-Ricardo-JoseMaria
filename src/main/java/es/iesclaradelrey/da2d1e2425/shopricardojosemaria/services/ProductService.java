@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 
 import java.util.Collection;
@@ -11,4 +12,6 @@ public interface ProductService {
     Optional<Product> findById(long id);
     Collection<Product> findAll();
     Collection<Product> findByCategoryId(Long categoryId);
+
+    void createProduct(AddProductDto addProductDto);
 }
