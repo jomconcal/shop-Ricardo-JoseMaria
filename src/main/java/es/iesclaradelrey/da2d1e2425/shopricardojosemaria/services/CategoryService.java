@@ -9,4 +9,5 @@ public interface CategoryService{
     void save(Category category);
     Collection<Category> findAll();
     Optional<Category> findById(Long id);
+    void create(String name, String description);
 }
