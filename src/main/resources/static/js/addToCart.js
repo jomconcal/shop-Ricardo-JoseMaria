@@ -4,7 +4,7 @@ Array.from(addButtons).forEach(button => {
 
     button.addEventListener("click", () => {
         console.log("appRootPath: "+ appRootPath)
-        fetch(appRootPath + "/api/cart", {
+        fetch(appRootPath + "api/cart", {
             method: "POST",
             body: JSON.stringify({
                 "productId": button.getAttribute("data-productId"),

@@ -3,40 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<form method="post" th:object="${product}">
+<div class="container d-flex justify-content-center align-items-center flex-column mt-5">
+    <h1 class="text-center mb-4">Introduce un producto nuevo</h1>
+</div>
 
-    <div>
-        <label for="txt-nombre">Nombre del producto</label>
+
+<form method="post" th:object="${product}" class="container mt-4">
+    <div th:if="${#fields.hasErrors()}">
+        <p th:each="error:${#fields.errors()}"></p>
+        <p>Error</p>
     </div>
-    <div>
-        <input type="text" id="txt-nombre" th:field="*{name}" >
+    <!-- Nombre del Producto -->
+    <div class="mb-3">
+        <label for="txt-nombre" class="form-label">Nombre del producto</label>
+        <input type="text" id="txt-nombre" class="form-control" th:field="*{name}">
     </div>
 
-    <div><label for="txt-categoria">Nombre de la categoria</label></div>
-    <div>
-       <select id="txt-categoria" th:field="*{categoryId}">
-           <option th:each="category:${categoryList}" th:text="${category.name}"  th:value="${category.id}"></option>
-       </select>
+    <!-- Categoría del Producto -->
+    <div class="mb-3">
+        <label for="txt-categoria" class="form-label">Nombre de la categoría</label>
+        <select id="txt-categoria" class="form-select" th:field="*{categoryId}">
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
+        </select>
     </div>
 
-    <div><label for="txt-description">Descripcion</label></div>
-    <div><textarea id="txt-description" th:field="*{description}" ></textarea></div>
+    <!-- Descripción del Producto -->
+    <div class="mb-3">
+        <label for="txt-description" class="form-label">Descripción</label>
+        <textarea id="txt-description" class="form-control" th:field="*{description}"></textarea>
+    </div>
 
-    <div><label for="txt-detail">Detalle del producto</label></div>
-    <div><textarea id="txt-detail" th:field="*{productDetail}" ></textarea></div>
+    <!-- Detalles del Producto -->
+    <div class="mb-3">
+        <label for="txt-detail" class="form-label">Detalle del producto</label>
+        <textarea id="txt-detail" class="form-control" th:field="*{productDetail}"></textarea>
+    </div>
 
-    <div><label for="txt-stock">Stock</label></div>
-    <div><input type="text" id="txt-stock" th:field="*{stock}"></div>
+    <!-- Stock del Producto -->
+    <div class="mb-3">
+        <label for="txt-stock" class="form-label">Stock</label>
+        <input type="number" id="txt-stock" class="form-control" th:field="*{stock}">
+    </div>
 
-    <div><label for="txt-price">Precio</label></div>
-    <div><input type="text" id="txt-price" th:field="*{price}"</div>
+    <!-- Precio del Producto -->
+    <div class="mb-3">
+        <label for="txt-price" class="form-label">Precio</label>
+        <input type="number" id="txt-price" class="form-control" th:field="*{price}" step="0.01">
+    </div>
 
-    <div><label for="txt-urlImage">Url de imagen</label></div>
-    <div><input type="text" id="txt-urlImage" th:field="*{imageUrl}"></div>
+    <!-- URL de la Imagen -->
+    <div class="mb-3">
+        <label for="txt-urlImage" class="form-label">URL de imagen</label>
+        <input type="text" id="txt-urlImage" class="form-control" th:field="*{imageUrl}">
+    </div>
 
-    <button type="submit">Aceptar</button>
+    <!-- Botón Aceptar -->
+    <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>
 </body>
 </html>

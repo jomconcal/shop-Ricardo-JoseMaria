@@ -4,10 +4,13 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
+import jakarta.persistence.Column;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,12 +40,16 @@ public class AdminController {
     }
 
     @PostMapping("/addProduct")
-    public ModelAndView postAddProduct(@ModelAttribute AddProductDto addProductDto) {
+    public String postAddProduct(@Valid @ModelAttribute AddProductDto addProductDto
+            , BindingResult bindingResult, Model model) {
         Collection<Category> categoryList = categoryService.findAll();
 
-        ModelAndView mav = new ModelAndView("admin/addProduct", "product", addProductDto);
-        mav.addObject("categoryList", categoryList);
-        productService.createProduct(addProductDto);
-        return mav;
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("product", addProductDto);
+
+        if (!bindingResult.hasErrors()) {
+            productService.createProduct(addProductDto);
+        }
+        return "admin/addProduct";
     }
 }

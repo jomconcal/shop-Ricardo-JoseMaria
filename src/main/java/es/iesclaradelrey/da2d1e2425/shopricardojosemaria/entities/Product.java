@@ -34,5 +34,4 @@ public class Product {
     private Set<Rating> ratings;
     @OneToMany(mappedBy = "product")
     private Set<CartItem> cartItems;
-
 }

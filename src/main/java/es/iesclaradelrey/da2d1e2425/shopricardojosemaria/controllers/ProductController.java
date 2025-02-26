@@ -79,6 +79,4 @@ public class ProductController {
             return allCategories.getFirst().getId();
         }
     }
-
-
 }

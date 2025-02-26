@@ -35,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryRepository.existsCategoryByNameIgnoreCase(name)){
             throw new AlreadyExistsException(String.format("Ya existe una categoría con el nombre %s", name));
         }
+
         Category category = new Category();
         category.setName(name);
         category.setDescription(description);

@@ -48,13 +48,17 @@ public class ProductServiceImpl implements ProductService {
         if(productRepository.existsProductByNameIgnoreCase(addProductDto.getName())) {
             throw new AlreadyExistsException("Product with name "+addProductDto.getName()+" already exists");
         }
-
         Product product = new Product();
         product.setCategory(categoryService.findById(addProductDto.getCategoryId()).orElseThrow());
         product.setName(addProductDto.getName());
         product.setDescription(addProductDto.getDescription());
         product.setPrice(addProductDto.getPrice());
         product.setStock(addProductDto.getStock());
+
+        //añadimos imagen por defecto si no se pone ninguna imagen
+        if(addProductDto.getImageUrl().isEmpty()){
+            addProductDto.setImageUrl("img/products/others/defaultImage.jpg");
+        }
         product.setImageUrl(addProductDto.getImageUrl());
         productRepository.save(product);
     }
