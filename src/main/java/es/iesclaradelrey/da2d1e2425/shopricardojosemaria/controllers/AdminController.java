@@ -51,6 +51,7 @@ public class AdminController {
             return "admin/addProduct";
         }
         productService.createProduct(addProductDto);
-        return "admin/addProduct-ok";
+        Long categoryId = addProductDto.getCategoryId();
+        return "redirect:/products/"+categoryId;
     }
 }

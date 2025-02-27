@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 
         //añadimos imagen por defecto si no se pone ninguna imagen
         if(addProductDto.getImageUrl().isEmpty()){
-            addProductDto.setImageUrl("img/products/others/defaultImage.jpg");
+            addProductDto.setImageUrl("/img/products/others/defaultImage.jpg");
         }
         product.setImageUrl(addProductDto.getImageUrl());
         productRepository.save(product);
