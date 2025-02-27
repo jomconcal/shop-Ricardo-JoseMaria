@@ -53,7 +53,11 @@ public class ProductServiceImpl implements ProductService {
         product.setName(addProductDto.getName());
         product.setDescription(addProductDto.getDescription());
         product.setPrice(addProductDto.getPrice());
-        product.setStock(addProductDto.getStock());
+        if(product.getStock() == null || product.getStock() < 0) {
+            product.setStock(0);
+        }else{
+            product.setStock(addProductDto.getStock());
+        }
 
         //añadimos imagen por defecto si no se pone ninguna imagen
         if(addProductDto.getImageUrl().isEmpty()){

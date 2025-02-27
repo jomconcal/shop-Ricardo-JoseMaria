@@ -13,23 +13,25 @@
 
 
 <form method="post" th:object="${product}" class="container mt-4">
-    <div th:if="${#fields.hasErrors()}">
-        <p th:each="error:${#fields.errors()}"></p>
-        <p>Error</p>
-    </div>
     <!-- Nombre del Producto -->
     <div class="mb-3">
         <label for="txt-nombre" class="form-label">Nombre del producto</label>
-        <input type="text" id="txt-nombre" class="form-control" th:field="*{name}">
+        <input type="text" id="txt-nombre" class="form-control" th:field="*{name}" th:errorclass="is-invalid">
+        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="${#fields.errors('name')}">
+            Error.
+        </div>
     </div>
 
     <!-- Categoría del Producto -->
     <div class="mb-3">
         <label for="txt-categoria" class="form-label">Nombre de la categoría</label>
-        <select id="txt-categoria" class="form-select" th:field="*{categoryId}">
+        <select id="txt-categoria" class="form-select" th:field="*{categoryId}" th:errorclass="is-invalid">
             <option value="" disabled selected>Selecciona una categoría</option>
             <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
         </select>
+        <div th:if="${#fields.hasErrors('categoryId')}" class="invalid-feedback" th:text="${#fields.errors('categoryId')}">
+            Error.
+        </div>
     </div>
 
     <!-- Descripción del Producto -->
@@ -53,7 +55,10 @@
     <!-- Precio del Producto -->
     <div class="mb-3">
         <label for="txt-price" class="form-label">Precio</label>
-        <input type="number" id="txt-price" class="form-control" th:field="*{price}" step="0.01">
+        <input type="number" id="txt-price" class="form-control" th:field="*{price}" step="0.01" th:errorclass="is-invalid">
+        <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback" th:text="${#fields.errors('price')}">
+            Error.
+        </div>
     </div>
 
     <!-- URL de la Imagen -->

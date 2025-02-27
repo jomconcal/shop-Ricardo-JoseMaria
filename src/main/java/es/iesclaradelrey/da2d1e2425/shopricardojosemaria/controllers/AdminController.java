@@ -40,16 +40,17 @@ public class AdminController {
     }
 
     @PostMapping("/addProduct")
-    public String postAddProduct(@Valid @ModelAttribute AddProductDto addProductDto
+    public String postAddProduct(@Valid @ModelAttribute("product") AddProductDto addProductDto
             , BindingResult bindingResult, Model model) {
         Collection<Category> categoryList = categoryService.findAll();
 
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("product", addProductDto);
 
-        if (!bindingResult.hasErrors()) {
-            productService.createProduct(addProductDto);
+        if (bindingResult.hasErrors()) {
+            return "admin/addProduct";
         }
-        return "admin/addProduct";
+        productService.createProduct(addProductDto);
+        return "admin/addProduct-ok";
     }
 }
