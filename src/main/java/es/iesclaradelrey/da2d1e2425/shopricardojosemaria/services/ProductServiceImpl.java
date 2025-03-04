@@ -1,10 +1,15 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -65,5 +70,12 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setImageUrl(addProductDto.getImageUrl());
         productRepository.save(product);
+    }
+
+    @Override
+    public Page<Product> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
+        return productRepository.findAll(pageable);
     }
 }

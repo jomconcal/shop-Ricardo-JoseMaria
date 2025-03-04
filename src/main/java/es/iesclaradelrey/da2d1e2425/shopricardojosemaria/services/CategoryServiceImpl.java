@@ -4,6 +4,10 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -35,11 +39,12 @@ public class CategoryServiceImpl implements CategoryService {
         if(categoryRepository.existsCategoryByNameIgnoreCase(name)){
             throw new AlreadyExistsException(String.format("Ya existe una categoría con el nombre %s", name));
         }
-
         Category category = new Category();
         category.setName(name);
         category.setDescription(description);
         categoryRepository.save(category);
     }
+
+
 
 }
