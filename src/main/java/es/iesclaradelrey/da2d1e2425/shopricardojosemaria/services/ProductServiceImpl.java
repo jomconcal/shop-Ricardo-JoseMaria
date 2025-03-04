@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(addProductDto.getName());
         product.setDescription(addProductDto.getDescription());
         product.setPrice(addProductDto.getPrice());
-        if(product.getStock() == null || product.getStock() < 0) {
+        if(addProductDto.getStock() == null || addProductDto.getStock() < 0) {
             product.setStock(0);
         }else{
             product.setStock(addProductDto.getStock());
