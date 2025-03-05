@@ -12,33 +12,100 @@
 <body>
 <main class="container d-flex flex-column gap-3">
     <h1 class="text-center mt-5">Categories</h1>
+
+    <form class="container d-flex gap-3 justify-content-between" th:action="@{/admin/products}">
+        <div class="d-flex gap-3 m-1">
+            <label for="order" class="form-label">Sort by</label>
+            <select id="order" class="form-select" name="orderBy">
+                <option value="id">Id</option>
+                <option value="category" >Category</option>
+                <option value="name">Name</option>
+            </select>
+        </div>
+
+
+        <fieldset class="d-flex gap-3 m-1">
+            <legend>Direction</legend>
+            <label class="form-check-label" for="asc">Ascending</label>
+            <input class="form-check-input" type="radio" id="asc" name="orderDir" value="asc" >
+            <label class="form-check-label" for="desc">Descending</label>
+            <input class="form-check-input" type="radio" id="desc" name="orderDir" value="desc">
+        </fieldset>
+        <div class="d-flex gap-3 m-1">
+            <label class="form-label" for="size">Size</label>
+            <select class="form-select" id="size" name="pageSize">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" >5</option>
+            </select>
+        </div>
+        <div class="d-flex gap-3 m-1">
+            <button type="submit" class="btn btn-primary">Show</button>
+        </div>
+    </form>
+
     <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Category</th>
+            <th scope="col" class="text-end">Actions &nbsp;</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="product:${products}">
+            <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.category.name}"></td>
+            <td class="d-flex gap-3 justify-content-end">
+                <a>Update</a>
+                <a>Delete</a>
+            </td>
+
         </tr>
         </tbody>
 
     </table>
 </main>
 <footer>
+    <p th:text="|Page ${products.number + 1} of ${products.totalPages}|"></p>
     <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link">Previous</a></li>
+            <li th:if="${products.number - 2 >=0 }" class="page-item">
+                <a class="page-link" th:text="${products.number - 1}"
+                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number - 1})}">
+                </a>
+            </li>
+            <li th:if="${products.number - 1 >=0 }" class="page-item">
+                <a class="page-link" th:text="${products.number }"
+                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number})}">
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link active"  th:text="${products.number +1}"
+                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 1})}">
+                </a>
+            </li>
+            <li th:if="${products.number + 1 < products.totalPages }" class="page-item">
+                <a class="page-link"  th:text="${products.number +2}"
+                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 2})}">
+                </a>
+            </li>
+            <li th:if="${products.number + 2 < products.totalPages }" class="page-item">
+                <a class="page-link" th:text="${products.number + 3}"
+                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 3})}">
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
         </ul>
     </nav>
 </footer>

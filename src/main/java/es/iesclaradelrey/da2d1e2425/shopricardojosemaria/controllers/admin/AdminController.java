@@ -1,13 +1,11 @@
-package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers;
+package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
-import jakarta.persistence.Column;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -28,7 +25,12 @@ public class AdminController {
     private final ProductService productService;
     private final CategoryService categoryService;
 
-    @GetMapping("/addProduct")
+    @GetMapping({"/",""})
+    public String getIndex() {
+        return "admin/indexAdmin";
+    }
+
+    @GetMapping({"/addProduct","/addProduct/"})
     public ModelAndView getAddProduct() {
 
         Collection<Category> categoryList = categoryService.findAll();
@@ -39,7 +41,7 @@ public class AdminController {
         return mav;
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping({"/addProduct","/addProduct/"})
     public String postAddProduct(@Valid @ModelAttribute("product") AddProductDto addProductDto
             , BindingResult bindingResult, Model model) {
         Collection<Category> categoryList = categoryService.findAll();
