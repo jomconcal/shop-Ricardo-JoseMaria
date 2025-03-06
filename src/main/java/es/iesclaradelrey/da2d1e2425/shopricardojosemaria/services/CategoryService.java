@@ -12,4 +12,6 @@ public interface CategoryService{
     Optional<Category> findById(Long id);
     void create(String name, String description);
 
+    Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
+
 }

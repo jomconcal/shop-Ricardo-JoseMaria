@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void create(String name, String description) {
-        if(categoryRepository.existsCategoryByNameIgnoreCase(name)){
+        if (categoryRepository.existsCategoryByNameIgnoreCase(name)) {
             throw new AlreadyExistsException(String.format("Ya existe una categoría con el nombre %s", name));
         }
         Category category = new Category();
@@ -45,6 +45,12 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
     }
 
+    @Override
+    public Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable categories = PageRequest.of(pageNumber-1, pageSize, Sort.by(direction, orderBy));
+        return categoryRepository.findAll(categories);
+    }
 
 
 }
