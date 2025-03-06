@@ -11,44 +11,12 @@
 </head>
 <body>
 <main class="container d-flex flex-column gap-3">
-    <h1 class="text-center mt-5">Categories</h1>
+    <h1 class="text-center mt-5">Products</h1>
 
-    <form class="container d-flex gap-3 justify-content-between" th:action="@{/admin/products}">
-        <div class="d-flex gap-3 m-1">
-            <label for="order" class="form-label">Sort by</label>
-            <select id="order" class="form-select" name="orderBy">
-                <option value="id">Id</option>
-                <option value="category" >Category</option>
-                <option value="name">Name</option>
-            </select>
-        </div>
-
-
-        <fieldset class="d-flex gap-3 m-1">
-            <legend>Direction</legend>
-            <label class="form-check-label" for="asc">Ascending</label>
-            <input class="form-check-input" type="radio" id="asc" name="orderDir" value="asc" >
-            <label class="form-check-label" for="desc">Descending</label>
-            <input class="form-check-input" type="radio" id="desc" name="orderDir" value="desc">
-        </fieldset>
-        <div class="d-flex gap-3 m-1">
-            <label class="form-label" for="size">Size</label>
-            <select class="form-select" id="size" name="pageSize">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5" >5</option>
-            </select>
-        </div>
-        <div class="d-flex gap-3 m-1">
-            <button type="submit" class="btn btn-primary">Show</button>
-        </div>
-    </form>
-
+    <th:block th:replace="~{frafments/fragments::order-form}"></th:block>
     <table class="table table-hover">
         <thead>
-        <tr>
+        <tr >
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
@@ -72,11 +40,9 @@
         </tbody>
 
     </table>
-</main>
-<footer>
-    <p th:text="|Page ${products.number + 1} of ${products.totalPages}|"></p>
-    <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5">
-        <ul class="pagination">
+    <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5 gap-3" >
+        <p th:text="|Page ${products.number + 1} of ${products.totalPages}|" class="my-auto"></p>
+        <ul class="pagination my-auto">
             <li class="page-item"><a class="page-link">Previous</a></li>
             <li th:if="${products.number - 2 >=0 }" class="page-item">
                 <a class="page-link" th:text="${products.number - 1}"
@@ -108,6 +74,9 @@
             </li>
         </ul>
     </nav>
+
+</main>
+<footer>
 </footer>
 </body>
 </html>

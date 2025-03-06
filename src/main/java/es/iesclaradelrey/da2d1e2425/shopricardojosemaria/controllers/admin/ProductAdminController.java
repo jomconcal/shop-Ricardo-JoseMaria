@@ -25,6 +25,6 @@ public class ProductAdminController {
                 pageSize,orderBy,orderDir));
         model.addAttribute("orderBy", orderBy);
         model.addAttribute("orderDir", orderDir);
-        return "/admin/products";
+        return "admin/adminProducts";
     }
 }
