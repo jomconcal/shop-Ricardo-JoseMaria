@@ -13,10 +13,10 @@
 <main class="container d-flex flex-column gap-3">
     <h1 class="text-center mt-5">Products</h1>
 
-    <th:block th:replace="~{fragments/fragments::order-form('/admin/products',${orders},${products.size})}"></th:block>
+    <th:block th:replace="~{admin/adminFragments::order-form('/admin/products',${orders},${products.size})}"></th:block>
     <table class="table table-hover">
         <thead>
-        <tr >
+        <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
@@ -40,41 +40,7 @@
         </tbody>
 
     </table>
-    <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5 gap-3" >
-        <p th:text="|Page ${products.number + 1} of ${products.totalPages}|" class="my-auto"></p>
-        <ul class="pagination my-auto">
-            <li class="page-item"><a class="page-link">Previous</a></li>
-            <li th:if="${products.number - 2 >=0 }" class="page-item">
-                <a class="page-link" th:text="${products.number - 1}"
-                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number - 1})}">
-                </a>
-            </li>
-            <li th:if="${products.number - 1 >=0 }" class="page-item">
-                <a class="page-link" th:text="${products.number }"
-                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number})}">
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link active"  th:text="${products.number +1}"
-                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 1})}">
-                </a>
-            </li>
-            <li th:if="${products.number + 1 < products.totalPages }" class="page-item">
-                <a class="page-link"  th:text="${products.number +2}"
-                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 2})}">
-                </a>
-            </li>
-            <li th:if="${products.number + 2 < products.totalPages }" class="page-item">
-                <a class="page-link" th:text="${products.number + 3}"
-                   th:href="@{/admin/products(orderDir=${orderDir},orderBy=${orderBy},pageSize=${products.size},pageNumber=${products.number + 3})}">
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-
+<th:block th:replace="~{admin/adminFragments::pagination(${products}, 'products')}"></th:block>
 </main>
 
 </body>

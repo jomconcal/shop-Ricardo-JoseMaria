@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="order-form(url,orders,currentPageSize)">
+    <form class="container d-flex gap-3 justify-content-between" th:action="@{${url}}">
+        <div class="d-flex gap-3 m-1">
+            <label for="order" class="form-label text-nowrap my-auto">Sort by</label>
+            <select id="order" class="form-select" name="orderBy" >
+                <option  th:each="entry:${orders}" th:selected="${orderBy==entry.value}" th:text="${entry.key}" th:value="${entry.value}"></option>
+            </select>
+        </div>
+
+
+        <fieldset class="d-flex gap-3 m-1">
+            <legend>Direction</legend>
+            <label class="form-check-label my-auto" for="asc">Ascending</label>
+            <input th:checked="${orderDir=='asc'}" class="form-check-input my-auto" type="radio" id="asc" name="orderDir" value="asc" >
+            <label class="form-check-label my-auto" for="desc">Descending</label>
+            <input th:checked="${orderDir=='desc'}" class="form-check-input my-auto" type="radio" id="desc" name="orderDir" value="desc">
+        </fieldset>
+        <div class="d-flex gap-3 m-1">
+            <label class="form-label my-auto" for="size">Size</label>
+            <select class="form-select" id="size" name="pageSize">
+                <option th:selected="${currentPageSize==1}" value="1">1</option>
+                <option th:selected="${currentPageSize==2}" value="2">2</option>
+                <option th:selected="${currentPageSize==3}" value="3">3</option>
+                <option th:selected="${currentPageSize==4}" value="4">4</option>
+                <option th:selected="${currentPageSize==5}" value="5" >5</option>
+            </select>
+        </div>
+        <div class="d-flex gap-3 m-1">
+            <button type="submit" class="btn btn-primary">Show</button>
+        </div>
+    </form>
+
+</th:block>
+
+<th:block th:fragment="pagination(pages, url)">
+    <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5 gap-3">
+        <p th:text="|Page ${pages.number + 1} of ${pages.totalPages}|" class="my-auto"></p>
+        <ul class="pagination my-auto">
+
+            <li class="page-item" th:if="${pages.hasPrevious()}">
+                <a class="page-link"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number})}"
+                >Previous</a>
+            </li>
+            <li class="page-item disabled" th:unless="${pages.hasPrevious()}">
+                <a class="page-link">Previous</a>
+            </li>
+
+            <li th:if="${pages.number - 2 >=0 }" class="page-item">
+                <a class="page-link" th:text="${pages.number - 1}"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number - 1})}">
+                </a>
+            </li>
+            <li th:if="${pages.number - 1 >=0 }" class="page-item">
+                <a class="page-link" th:text="${pages.number }"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number})}">
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link active" th:text="${pages.number +1}"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number + 1})}">
+                </a>
+            </li>
+            <li th:if="${pages.number + 1 < pages.totalPages }" class="page-item">
+                <a class="page-link" th:text="${pages.number +2}"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number + 2})}">
+                </a>
+            </li>
+            <li th:if="${pages.number + 2 < pages.totalPages }" class="page-item">
+                <a class="page-link" th:text="${pages.number + 3}"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number + 3})}">
+                </a>
+            </li>
+            <li class="page-item" th:if="${pages.hasNext()}">
+                <a class="page-link"
+                   th:href="@{/admin/{url}(url=__${url}__,orderDir=${orderDir},orderBy=${orderBy},pageSize=${pages.size},pageNumber=${pages.number + 2})}"
+                >Next</a>
+            </li>
+            <li class="page-item disabled" th:unless="${pages.hasNext()}">
+                <a class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</th:block>
+</body>
+</html>

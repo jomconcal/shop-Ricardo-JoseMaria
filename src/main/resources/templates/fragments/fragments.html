@@ -15,38 +15,4 @@
 </th:block>
 </body>
 
-<th:block th:fragment="order-form(url,orders,currentPageSize)">
-    <form class="container d-flex gap-3 justify-content-between" th:action="@{${url}}">
-        <div class="d-flex gap-3 m-1">
-            <label for="order" class="form-label text-nowrap my-auto">Sort by</label>
-            <select id="order" class="form-select" name="orderBy" >
-                <option  th:each="entry:${orders}" th:selected="${orderBy==entry.value}" th:text="${entry.key}" th:value="${entry.value}"></option>
-            </select>
-        </div>
-
-
-        <fieldset class="d-flex gap-3 m-1">
-            <legend>Direction</legend>
-            <label class="form-check-label my-auto" for="asc">Ascending</label>
-            <input th:checked="${orderDir=='asc'}" class="form-check-input my-auto" type="radio" id="asc" name="orderDir" value="asc" >
-            <label class="form-check-label my-auto" for="desc">Descending</label>
-            <input th:checked="${orderDir=='desc'}" class="form-check-input my-auto" type="radio" id="desc" name="orderDir" value="desc">
-        </fieldset>
-        <div class="d-flex gap-3 m-1">
-            <label class="form-label my-auto" for="size">Size</label>
-            <select class="form-select" id="size" name="pageSize">
-                <option th:selected="${currentPageSize==1}" value="1">1</option>
-                <option th:selected="${currentPageSize==2}" value="2">2</option>
-                <option th:selected="${currentPageSize==3}" value="3">3</option>
-                <option th:selected="${currentPageSize==4}" value="4">4</option>
-                <option th:selected="${currentPageSize==5}" value="5" >5</option>
-            </select>
-        </div>
-        <div class="d-flex gap-3 m-1">
-            <button type="submit" class="btn btn-primary">Show</button>
-        </div>
-    </form>
-
-</th:block>
-
 </html>
