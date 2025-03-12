@@ -35,4 +35,10 @@ public class ProductAdminController {
         model.addAttribute("orders", orders);
         return "admin/adminProducts";
     }
+
+    @GetMapping("/new")
+    public String newProduct() {
+        return "admin/newProduct";
+    }
+
 }
