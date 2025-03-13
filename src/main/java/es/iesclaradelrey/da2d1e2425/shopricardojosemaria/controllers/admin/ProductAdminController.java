@@ -56,7 +56,7 @@ public class ProductAdminController {
             return "admin/newProduct";
         }
         productService.createProduct(addProductDto);
-        Long categoryId = addProductDto.getCategoryId();
+//        Long categoryId = addProductDto.getCategoryId();
 //        return "redirect:/products/"+categoryId;
         return  "admin/Products";
     }
