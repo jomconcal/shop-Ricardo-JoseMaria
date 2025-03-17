@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<th:block th:fragment="order-form(url,orders,currentPageSize)">
+<th:block th:fragment="order-form(url,orders,orderBy,orderDir,currentPageSize)">
     <form class="container d-flex gap-3 justify-content-between" th:action="@{${url}}">
         <div class="d-flex gap-3 m-1">
             <label for="order" class="form-label text-nowrap my-auto">Sort by</label>
@@ -39,7 +39,7 @@
 
 </th:block>
 
-<th:block th:fragment="pagination(pages, url)">
+<th:block th:fragment="pagination(pages,orderBy,orderDir, url)">
     <nav aria-label="Page navigation example" class=" container d-flex justify-content-center mt-5 gap-3">
         <p th:text="|Page ${pages.number + 1} of ${pages.totalPages}|" class="my-auto"></p>
         <ul class="pagination my-auto">

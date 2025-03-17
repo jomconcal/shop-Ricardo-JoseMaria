@@ -13,7 +13,7 @@
 <main class="container d-flex flex-column gap-3">
   <h1 class="text-center mt-5">Categories</h1>
 
-  <th:block th:replace="~{admin/adminFragments::order-form('/admin/categories',${orders},${categories.size})}"></th:block>
+  <th:block th:replace="~{admin/fragments/adminFragments::order-form('/admin/categories',${orders},${orderBy},${orderDir},${categories.size})}"></th:block>
   <table class="table table-hover">
     <thead>
     <tr >
@@ -39,7 +39,7 @@
 
   </table>
 
-  <th:block th:replace="~{admin/adminFragments::pagination(${categories}, 'categories')}"></th:block>
+  <th:block th:replace="~{admin/fragments/adminFragments::pagination(${categories},${orderBy},${orderDir}, 'categories')}"></th:block>
 
 </main>
 
