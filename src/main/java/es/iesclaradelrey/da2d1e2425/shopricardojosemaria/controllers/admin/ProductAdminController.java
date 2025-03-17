@@ -26,18 +26,18 @@ public class ProductAdminController {
     private final ProductService productService;
     private final CategoryService categoryService;
 
-    @GetMapping({"","/"})
+    @GetMapping({"", "/"})
     public String categoryAdmin(@RequestParam(defaultValue = "1") Integer pageNumber,
                                 @RequestParam(defaultValue = "5") Integer pageSize,
                                 @RequestParam(defaultValue = "category.name") String orderBy,
                                 @RequestParam(defaultValue = "asc") String orderDir,
                                 Model model) {
-        Map<String,String>orders= new LinkedHashMap<>();
+        Map<String, String> orders = new LinkedHashMap<>();
         orders.put("Id", "id");
         orders.put("Name", "name");
         orders.put("Category", "category.name");
         model.addAttribute("products", productService.findAll(pageNumber,
-                pageSize,orderBy,orderDir));
+                pageSize, orderBy, orderDir));
         model.addAttribute("orderBy", orderBy);
         model.addAttribute("orderDir", orderDir);
         model.addAttribute("orders", orders);
@@ -45,20 +45,12 @@ public class ProductAdminController {
     }
 
     @GetMapping("/new")
-    public String postAddProduct(@Valid @ModelAttribute("product") AddProductDto addProductDto
-            , BindingResult bindingResult, Model model) {
+    public String getAddProduct(Model model) {
         Collection<Category> categoryList = categoryService.findAll();
 
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("product", addProductDto);
-
-        if (bindingResult.hasErrors()) {
-            return "admin/newProduct";
-        }
-        productService.createProduct(addProductDto);
-//        Long categoryId = addProductDto.getCategoryId();
-//        return "redirect:/products/"+categoryId;
-        return  "admin/Products";
+        model.addAttribute("product", new AddProductDto());
+        return "admin/newProduct";
     }
 
 }

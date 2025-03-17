@@ -1,12 +1,12 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,4 +33,17 @@ public class CategoriesAdminController {
         model.addAttribute("orders", orders);
         return "admin/adminCategories";
     }
+
+    @GetMapping("/new")
+    public String getAddCategory(Model model) {
+        model.addAttribute("category", new AddCategoryDto());
+        return "admin/newCategory";
+    }
+
+    @PostMapping("/new")
+    public ModelAndView postAddCategory(@ModelAttribute AddCategoryDto addCategoryDto) {
+        categoryService.createCategory(addCategoryDto);
+        return new ModelAndView("redirect:/admin/categories/new");
+    }
+
 }

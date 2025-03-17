@@ -13,6 +13,8 @@
 <main class="container d-flex flex-column gap-3">
     <h1 class="text-center mt-5">Products</h1>
 
+    <div th:replace="~{admin/adminFragments :: returnPage}"></div>
+
     <th:block th:replace="~{admin/adminFragments::order-form('/admin/products',${orders},${products.size})}"></th:block>
     <table class="table table-hover">
         <thead>

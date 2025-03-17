@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
@@ -50,6 +51,22 @@ public class CategoryServiceImpl implements CategoryService {
         Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable categories = PageRequest.of(pageNumber-1, pageSize, Sort.by(direction, orderBy));
         return categoryRepository.findAll(categories);
+    }
+
+    @Override
+    public void createCategory(AddCategoryDto addCategoryDto) {
+        if(categoryRepository.existsCategoryByNameIgnoreCase(addCategoryDto.getName())) {
+            throw new AlreadyExistsException("Category with name "+addCategoryDto.getName()+" already exists");
+        }
+        Category category = new Category();
+        category.setName(addCategoryDto.getName());
+        category.setDescription(addCategoryDto.getDescription());
+
+        if(addCategoryDto.getImageUrl().isEmpty()){
+            addCategoryDto.setImageUrl("/img/categories/others/defaultImage.png");
+        }
+        category.setImageUrl(addCategoryDto.getImageUrl());
+        categoryRepository.save(category);
     }
 
 

@@ -8,9 +8,10 @@
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center flex-column mt-5">
-    <h1 class="text-center mb-4">Introduce un producto nuevo</h1>
+    <h1 class="text-center mb-4">Add new product</h1>
 </div>
 
+<div th:replace="~{admin/adminFragments :: returnPage}"></div>
 
 <form method="post" th:object="${product}" class="container mt-4">
     <!-- Nombre del Producto -->
@@ -69,6 +70,7 @@
 
     <!-- Botón Aceptar -->
     <button type="submit" class="btn btn-primary">Aceptar</button>
+    <a th:href="@{.}" class="btn btn-secondary ms-2">Back to categories</a>
 </form>
 </body>
 </html>
