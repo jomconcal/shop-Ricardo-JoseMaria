@@ -13,6 +13,16 @@
 <main class="container d-flex flex-column gap-3">
   <h1 class="text-center mt-5">Categories</h1>
 
+  <div class="container mt-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a th:href="@{/admin}" class="text-decoration-none">Back</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
   <th:block th:replace="~{admin/fragments/adminFragments::order-form('/admin/categories',${orders},${orderBy},${orderDir},${categories.size})}"></th:block>
   <table class="table table-hover">
     <thead>

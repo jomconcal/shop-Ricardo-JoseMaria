@@ -1,15 +1,19 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -41,9 +45,28 @@ public class CategoriesAdminController {
     }
 
     @PostMapping("/new")
-    public ModelAndView postAddCategory(@ModelAttribute AddCategoryDto addCategoryDto) {
-        categoryService.createCategory(addCategoryDto);
-        return new ModelAndView("redirect:/admin/categories/new");
+    public String postAddCategory(@Valid @ModelAttribute("category") AddCategoryDto addCategoryDto,
+                                        BindingResult bindingResult, Model model) {
+
+        model.addAttribute("category", addCategoryDto);
+
+        if(bindingResult.hasErrors()) {
+            return "admin/newCategory";
+        }
+
+        try {
+//            if(new Random().nextBoolean()){
+//                throw new RuntimeException("Error");
+//            }
+            categoryService.createCategory(addCategoryDto);
+        }catch (AlreadyExistsException e) {
+            bindingResult.rejectValue("name", "error.category.alreadyExists","Name already exists");
+            return "admin/newCategory";
+        }catch (Exception e) {
+            bindingResult.reject("",e.getMessage());
+            return "admin/newCategory";
+        }
+        return"redirect:/admin/categories";
     }
 
 }

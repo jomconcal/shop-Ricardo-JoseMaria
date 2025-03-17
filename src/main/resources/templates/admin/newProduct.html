@@ -11,8 +11,15 @@
     <h1 class="text-center mb-4">Add new product</h1>
 </div>
 
-<div th:replace="~{admin/adminFragments :: returnPage}"></div>
-
+<div class="container mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/admin/products}" class="text-decoration-none">Back</a>
+            </li>
+        </ol>
+    </nav>
+</div>
 <form method="post" th:object="${product}" class="container mt-4">
     <!-- Nombre del Producto -->
     <div class="mb-3">
@@ -70,7 +77,6 @@
 
     <!-- Botón Aceptar -->
     <button type="submit" class="btn btn-primary">Aceptar</button>
-    <a th:href="@{.}" class="btn btn-secondary ms-2">Back to categories</a>
 </form>
 </body>
 </html>

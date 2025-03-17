@@ -63,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDescription(addCategoryDto.getDescription());
 
         if(addCategoryDto.getImageUrl().isEmpty()){
-            addCategoryDto.setImageUrl("/img/categories/others/defaultImage.png");
+            addCategoryDto.setImageUrl("/img/categories/default.jfif");
         }
         category.setImageUrl(addCategoryDto.getImageUrl());
         categoryRepository.save(category);
