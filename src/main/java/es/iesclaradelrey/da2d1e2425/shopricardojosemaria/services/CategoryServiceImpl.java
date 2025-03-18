@@ -1,8 +1,10 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -69,5 +71,21 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
     }
 
+    @Override
+    public void updateCategory(EditCategoryDto editCategoryDto, Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(()->
+            new CategoryNotFoundException("category not found")
+        );
+
+        category.setName(editCategoryDto.getName());
+        category.setDescription(editCategoryDto.getDescription());
+
+        if(editCategoryDto.getImageUrl().isEmpty()){
+            editCategoryDto.setImageUrl("/img/categories/default.jfif");
+        }
+        category.setImageUrl(editCategoryDto.getImageUrl());
+        categoryRepository.save(category);
+
+    }
 
 }

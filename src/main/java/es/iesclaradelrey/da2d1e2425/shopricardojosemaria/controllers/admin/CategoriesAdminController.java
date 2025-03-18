@@ -1,7 +1,10 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -9,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.LinkedHashMap;
@@ -22,17 +24,18 @@ import java.util.Random;
 public class CategoriesAdminController {
 
     private CategoryService categoryService;
-    @GetMapping({"","/"})
+
+    @GetMapping({"", "/"})
     public String categoryAdmin(@RequestParam(defaultValue = "1") Integer pageNumber,
                                 @RequestParam(defaultValue = "2") Integer pageSize,
                                 @RequestParam(defaultValue = "name") String orderBy,
                                 @RequestParam(defaultValue = "asc") String orderDir,
                                 Model model) {
-        Map<String,String> orders= new LinkedHashMap<>();
+        Map<String, String> orders = new LinkedHashMap<>();
         orders.put("Id", "id");
         orders.put("Name", "name");
         model.addAttribute("categories", categoryService.findAll(pageNumber,
-                pageSize,orderBy,orderDir));
+                pageSize, orderBy, orderDir));
         model.addAttribute("orderBy", orderBy);
         model.addAttribute("orderDir", orderDir);
         model.addAttribute("orders", orders);
@@ -42,6 +45,8 @@ public class CategoriesAdminController {
     @GetMapping("/new")
     public String getAddCategory(Model model) {
         model.addAttribute("category", new AddCategoryDto());
+        model.addAttribute("title","Add Category");
+        model.addAttribute("textButon","Add");
         return "admin/newCategory";
     }
 
@@ -50,8 +55,9 @@ public class CategoriesAdminController {
                                   BindingResult bindingResult, Model model, RedirectAttributes attributes) {
 
         model.addAttribute("category", addCategoryDto);
-
-        if(bindingResult.hasErrors()) {
+        model.addAttribute("title","Add Category");
+        model.addAttribute("textButon","Add");
+        if (bindingResult.hasErrors()) {
             return "admin/newCategory";
         }
 
@@ -60,16 +66,43 @@ public class CategoriesAdminController {
 //                throw new RuntimeException("Error");
 //            }
             categoryService.createCategory(addCategoryDto);
-        }catch (AlreadyExistsException e) {
-            bindingResult.rejectValue("name", "error.category.alreadyExists","Name already exists");
+        } catch (AlreadyExistsException e) {
+            bindingResult.rejectValue("name", "error.category.alreadyExists", "Name already exists");
             return "admin/newCategory";
-        }catch (Exception e) {
-            bindingResult.reject("",e.getMessage());
+        } catch (Exception e) {
+            bindingResult.reject("", e.getMessage());
             return "admin/newCategory";
         }
 
         attributes.addFlashAttribute("message", "Category added successfully");
-        return"redirect:/admin/categories";
+        return "redirect:/admin/categories";
+    }
+
+    @GetMapping("/edit/{idCategory}")
+    public String getEditCategory(Model model, @PathVariable Long idCategory) {
+        Category category= categoryService.findById(idCategory).orElseThrow();
+        EditCategoryDto editCategoryDto = new EditCategoryDto(category);
+        model.addAttribute("category", editCategoryDto);
+        model.addAttribute("title","Update Category");
+        model.addAttribute("textButon","Update");
+        return "admin/newCategory";
+    }
+
+    @PostMapping ("/edit/{idCategory}")
+    public String postEditCategory(Model model, @PathVariable Long idCategory,
+                                   EditCategoryDto editCategoryDto,  RedirectAttributes attributes) {
+
+        model.addAttribute("category", editCategoryDto);
+        model.addAttribute("title","Update Category");
+        model.addAttribute("textButon","Update");
+        try{
+        categoryService.updateCategory(editCategoryDto, idCategory);
+        }catch (CategoryNotFoundException e) {
+            e.printStackTrace();
+            return "redirect:/admin/categories";
+        }
+        attributes.addFlashAttribute("message", "Category updated successfully");
+        return "redirect:/admin/categories";
     }
 
 }

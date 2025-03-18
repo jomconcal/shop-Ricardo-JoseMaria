@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import org.springframework.data.domain.Page;
 
@@ -16,4 +17,6 @@ public interface CategoryService{
     Page<Category> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 
     void createCategory(AddCategoryDto addCategoryDto);
+
+    void updateCategory(EditCategoryDto editCategoryDto, Long id);
 }

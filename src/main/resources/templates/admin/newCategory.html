@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center flex-column mt-5">
-    <h1 class="text-center mb-4">Add new category</h1>
+    <h1 class="text-center mb-4" th:text="${title}">Add new category</h1>
 </div>
 
 <div class="container mt-3">
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Botón de enviar -->
-    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="submit" class="btn btn-primary" th:text="${textButon}">Add</button>
 </form>
 </body>
 </html>
