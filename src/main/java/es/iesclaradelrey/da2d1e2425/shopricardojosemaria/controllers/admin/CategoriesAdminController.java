@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class CategoriesAdminController {
 
     @PostMapping("/new")
     public String postAddCategory(@Valid @ModelAttribute("category") AddCategoryDto addCategoryDto,
-                                        BindingResult bindingResult, Model model) {
+                                  BindingResult bindingResult, Model model, RedirectAttributes attributes) {
 
         model.addAttribute("category", addCategoryDto);
 
@@ -66,6 +67,8 @@ public class CategoriesAdminController {
             bindingResult.reject("",e.getMessage());
             return "admin/newCategory";
         }
+
+        attributes.addFlashAttribute("message", "Category added successfully");
         return"redirect:/admin/categories";
     }
 

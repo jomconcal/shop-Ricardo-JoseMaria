@@ -21,6 +21,11 @@
     </nav>
 </div>
 <form method="post" th:object="${product}" class="container mt-4">
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <ul>
+            <li th:each="error : ${#fields.globalErrors()}" th:text="${error}"></li>
+        </ul>
+    </div>
     <!-- Nombre del Producto -->
     <div class="mb-3">
         <label for="txt-nombre" class="form-label">Nombre del producto</label>
@@ -37,6 +42,7 @@
             <option value="" disabled selected>Selecciona una categoría</option>
             <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}"></option>
         </select>
+
         <div th:if="${#fields.hasErrors('categoryId')}" class="invalid-feedback" th:text="${#fields.errors('categoryId')}">
             Error.
         </div>

@@ -25,35 +25,9 @@ public class AdminController {
     private final ProductService productService;
     private final CategoryService categoryService;
 
-    @GetMapping({"/",""})
+    @GetMapping({"/", ""})
     public String getIndex() {
         return "admin/indexAdmin";
     }
 
-    @GetMapping({"/addProduct","/addProduct/"})
-    public ModelAndView getAddProduct() {
-
-        Collection<Category> categoryList = categoryService.findAll();
-
-        ModelAndView mav = new ModelAndView("admin/addProduct");
-        mav.addObject("product", new AddProductDto());
-        mav.addObject("categoryList", categoryList);
-        return mav;
-    }
-
-    @PostMapping({"/addProduct","/addProduct/"})
-    public String postAddProduct(@Valid @ModelAttribute("product") AddProductDto addProductDto
-            , BindingResult bindingResult, Model model) {
-        Collection<Category> categoryList = categoryService.findAll();
-
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("product", addProductDto);
-
-        if (bindingResult.hasErrors()) {
-            return "admin/addProduct";
-        }
-        productService.createProduct(addProductDto);
-        Long categoryId = addProductDto.getCategoryId();
-        return "redirect:/products/"+categoryId;
-    }
 }

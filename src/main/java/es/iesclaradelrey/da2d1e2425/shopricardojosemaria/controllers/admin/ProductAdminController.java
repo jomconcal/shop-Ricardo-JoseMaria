@@ -2,6 +2,8 @@ package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
 import jakarta.validation.Valid;
@@ -9,14 +11,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -51,6 +52,40 @@ public class ProductAdminController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("product", new AddProductDto());
         return "admin/newProduct";
+    }
+
+    @PostMapping({"/new", "/new/"})
+    public String postAddProduct(@Valid @ModelAttribute("product") AddProductDto addProductDto
+            , BindingResult bindingResult, Model model, RedirectAttributes attributes) {
+        Collection<Category> categoryList = categoryService.findAll();
+
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("product", addProductDto);
+
+        if (bindingResult.hasErrors()) {
+            return "admin/addProduct";
+        }
+
+        try {
+
+//            if (new Random().nextBoolean()) {
+//                throw new RuntimeException("Error");
+//            }
+
+            productService.createProduct(addProductDto);
+            attributes.addFlashAttribute("message", "Product added successfully");
+        } catch (AlreadyExistsException aE) {
+            bindingResult.rejectValue("name", "error.product.alreadyExists", aE.getMessage());
+            return "admin/newProduct";
+        } catch (CategoryNotFoundException cE) {
+            bindingResult.rejectValue("categoryId", "error.category.doesntExist", cE.getMessage());
+            return "admin/newProduct";
+        } catch (Exception e) {
+            bindingResult.reject("", e.getMessage());
+            return "admin/newProduct";
+        }
+
+        return "redirect:/admin/products";
     }
 
 }

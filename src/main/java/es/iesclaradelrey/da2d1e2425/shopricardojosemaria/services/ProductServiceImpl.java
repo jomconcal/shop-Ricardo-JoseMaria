@@ -4,6 +4,8 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
     private ProductRepository productRepository;
 
     @Override
@@ -53,6 +56,11 @@ public class ProductServiceImpl implements ProductService {
         if(productRepository.existsProductByNameIgnoreCase(addProductDto.getName())) {
             throw new AlreadyExistsException("Product with name "+addProductDto.getName()+" already exists");
         }
+
+        if(!categoryRepository.existsById(addProductDto.getCategoryId())) {
+            throw new CategoryNotFoundException("Category with id "+addProductDto.getCategoryId()+" does not exist");
+        }
+
         Product product = new Product();
         product.setCategory(categoryService.findById(addProductDto.getCategoryId()).orElseThrow());
         product.setName(addProductDto.getName());
