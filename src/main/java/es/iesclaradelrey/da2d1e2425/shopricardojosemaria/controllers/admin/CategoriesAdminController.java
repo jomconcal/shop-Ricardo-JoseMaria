@@ -62,9 +62,9 @@ public class CategoriesAdminController {
         }
 
         try {
-//            if(new Random().nextBoolean()){
-//                throw new RuntimeException("Error");
-//            }
+            if(new Random().nextBoolean()){
+                throw new RuntimeException("Error");
+            }
             categoryService.createCategory(addCategoryDto);
         } catch (AlreadyExistsException e) {
             bindingResult.rejectValue("name", "error.category.alreadyExists", "Name already exists");
@@ -90,16 +90,24 @@ public class CategoriesAdminController {
 
     @PostMapping ("/edit/{idCategory}")
     public String postEditCategory(Model model, @PathVariable Long idCategory,
-                                   EditCategoryDto editCategoryDto,  RedirectAttributes attributes) {
+                                   @Valid @ModelAttribute("category") EditCategoryDto editCategoryDto, BindingResult bindingResult,
+                                   RedirectAttributes attributes) {
 
         model.addAttribute("category", editCategoryDto);
         model.addAttribute("title","Update Category");
         model.addAttribute("textButon","Update");
         try{
-        categoryService.updateCategory(editCategoryDto, idCategory);
+            if (new Random().nextBoolean()) {
+                throw new RuntimeException("Error");
+            }
+            categoryService.updateCategory(editCategoryDto, idCategory);
         }catch (CategoryNotFoundException e) {
             e.printStackTrace();
             return "redirect:/admin/categories";
+        } catch (Exception e) {
+            bindingResult.reject("", e.getMessage());
+            System.out.println(e.getMessage());
+            return "admin/newCategory";
         }
         attributes.addFlashAttribute("message", "Category updated successfully");
         return "redirect:/admin/categories";
