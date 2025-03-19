@@ -88,4 +88,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
+    public void deleteCategory(Long id) {
+        deleteAllProducts(id);
+        categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllProducts(Long id) {
+        categoryRepository.deleteAll(categoryRepository.findAllByProductsId(id));
+    }
+
 }

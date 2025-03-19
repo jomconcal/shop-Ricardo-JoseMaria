@@ -19,4 +19,7 @@ public interface CategoryService{
     void createCategory(AddCategoryDto addCategoryDto);
 
     void updateCategory(EditCategoryDto editCategoryDto, Long id);
+
+    void deleteCategory(Long id);
+    void deleteAllProducts(Long id);
 }

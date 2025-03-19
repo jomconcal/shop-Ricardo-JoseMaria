@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.DeleteCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
@@ -90,7 +91,8 @@ public class CategoriesAdminController {
 
     @PostMapping ("/edit/{idCategory}")
     public String postEditCategory(Model model, @PathVariable Long idCategory,
-                                   @Valid @ModelAttribute("category") EditCategoryDto editCategoryDto, BindingResult bindingResult,
+                                   @Valid @ModelAttribute("category") EditCategoryDto editCategoryDto,
+                                   BindingResult bindingResult,
                                    RedirectAttributes attributes) {
 
         model.addAttribute("category", editCategoryDto);
@@ -113,4 +115,43 @@ public class CategoriesAdminController {
         return "redirect:/admin/categories";
     }
 
+    @GetMapping("/delete/{idCategory}")
+    public String getDeleteCategory(Model model,@PathVariable Long idCategory) {
+        Category category= categoryService.findById(idCategory).orElseThrow();
+        DeleteCategoryDto deleteCategoryDto = new DeleteCategoryDto(category);
+
+        model.addAttribute("category", deleteCategoryDto);
+        model.addAttribute("title","Delete Category");
+        model.addAttribute("textButon","Delete");
+
+        return "admin/deleteCategory";
+    }
+
+    @PostMapping("/delete/{idCategory}")
+    public String postDeleteCategory(@PathVariable Long idCategory,
+                                     @Valid @ModelAttribute("category") DeleteCategoryDto deleteCategoryDto,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes attributes,Model model) {
+
+        System.out.println(deleteCategoryDto);
+
+//        model.addAttribute("category", deleteCategoryDto);
+        model.addAttribute("title","Delete Category");
+        model.addAttribute("textButon","Delete");
+
+        try{
+            if (new Random().nextBoolean()) {
+                throw new RuntimeException("Error");
+            }
+            categoryService.deleteCategory(idCategory);
+            attributes.addFlashAttribute("message", "Category delete successfully");
+            return "redirect:/admin/categories";
+        }catch (CategoryNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            bindingResult.reject("", e.getMessage());
+            System.out.println(e.getMessage());
+        }
+        return "admin/deleteCategory";
+    }
 }
