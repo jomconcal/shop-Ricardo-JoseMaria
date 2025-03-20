@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center flex-column mt-5">
-    <h1 class="text-center mb-4" th:text="${title}">Add new category</h1>
+    <h1 class="text-center mb-4">Delete category</h1>
     <h2>Are you sure you want to delete this category?</h2>
 </div>
 
@@ -32,7 +32,7 @@
     <!-- Nombre de la categoría -->
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input disabled type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid">
+        <input readonly type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid">
         <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="${#fields.errors('name')}">
             Error.
         </div>
@@ -41,24 +41,13 @@
     <!-- Descripción de la categoría -->
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <input disabled type="text" class="form-control" id="description" th:field="*{description}">
-    </div>
-
-    <!-- URL de imagen de la categoría -->
-    <div class="mb-3">
-        <label for="imageUrl" class="form-label">Image URL</label>
-        <input disabled type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}">
+        <input readonly type="text" class="form-control" id="description" th:field="*{description}">
     </div>
 
     <!-- Botón de enviar -->
-    <div class="d-flex justify-content-between align-items-center">
+    <div>
         <!-- Botón "Add" -->
-        <button type="submit" class="btn btn-primary" th:text="${textButon}">Add</button>
-
-        <!-- Enlace "Cancel" -->
-        <div>
-            <a th:href="@{/admin/categories}" class="btn btn-primary text-decoration-none">Cancel</a>
-        </div>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </div>
 
 

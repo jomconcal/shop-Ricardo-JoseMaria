@@ -10,5 +10,4 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category,Long> {
     boolean existsCategoryByNameIgnoreCase(String name);
-    List<Category> findAllByProductsId(Long id);
 }

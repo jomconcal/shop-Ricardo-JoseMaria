@@ -5,7 +5,10 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ForeignKeyViolationException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +24,7 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public void save(Category category) {
@@ -90,13 +94,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
-        deleteAllProducts(id);
-        categoryRepository.deleteById(id);
+        if(productRepository.existsProductByCategoryId(id)) {
+            throw new ForeignKeyViolationException("This category is not empty");
+        }
+       categoryRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteAllProducts(Long id) {
-        categoryRepository.deleteAll(categoryRepository.findAllByProductsId(id));
-    }
+//    @Override
+//    public void deleteAllProducts(Long id) {
+//        categoryRepository.deleteAll(categoryRepository.findAllByProductsId(id));
+//    }
 
 }

@@ -55,16 +55,17 @@ public class CategoriesAdminController {
     public String postAddCategory(@Valid @ModelAttribute("category") AddCategoryDto addCategoryDto,
                                   BindingResult bindingResult, Model model, RedirectAttributes attributes) {
 
-        model.addAttribute("category", addCategoryDto);
+//        model.addAttribute("category", addCategoryDto);
         model.addAttribute("title","Add Category");
         model.addAttribute("textButon","Add");
-        if (bindingResult.hasErrors()) {
-            return "admin/newCategory";
-        }
+
 
         try {
             if(new Random().nextBoolean()){
                 throw new RuntimeException("Error");
+            }
+            if (bindingResult.hasErrors()) {
+                return "admin/newCategory";
             }
             categoryService.createCategory(addCategoryDto);
         } catch (AlreadyExistsException e) {
@@ -95,12 +96,15 @@ public class CategoriesAdminController {
                                    BindingResult bindingResult,
                                    RedirectAttributes attributes) {
 
-        model.addAttribute("category", editCategoryDto);
+//        model.addAttribute("category", editCategoryDto);
         model.addAttribute("title","Update Category");
         model.addAttribute("textButon","Update");
         try{
             if (new Random().nextBoolean()) {
                 throw new RuntimeException("Error");
+            }
+            if(bindingResult.hasErrors()) {
+                return "admin/newCategory";
             }
             categoryService.updateCategory(editCategoryDto, idCategory);
         }catch (CategoryNotFoundException e) {
@@ -134,24 +138,23 @@ public class CategoriesAdminController {
                                      RedirectAttributes attributes,Model model) {
 
         System.out.println(deleteCategoryDto);
-
 //        model.addAttribute("category", deleteCategoryDto);
-        model.addAttribute("title","Delete Category");
-        model.addAttribute("textButon","Delete");
 
         try{
             if (new Random().nextBoolean()) {
                 throw new RuntimeException("Error");
             }
             categoryService.deleteCategory(idCategory);
-            attributes.addFlashAttribute("message", "Category delete successfully");
+            attributes.addFlashAttribute("message", "Category deleted successfully");
             return "redirect:/admin/categories";
         }catch (CategoryNotFoundException e) {
             e.printStackTrace();
+
         } catch (Exception e) {
             bindingResult.reject("", e.getMessage());
             System.out.println(e.getMessage());
         }
         return "admin/deleteCategory";
+
     }
 }
