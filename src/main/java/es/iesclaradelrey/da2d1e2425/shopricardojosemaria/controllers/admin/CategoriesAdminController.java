@@ -125,8 +125,6 @@ public class CategoriesAdminController {
         DeleteCategoryDto deleteCategoryDto = new DeleteCategoryDto(category);
 
         model.addAttribute("category", deleteCategoryDto);
-        model.addAttribute("title","Delete Category");
-        model.addAttribute("textButon","Delete");
 
         return "admin/deleteCategory";
     }

@@ -1,10 +1,12 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ProductNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -85,6 +87,47 @@ public class ProductServiceImpl implements ProductService {
         Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public void updateProduct(EditProductDto editProductDto, Long idProduct) {
+
+        if(productRepository.existsProductByNameIgnoreCase(editProductDto.getName())) {
+            throw new AlreadyExistsException("Product with name "+editProductDto.getName()+" already exists");
+        }
+
+        if(!categoryRepository.existsById(editProductDto.getCategoryId())) {
+            throw new CategoryNotFoundException("Category with id "+editProductDto.getCategoryId()+" does not exist");
+        }
+
+        Product product = productRepository.findById(idProduct).orElseThrow(()->
+                new ProductNotFoundException("Product with id "+idProduct+" does not exist")
+        );
+
+
+        product.setName(editProductDto.getName());
+        product.setDescription(editProductDto.getDescription());
+        product.setProductDetail(editProductDto.getProductDetail());
+
+        if(editProductDto.getStock() == null || editProductDto.getStock() < 0) {
+            product.setStock(0);
+        }else{
+            product.setStock(editProductDto.getStock());
+        }
+
+        product.setPrice(editProductDto.getPrice());
+
+        if(editProductDto.getImageUrl().isEmpty()){
+            editProductDto.setImageUrl("/img/products/others/defaultImage.jpg");
+        }
+        product.setImageUrl(editProductDto.getImageUrl());
+
+        productRepository.save(product);
+    }
+
+    @Override
+    public void deleteProductDto(Long idProduct) {
+
     }
 
 }
