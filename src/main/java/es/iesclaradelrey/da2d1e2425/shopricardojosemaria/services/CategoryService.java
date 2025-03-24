@@ -1,7 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import org.springframework.data.domain.Page;
 

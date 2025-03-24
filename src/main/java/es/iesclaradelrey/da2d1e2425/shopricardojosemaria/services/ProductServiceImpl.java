@@ -1,14 +1,15 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ForeignKeyViolationException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ProductNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.RatingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final CategoryService categoryService;
     private final CategoryRepository categoryRepository;
+    private final RatingRepository ratingRepository;
     private ProductRepository productRepository;
 
     @Override
@@ -126,8 +128,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductDto(Long idProduct) {
-
+    public void deleteProduct(Long idProduct) {
+        if(ratingRepository.existsRatingByProductId(idProduct)) {
+            throw new ForeignKeyViolationException("This product is already rated. Delete first the ratings associated with this product.");
+        }
+      productRepository.deleteById(idProduct);
     }
 
 }

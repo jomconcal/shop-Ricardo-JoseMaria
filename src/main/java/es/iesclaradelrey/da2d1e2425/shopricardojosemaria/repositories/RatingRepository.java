@@ -14,4 +14,5 @@ public interface RatingRepository extends ListCrudRepository<Rating, Long> {
 
     List<Rating> findRatingByProductId(Long productId);
 
+    boolean existsRatingByProductId(Long productId);
 }

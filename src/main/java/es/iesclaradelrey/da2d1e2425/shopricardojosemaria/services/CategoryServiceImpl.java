@@ -1,14 +1,13 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ForeignKeyViolationException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CategoryRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

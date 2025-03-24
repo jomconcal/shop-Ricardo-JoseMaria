@@ -1,9 +1,8 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.DeleteCategoryDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.DeleteProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.DeleteProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
@@ -50,7 +49,7 @@ public class ProductAdminController {
         return "admin/adminProducts";
     }
 
-    @GetMapping("/new")
+    @GetMapping({"/new","/new/"})
     public String getAddProduct(Model model) {
         Collection<Category> categoryList = categoryService.findAll();
 
@@ -68,10 +67,13 @@ public class ProductAdminController {
         Collection<Category> categoryList = categoryService.findAll();
 
         model.addAttribute("categoryList", categoryList);
-        model.addAttribute("product", addProductDto);
+//        model.addAttribute("product", addProductDto);
+        model.addAttribute("textButton", "Add");
+        model.addAttribute("title", "Add new product");
+
 
         if (bindingResult.hasErrors()) {
-            return "admin/addProduct";
+            return "admin/newProduct";
         }
 
         try {
@@ -113,24 +115,28 @@ public class ProductAdminController {
 
     @PostMapping ("/edit/{idProduct}")
     public String postEditCategory(Model model, @PathVariable Long idProduct,
-                                   @Valid @ModelAttribute("category") EditProductDto editProductDto,
+                                   @Valid @ModelAttribute("product") EditProductDto editProductDto,
                                    BindingResult bindingResult,
                                    RedirectAttributes attributes) {
 
+        Collection<Category> categoryList = categoryService.findAll();
+
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("title", "Edit Product");
+        model.addAttribute("textButton", "Update");
         try{
 //            if (new Random().nextBoolean()) {
 //                throw new RuntimeException("Error");
 //            }
             if(bindingResult.hasErrors()) {
+                System.out.println(bindingResult.getAllErrors());
                 return "admin/newProduct";
             }
             productService.updateProduct(editProductDto, idProduct);
         }catch (ProductNotFoundException e) {
-            e.printStackTrace();
             return "redirect:/admin/products";
         } catch (Exception e) {
             bindingResult.reject("", e.getMessage());
-            System.out.println(e.getMessage());
             return "admin/newProduct";
         }
         attributes.addFlashAttribute("message", "Category updated successfully");
@@ -144,12 +150,12 @@ public class ProductAdminController {
 
         model.addAttribute("product", deleteProductDto);
 
-        return "admin/deleteCategory";
+        return "admin/deleteProduct";
     }
 
     @PostMapping("/delete/{idProduct}")
     public String postDeleteCategory(@PathVariable Long idProduct,
-                                     @Valid @ModelAttribute("category") DeleteProductDto deleteProductDto,
+                                     @Valid @ModelAttribute("product") DeleteProductDto deleteProductDto,
                                      BindingResult bindingResult,
                                      RedirectAttributes attributes,Model model) {
 
@@ -160,8 +166,8 @@ public class ProductAdminController {
             if (new Random().nextBoolean()) {
                 throw new RuntimeException("Error");
             }
-            productService.deleteProductDto(idProduct);
-            attributes.addFlashAttribute("message", "Category deleted successfully");
+            productService.deleteProduct(idProduct);
+            attributes.addFlashAttribute("message", "Product deleted successfully");
             return "redirect:/admin/products";
         }catch (ProductNotFoundException e) {
             e.printStackTrace();

@@ -1,10 +1,8 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditProductDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddProductDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 
 import java.util.Collection;
@@ -23,5 +21,5 @@ public interface ProductService {
 
     void updateProduct(EditProductDto editProductDto, Long idProduct);
 
-    void deleteProductDto(Long idProduct);
+    void deleteProduct(Long idProduct);
 }

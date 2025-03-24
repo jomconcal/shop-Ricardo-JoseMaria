@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto;
+package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import jakarta.validation.constraints.NotBlank;

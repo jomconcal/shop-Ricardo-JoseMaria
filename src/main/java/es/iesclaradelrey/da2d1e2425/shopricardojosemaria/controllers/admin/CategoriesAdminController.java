@@ -1,8 +1,8 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.admin;
 
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.AddCategoryDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.DeleteCategoryDto;
-import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.EditCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.DeleteCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditCategoryDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.AlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.CategoryNotFoundException;

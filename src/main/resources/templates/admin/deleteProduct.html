@@ -30,7 +30,7 @@
 
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid">
+    <input readonly type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid">
     <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="${#fields.errors('name')}">
       Error.
     </div>
@@ -38,7 +38,7 @@
 
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <input type="text" class="form-control" id="description" th:field="*{description}">
+    <input readonly type="text" class="form-control" id="description" th:field="*{description}">
   </div>
 
   <!-- Botón de enviar -->

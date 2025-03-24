@@ -51,11 +51,11 @@
             <td class="d-flex gap-3 justify-content-end">
                 <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="btn btn-outline-info">
                     <i class="fa-solid fa-wrench"> </i>
-                    <span class="sr-only">Edit category</span>
+                    <span class="sr-only">Edit product</span>
                 </a>
-                <a th:href="@{/admin/products/delete{id}(id=${product.id})}" class="btn btn-outline-danger">
+                <a th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-outline-danger">
                     <i class="fa-solid fa-trash"> </i>
-                    <span class="sr-only">Delete category</span>
+                    <span class="sr-only">Delete product</span>
                 </a>
             </td>
 
