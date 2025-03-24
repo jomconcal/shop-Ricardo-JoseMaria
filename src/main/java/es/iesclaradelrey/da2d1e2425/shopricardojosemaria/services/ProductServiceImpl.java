@@ -94,7 +94,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(EditProductDto editProductDto, Long idProduct) {
 
-        if(productRepository.existsProductByNameIgnoreCase(editProductDto.getName())) {
+        Product product = productRepository.findById(idProduct).orElseThrow(()->
+                new ProductNotFoundException("Product with id "+idProduct+" does not exist")
+        );
+
+        if(!product.getName().equalsIgnoreCase(editProductDto.getName())&&
+                productRepository.existsProductByNameIgnoreCase(editProductDto.getName())) {
             throw new AlreadyExistsException("Product with name "+editProductDto.getName()+" already exists");
         }
 
@@ -102,9 +107,7 @@ public class ProductServiceImpl implements ProductService {
             throw new CategoryNotFoundException("Category with id "+editProductDto.getCategoryId()+" does not exist");
         }
 
-        Product product = productRepository.findById(idProduct).orElseThrow(()->
-                new ProductNotFoundException("Product with id "+idProduct+" does not exist")
-        );
+
 
 
         product.setName(editProductDto.getName());

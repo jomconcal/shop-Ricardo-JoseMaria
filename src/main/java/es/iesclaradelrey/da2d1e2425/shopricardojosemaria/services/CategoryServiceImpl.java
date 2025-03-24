@@ -80,6 +80,11 @@ public class CategoryServiceImpl implements CategoryService {
             new CategoryNotFoundException("category not found")
         );
 
+        if(!category.getName().equalsIgnoreCase(editCategoryDto.getName())&&
+                categoryRepository.existsCategoryByNameIgnoreCase(editCategoryDto.getName())) {
+            throw new AlreadyExistsException("Category with name "+editCategoryDto.getName()+" already exists");
+        }
+
         category.setName(editCategoryDto.getName());
         category.setDescription(editCategoryDto.getDescription());
 
