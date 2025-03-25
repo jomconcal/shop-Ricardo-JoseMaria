@@ -133,8 +133,12 @@ public class ProductAdminController {
                 return "admin/newProduct";
             }
             productService.updateProduct(editProductDto, idProduct);
-        }catch (ProductNotFoundException e) {
-            return "redirect:/admin/products";
+        } catch (AlreadyExistsException e) {
+            bindingResult.rejectValue("name",null, e.getMessage());
+            return "admin/newProduct";
+        } catch (CategoryNotFoundException e) {
+            bindingResult.rejectValue("categoryId",null, e.getMessage());
+            return "admin/newProduct";
         } catch (Exception e) {
             bindingResult.reject("", e.getMessage());
             return "admin/newProduct";
@@ -170,8 +174,8 @@ public class ProductAdminController {
             attributes.addFlashAttribute("message", "Product deleted successfully");
             return "redirect:/admin/products";
         }catch (ProductNotFoundException e) {
-            e.printStackTrace();
-
+            bindingResult.reject("", e.getMessage());
+            return "redirect:/admin/products";
         } catch (Exception e) {
             bindingResult.reject("", e.getMessage());
             System.out.println(e.getMessage());

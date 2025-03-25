@@ -1,7 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class DeleteCategoryDto {
-    @NotBlank(message = "Please enter a name")
     private String name;
     private String description;
 

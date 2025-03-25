@@ -110,6 +110,9 @@ public class CategoriesAdminController {
         }catch (CategoryNotFoundException e) {
             e.printStackTrace();
             return "redirect:/admin/categories";
+        } catch (AlreadyExistsException e) {
+            bindingResult.rejectValue("name",null, e.getMessage());
+            return "admin/newCategory";
         } catch (Exception e) {
             bindingResult.reject("", e.getMessage());
             System.out.println(e.getMessage());
