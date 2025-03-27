@@ -1,4 +1,4 @@
-INSERT INTO ratings (rating, user_name, comment, date, product_id)
+INSERT INTO ratings (rating, userName, comment, date, product_id)
 VALUES
 
     (0.0, 'user1', 'Cappuccino was good, but the foam could be thicker.', '2025-01-15 14:31:00',
@@ -50,7 +50,7 @@ VALUES
     (5.0, 'user13', 'Ice Cream was amazing, creamy and rich in flavor. Loved every bite!', '2025-01-15 14:54:00',
      (SELECT id FROM products WHERE name = 'Ice Cream'));
 
-INSERT INTO ratings (rating, user_name, comment, date, product_id)
+INSERT INTO ratings (rating, userName, comment, date, product_id)
 VALUES
     (4.0, 'user1', 'Latte was smooth and had a great aroma. I enjoyed it a lot!', '2025-01-16 10:00:00',
      (SELECT id FROM products WHERE name = 'Latte')),

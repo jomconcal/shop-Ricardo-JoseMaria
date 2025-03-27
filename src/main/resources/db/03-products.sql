@@ -1,5 +1,5 @@
 -- Productos de Coffees
-INSERT INTO products (category_id, name, description, product_detail, price, image_url)
+INSERT INTO products (category_id, name, description, productDetail, price, imageUrl)
 VALUES ((SELECT id FROM categories WHERE name = 'Coffees'), 'Espresso', 'Classic Italian coffee',
         'Espresso is a concentrated coffee brewed by forcing a small amount of nearly boiling water through finely-ground coffee beans. It has a strong, bold flavor with a rich crema on top.',
         4.50, '/img/products/coffees/espresso.webp'),
@@ -17,7 +17,7 @@ VALUES ((SELECT id FROM categories WHERE name = 'Coffees'), 'Espresso', 'Classic
         5.75, '/img/products/coffees/mocha.jpg');
 
 -- Productos de Teas
-INSERT INTO products (category_id, name, description, product_detail, price, image_url)
+INSERT INTO products (category_id, name, description, productDetail, price, imageUrl)
 VALUES ((SELECT id FROM categories WHERE name = 'Teas'), 'Green Tea', 'Refreshing and healthy',
         'Green tea is made from unoxidized leaves, giving it a fresh, light taste. Rich in antioxidants, it’s known for its health benefits, including boosting metabolism and improving brain function.',
         3.50, '/img/products/teas/green-tea.webp'),
@@ -35,7 +35,7 @@ VALUES ((SELECT id FROM categories WHERE name = 'Teas'), 'Green Tea', 'Refreshin
         3.50, '/img/products/teas/mint-tea.jpg');
 
 -- Productos de Cocktails
-INSERT INTO products (category_id, name, description, product_detail, price, image_url)
+INSERT INTO products (category_id, name, description, productDetail, price, imageUrl)
 VALUES ((SELECT id FROM categories WHERE name = 'Cocktails'), 'Mojito', 'Classic Cuban cocktail',
         'Mojito is a cocktail made with white rum, sugar, lime juice, soda water, and mint. It’s known for its refreshing, minty flavor and is the perfect drink for a summer day or any casual gathering.',
         8.00, '/img/products/cocktails/mojito.jpg'),
@@ -53,7 +53,7 @@ VALUES ((SELECT id FROM categories WHERE name = 'Cocktails'), 'Mojito', 'Classic
         9.50, '/img/products/cocktails/daiquiri.jpg');
 
 -- Productos de Pintxos
-INSERT INTO products (category_id, name, description, product_detail, price, image_url)
+INSERT INTO products (category_id, name, description, productDetail, price, imageUrl)
 VALUES ((SELECT id FROM categories WHERE name = 'Pintxos'), 'Jamon Pintxo', 'Ham on crusty bread',
         'Jamon Pintxo is a Basque-inspired bite consisting of thinly sliced cured ham served on a piece of crusty bread. It’s simple, savory, and delicious, perfect for a tapas-style meal.',
         3.50, '/img/products/pintxos/jamon-pintxo.jpg'),
@@ -71,7 +71,7 @@ VALUES ((SELECT id FROM categories WHERE name = 'Pintxos'), 'Jamon Pintxo', 'Ham
         4.50, '/img/products/pintxos/cheese-pintxo.jpg');
 
 -- Productos de Desserts
-INSERT INTO products (category_id, name, description, product_detail, price, image_url)
+INSERT INTO products (category_id, name, description, productDetail, price, imageUrl)
 VALUES ((SELECT id FROM categories WHERE name = 'Desserts'), 'Brownie', 'Rich chocolate dessert',
         'Brownie is a dense, fudgy chocolate dessert that’s perfect for any chocolate lover. It’s rich, moist, and packed with flavor, often enjoyed with a scoop of vanilla ice cream.',
         4.50, '/img/products/desserts/brownie.png'),

@@ -1,5 +1,5 @@
 -- Categorías
-INSERT INTO categories (name, description, image_url) VALUES
+INSERT INTO categories (name, description, imageUrl) VALUES
                                                           ('Coffees', 'Enjoy the finest coffee blends', '/img/categories/coffee.png'),
                                                           ('Teas', 'Discover the magic of our tea selections', '/img/categories/tea.webp'),
                                                           ('Cocktails', 'Crafted cocktails for every occasion', '/img/categories/cocktail.jpg'),
