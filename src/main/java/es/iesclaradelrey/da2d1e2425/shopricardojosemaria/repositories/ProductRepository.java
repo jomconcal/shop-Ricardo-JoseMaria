@@ -1,8 +1,9 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.Collection;
 
@@ -13,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     Boolean existsProductByNameIgnoreCase(String name);
     Boolean existsProductByCategoryId(Long categoryId);
+    Page<Product> findProductsByCategoryId(Long categoryId, Pageable pageable);
+    Page<Product> findProductByNameContainingIgnoreCase(String search, Pageable pageable);
 }

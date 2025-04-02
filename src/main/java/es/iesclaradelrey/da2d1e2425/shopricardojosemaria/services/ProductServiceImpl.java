@@ -30,11 +30,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public long count() {
-        return productRepository.count();
-    }
-
-    @Override
     public void save(Product product) {
         productRepository.save(product);
     }
@@ -89,6 +84,21 @@ public class ProductServiceImpl implements ProductService {
         Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> findAll(String search, Long cat, Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
+
+        if (cat==null){
+            if(search==null) {
+                return productRepository.findAll(pageable);
+            }else{
+
+            }
+        }
+        return productRepository.findProductsByCategoryId(cat,pageable);
     }
 
     @Override

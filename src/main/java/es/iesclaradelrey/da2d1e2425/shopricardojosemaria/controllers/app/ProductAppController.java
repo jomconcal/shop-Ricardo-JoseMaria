@@ -5,12 +5,15 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,16 +25,16 @@ public class ProductAppController {
 
 
     @GetMapping("/find")
-    public ResponseEntity<Collection<AppProductDto>> getProducts() {
+    public ResponseEntity<Page<AppProductDto>> getProducts() {
 
-        Collection<Product> productList = productService.findAll();
+        Page<Product> productList = productService.findAll(null,null,1,4,"name","asc");
         ModelMapper modelMapper = new ModelMapper();
 
-        Collection<AppProductDto> appProductDtos = productList.stream()
+        List<AppProductDto> appProductDtos = productList.stream()
                 .map(product -> modelMapper.map(product, AppProductDto.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())                ;
 
-        return ResponseEntity.ok(appProductDtos);
+        return ResponseEntity.ok(new PageImpl<>(appProductDtos, productList.getPageable(), productList.getTotalElements()));
     }
 
 //    @GetMapping("/find")
