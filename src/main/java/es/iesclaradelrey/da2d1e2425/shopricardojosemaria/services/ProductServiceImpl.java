@@ -89,16 +89,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findAll(String search, Long cat, Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
         Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
+        Pageable pageable = PageRequest.of(pageNumber , pageSize, Sort.by(direction, orderBy));
 
         if (cat==null){
-            if(search==null) {
+            if(search.isBlank()) {
                 return productRepository.findAll(pageable);
             }else{
-
+                return productRepository.findProductsBySearch(search, pageable);
+            }
+        }else{
+            if(search.isBlank()) {
+                return productRepository.findProductsByCategoryId(cat,pageable);
             }
         }
-        return productRepository.findProductsByCategoryId(cat,pageable);
+        return productRepository.findProductsBySearchAndCategoryId(search,cat,pageable);
     }
 
     @Override

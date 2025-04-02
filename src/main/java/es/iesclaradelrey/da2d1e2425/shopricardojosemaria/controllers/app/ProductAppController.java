@@ -7,9 +7,11 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -25,22 +27,22 @@ public class ProductAppController {
 
 
     @GetMapping("/find")
-    public ResponseEntity<Page<AppProductDto>> getProducts() {
+    public ResponseEntity<PagedModel<AppProductDto>> getProducts(
+            @RequestParam(defaultValue = "",required = false) String search,
+            @RequestParam(required = false) Long cat,
+            @RequestParam(defaultValue = "1") Integer pageNumber,
+            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam(defaultValue = "name") String orderBy,
+            @RequestParam(defaultValue = "asc") String orderDir            ) {
 
-        Page<Product> productList = productService.findAll(null,null,1,4,"name","asc");
+        Page<Product> productList = productService.findAll(search,cat,pageNumber-1,pageSize,orderBy,orderDir);
         ModelMapper modelMapper = new ModelMapper();
 
         List<AppProductDto> appProductDtos = productList.stream()
                 .map(product -> modelMapper.map(product, AppProductDto.class))
                 .collect(Collectors.toList())                ;
 
-        return ResponseEntity.ok(new PageImpl<>(appProductDtos, productList.getPageable(), productList.getTotalElements()));
+        return ResponseEntity.ok(new PagedModel<>(new PageImpl<>(appProductDtos, productList.getPageable(), productList.getTotalElements())));
     }
 
-//    @GetMapping("/find")
-//    public ResponseEntity<Collection<Product>> getProducts() {
-//
-//        Collection<Product>productList= productService.findAll();
-//        return ResponseEntity.ok(productList);
-//    }
 }
