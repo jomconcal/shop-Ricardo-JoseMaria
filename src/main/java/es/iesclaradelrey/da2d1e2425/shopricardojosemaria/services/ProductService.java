@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface ProductService {
-    long count();
     void save(Product product);
     Optional<Product> findById(long id);
     Collection<Product> findAll();
@@ -18,6 +17,8 @@ public interface ProductService {
     void createProduct(AddProductDto addProductDto);
 
     Page<Product> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
+
+    Page<Product> findAll(String search, Long cat, Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 
     void updateProduct(EditProductDto editProductDto, Long idProduct);
 
