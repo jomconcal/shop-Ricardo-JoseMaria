@@ -8,6 +8,10 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ProductNotFoundE
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CartItemRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -87,6 +91,14 @@ public class CartItemServiceImpl implements CartItemService {
             cartItem.setQuantity(cartItem.getQuantity() + (increase ? 1 : -1));
             cartItemRepository.save(cartItem);
         }
+    }
+
+    @Override
+    public Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
+
+        return cartItemRepository.findAll(pageable);
     }
 
 }
