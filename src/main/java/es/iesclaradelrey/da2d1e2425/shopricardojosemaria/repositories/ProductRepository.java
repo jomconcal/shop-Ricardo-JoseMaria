@@ -4,12 +4,13 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpecificationExecutor<Product> {
 
     //Consulta derivada. No hace falta definir el cuerpo. Lo hace IntelliJ que es muy listo y sabe lo que quiero.
     Collection<Product> findByCategoryId(Long categoryId);
