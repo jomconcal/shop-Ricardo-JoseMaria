@@ -1,5 +1,6 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.criteriaApp.ProductSpecification;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.AddProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.admin.EditProductDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
@@ -86,24 +87,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<Product> findAll(String search, Long cat, Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
-        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(pageNumber , pageSize, Sort.by(direction, orderBy));
-
-        if (cat==null){
-            if(search.isBlank()) {
-                return productRepository.findAll(pageable);
-            }else{
-                return productRepository.findProductsBySearch(search, pageable);
-            }
-        }else{
-            if(search.isBlank()) {
-                return productRepository.findProductsByCategoryId(cat,pageable);
-            }
-        }
-        return productRepository.findProductsBySearchAndCategoryId(search,cat,pageable);
-    }
 
     @Override
     public void updateProduct(EditProductDto editProductDto, Long idProduct) {
@@ -152,4 +135,13 @@ public class ProductServiceImpl implements ProductService {
       productRepository.deleteById(idProduct);
     }
 
+    @Override
+    public Page<Product> findAll(String search, Long cat, Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(pageNumber , pageSize, Sort.by(direction, orderBy));
+
+        ProductSpecification productSpecification = new ProductSpecification(cat,search);
+
+        return productRepository.findAll(productSpecification, pageable);
+    }
 }
