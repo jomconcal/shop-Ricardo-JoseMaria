@@ -40,7 +40,7 @@ public class ProductAppController {
 
         List<AppProductDto> appProductDtos = productList.stream()
                 .map(product -> modelMapper.map(product, AppProductDto.class))
-                .collect(Collectors.toList())                ;
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(new PagedModel<>(new PageImpl<>(appProductDtos, productList.getPageable(), productList.getTotalElements())));
     }
