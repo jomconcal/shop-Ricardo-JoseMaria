@@ -6,13 +6,13 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryServic
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,7 +24,7 @@ public class CategoryAppController {
 
 
     @GetMapping("/find")
-    public ResponseEntity<List<AppCategoryDto>>getCategories(){
+    public ResponseEntity<Map<String,List<AppCategoryDto>>>getCategories(){
 
         Collection<Category>categories=categoryService.findAll();
         ModelMapper modelMapper=new ModelMapper();
@@ -34,6 +34,11 @@ public class CategoryAppController {
                         modelMapper.map(category, AppCategoryDto.class))
                 .toList();
 
-        return ResponseEntity.ok(appCategories);
+        List<AppCategoryDto> mutableList = new ArrayList<>(appCategories);
+
+        mutableList.addFirst(new AppCategoryDto(0L,"All"));
+        Map<String,List<AppCategoryDto>> map=new HashMap<>();
+        map.put("content",mutableList);
+        return ResponseEntity.ok(map);
     }
 }
