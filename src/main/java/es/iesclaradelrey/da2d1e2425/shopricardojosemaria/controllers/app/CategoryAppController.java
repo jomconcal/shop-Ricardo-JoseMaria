@@ -36,7 +36,7 @@ public class CategoryAppController {
 
         List<AppCategoryDto> mutableList = new ArrayList<>(appCategories);
 
-        mutableList.addFirst(new AppCategoryDto(0L,"All"));
+        mutableList.addFirst(new AppCategoryDto(null,"All"));
         Map<String,List<AppCategoryDto>> map=new HashMap<>();
         map.put("content",mutableList);
         return ResponseEntity.ok(map);
