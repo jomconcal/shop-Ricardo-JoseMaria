@@ -2,7 +2,6 @@ package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.ProductInCartDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.CartItem;
-import org.springframework.data.domain.Page;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,7 +12,9 @@ public interface CartItemService {
     Optional<CartItem> findById(long id);
     Double pricePerCart(Collection<CartItem> cartItems);
 
-    void removeItemFromCart(Long cartItem);
+    void removeItemFromCart(Long cartItemId);
+
+    void removeProductFromCart(Long productId);
 
     void removeCart();
 
@@ -21,5 +22,7 @@ public interface CartItemService {
 
     void save(ProductInCartDto productToCartDto);
 
-    Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
+    void addToCart(Long productId, int quantity);
+
+//    Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir);
 }

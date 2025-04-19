@@ -8,10 +8,6 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ProductNotFoundE
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CartItemRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -60,6 +56,12 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
+    public void removeProductFromCart(Long productId) {
+        CartItem cartItem=cartItemRepository.findByProductId(productId).orElseThrow();
+        cartItemRepository.delete(cartItem);
+    }
+
+    @Override
     public void removeCart() {
         cartItemRepository.deleteAll();
     }
@@ -69,6 +71,11 @@ public class CartItemServiceImpl implements CartItemService {
     public void save(ProductInCartDto productInCart) {
         this.save(productInCart.getProductId(), productInCart.getQuantity());
 
+    }
+
+    @Override
+    public void addToCart(Long productId,int quantity) {
+       save(productId, quantity);
     }
 
     private void save(Long productId, int quantity) {
@@ -93,12 +100,12 @@ public class CartItemServiceImpl implements CartItemService {
         }
     }
 
-    @Override
-    public Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
-        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
-
-        return cartItemRepository.findAll(pageable);
-    }
+//    @Override
+//    public Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
+//        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+//        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
+//
+//        return cartItemRepository.findAll(pageable);
+//    }
 
 }
