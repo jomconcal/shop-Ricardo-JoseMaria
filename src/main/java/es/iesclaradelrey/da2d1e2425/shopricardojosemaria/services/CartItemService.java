@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface CartItemService {
-    void save(CartItem cartItem);
+    CartItem save(CartItem cartItem);
     Collection<CartItem> findAll();
     Optional<CartItem> findById(long id);
     Double pricePerCart(Collection<CartItem> cartItems);

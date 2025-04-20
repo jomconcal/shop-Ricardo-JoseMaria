@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +15,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AppCartItemDto {
     private int quantity;
+    @CreationTimestamp
     private LocalDateTime addingDate;
+    @UpdateTimestamp
     private LocalDateTime updatingDate;
     private Long productId;
     private String productName;
