@@ -21,4 +21,5 @@ public class AppCartItemDto {
     private LocalDateTime updatingDate;
     private Long productId;
     private String productName;
+    private String imageUrl;
 }

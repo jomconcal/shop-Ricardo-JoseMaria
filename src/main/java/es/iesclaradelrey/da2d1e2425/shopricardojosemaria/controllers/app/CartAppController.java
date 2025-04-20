@@ -29,7 +29,12 @@ public class CartAppController {
         Collection<CartItem> cartItems = cartItemService.findAll();
         ModelMapper modelMapper = new ModelMapper();
 
-        List<AppCartItemDto> cartItemsDto = cartItems.stream().map(cartItem -> modelMapper.map(cartItem, AppCartItemDto.class)).toList();
+        List<AppCartItemDto> cartItemsDto = cartItems.stream().map(cartItem -> {
+            AppCartItemDto dto = modelMapper.map(cartItem, AppCartItemDto.class);
+            dto.setImageUrl(cartItem.getProduct().getImageUrl());
+            return dto;
+        }).toList();
+
         HashMap<String, Collection<AppCartItemDto>> map = new HashMap<>();
         map.put("content", cartItemsDto);
         return ResponseEntity.ok(map);

@@ -82,6 +82,9 @@ public class CartItemServiceImpl implements CartItemService {
 
     //Esta función tiene dos métodos para actualizar la información de los DTOs relativa a la fecha en tiempo real.
     private void save(Long productId, int quantity) {
+        if (quantity<=0){
+            throw new IllegalArgumentException("quantity must be positive");
+        }
         Product product = productRepository
                 .findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product with id " + productId + " not found"));
