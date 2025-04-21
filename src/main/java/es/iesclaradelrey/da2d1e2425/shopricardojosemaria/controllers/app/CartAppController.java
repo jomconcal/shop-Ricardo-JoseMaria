@@ -32,6 +32,8 @@ public class CartAppController {
         List<AppCartItemDto> cartItemsDto = cartItems.stream().map(cartItem -> {
             AppCartItemDto dto = modelMapper.map(cartItem, AppCartItemDto.class);
             dto.setImageUrl(cartItem.getProduct().getImageUrl());
+            dto.setUnitPrice(cartItem.getProduct().getPrice());
+            dto.setTotalPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
             return dto;
         }).toList();
 

@@ -22,4 +22,6 @@ public class AppCartItemDto {
     private Long productId;
     private String productName;
     private String imageUrl;
+    private Double unitPrice;
+    private Double totalPrice;
 }
