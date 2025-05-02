@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers.app;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.app.AppCategoryDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.app.AppListCategoriesDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Category;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CategoryService;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class CategoryAppController {
 
 
     @GetMapping("/find")
-    public ResponseEntity<Map<String,List<AppCategoryDto>>>getCategories(){
+    public ResponseEntity<AppListCategoriesDto>getCategories(){
 
         Collection<Category>categories=categoryService.findAll();
         ModelMapper modelMapper=new ModelMapper();
@@ -37,8 +38,7 @@ public class CategoryAppController {
         List<AppCategoryDto> mutableList = new ArrayList<>(appCategories);
 
         mutableList.addFirst(new AppCategoryDto(null,"All"));
-        Map<String,List<AppCategoryDto>> map=new HashMap<>();
-        map.put("content",mutableList);
-        return ResponseEntity.ok(map);
+        AppListCategoriesDto appListCategoriesDto=new AppListCategoriesDto(mutableList);
+        return ResponseEntity.ok(appListCategoriesDto);
     }
 }
