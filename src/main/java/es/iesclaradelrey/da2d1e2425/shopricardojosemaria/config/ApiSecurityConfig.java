@@ -82,6 +82,7 @@ public class ApiSecurityConfig {
         // - Indicar las protegidas, y acabar con .anyRequest().permitAll() (la mayoría abierto y se restringe algo)
         // - Indicar las desprotegidas, y acabar con .anyRequest().authenticated() (mayoría cerrado y se permite algo)
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/img/**").permitAll()
                 .requestMatchers("/api/app/v1/auth/**").permitAll()
                 .anyRequest().authenticated());
 
