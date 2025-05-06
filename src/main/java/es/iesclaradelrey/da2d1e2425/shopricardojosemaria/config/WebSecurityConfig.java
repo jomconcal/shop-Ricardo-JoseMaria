@@ -46,13 +46,13 @@ public class WebSecurityConfig {
      */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        // De momento, permitir el acceso a cualquier parte de la aplicación.
         http.csrf(csrf ->
                         csrf.ignoringRequestMatchers("/api/cart"))
                 .headers(heather ->
                         heather.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/img/**").permitAll()
+                        .requestMatchers("/img/categories/fondo.jpg").permitAll()
+                        .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/login/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login-> login
