@@ -14,4 +14,6 @@ public interface AppUserService {
     AppUser save(AppUser user);
 
     List<AppUser> findAll();
+
+    Optional<AppUser> currentUser();
 }

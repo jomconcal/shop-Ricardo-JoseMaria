@@ -5,6 +5,8 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.UserNameAlreadyExistsException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.AppUserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +55,11 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public List<AppUser> findAll() {
         return appUserRepository.findAll();
+    }
+
+    @Override
+    public Optional<AppUser> currentUser() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        return appUserRepository.findByEmail(userName);
     }
 }

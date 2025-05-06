@@ -1,12 +1,15 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.controllers;
 
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.CartItem;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CartItemRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.AppUserService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.CartItemService;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ public class CartItemController {
 
     private final CartItemService cartItemService;
     private final ProductService productService;
+    private final AppUserService appUserService;
 
     @GetMapping("/{productId}")
     public String addToCartItem(
@@ -27,7 +31,8 @@ public class CartItemController {
             @RequestParam(name = "from") String from) {
 
         Product product = productService.findById(productId).orElseThrow();
-        CartItem cartItem= new CartItem(1,product);
+        AppUser appUser = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        CartItem cartItem= new CartItem(1,product,appUser);
         cartItemService.save(cartItem);
         return "redirect:"+from;
     }

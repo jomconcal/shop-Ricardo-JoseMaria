@@ -19,6 +19,14 @@ CREATE TABLE IF NOT EXISTS products (
                                         FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
+create table if not exists app_users(
+                                        user_id bigint primary key auto_increment,
+                                        first_name varchar(200) not null,
+                                        last_name varchar(200) not null,
+                                        email varchar(200) not null unique,
+                                        password varchar(200) not null
+);
+
 -- Crear la tabla de artículos del carrito
 CREATE TABLE IF NOT EXISTS cart_item (
                                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +35,9 @@ CREATE TABLE IF NOT EXISTS cart_item (
                                          updatingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
                                          product_id BIGINT NOT NULL,
                                          FOREIGN KEY (product_id) REFERENCES products(id),
-                                         CONSTRAINT UNIQUE_PRODUCT_ID UNIQUE (product_id)
+                                         CONSTRAINT UNIQUE_PRODUCT_ID UNIQUE (product_id),
+                                         user_id BIGINT NOT NULL,
+                                         FOREIGN KEY (user_id) REFERENCES app_users(user_id)
 );
 
 -- Crear la tabla de valoraciones

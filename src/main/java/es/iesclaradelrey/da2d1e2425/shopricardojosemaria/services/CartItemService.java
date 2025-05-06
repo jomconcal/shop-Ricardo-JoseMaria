@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface CartItemService {
     CartItem save(CartItem cartItem);
     Collection<CartItem> findAll();
-    Optional<CartItem> findById(long id);
+//    Optional<CartItem> findById(long id);
     Double pricePerCart(Collection<CartItem> cartItems);
 
     void removeItemFromCart(Long cartItemId);

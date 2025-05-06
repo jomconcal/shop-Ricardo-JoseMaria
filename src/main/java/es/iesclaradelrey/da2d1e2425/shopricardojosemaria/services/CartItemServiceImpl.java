@@ -1,15 +1,18 @@
 package es.iesclaradelrey.da2d1e2425.shopricardojosemaria.services;
 
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.ProductInCartDto;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.AppUser;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.CartItem;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.Product;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.InsufficientStock;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ItemNotBelongingToUserException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.ProductNotFoundException;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.CartItemRepository;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -24,6 +27,7 @@ public class CartItemServiceImpl implements CartItemService {
     private final CartItemRepository cartItemRepository;
     private final ProductRepository productRepository;
     private final EntityManager entityManager;
+    private final AppUserService appUserService;
 
     @Override
     public CartItem save(CartItem cartItem) {
@@ -38,13 +42,14 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public Collection<CartItem> findAll() {
-        return cartItemRepository.findAll();
+        Long userId = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found")).getId();
+        return cartItemRepository.findAllByAppUserId(userId);
     }
 
-    @Override
-    public Optional<CartItem> findById(long id) {
-        return cartItemRepository.findById(id);
-    }
+//    @Override
+//    public Optional<CartItem> findById(long id) {
+//        return cartItemRepository.findById(id);
+//    }
 
     @Override
     public Double pricePerCart(Collection<CartItem> cartItems) {
@@ -58,13 +63,19 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public void removeProductFromCart(Long productId) {
+        AppUser user = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found"));
         CartItem cartItem = cartItemRepository.findByProductId(productId).orElseThrow();
+        if(user.equals(cartItem.getAppUser())){
+            throw new ItemNotBelongingToUserException(user.getEmail()+ " cannot delete this item ");
+        }
         cartItemRepository.delete(cartItem);
     }
 
     @Override
+    @Transactional
     public void removeCart() {
-        cartItemRepository.deleteAll();
+        Long userId = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found")).getId();
+        cartItemRepository.deleteAllByUserId(userId);
     }
 
 
@@ -82,7 +93,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     //Esta función tiene dos métodos para actualizar la información de los DTOs relativa a la fecha en tiempo real.
     private void save(Long productId, int quantity) {
-        if (quantity<=0){
+        if (quantity <= 0) {
             throw new IllegalArgumentException("quantity must be positive");
         }
         Product product = productRepository
@@ -93,7 +104,8 @@ public class CartItemServiceImpl implements CartItemService {
             throw new InsufficientStock("There's only " + product.getStock() + " products in stock");
         }
 
-        CartItem cartItem = new CartItem(quantity, product);
+        AppUser appUser = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        CartItem cartItem = new CartItem(quantity, product, appUser);
         cartItem = this.save(cartItem);
 
         entityManager.flush();
@@ -109,13 +121,5 @@ public class CartItemServiceImpl implements CartItemService {
             cartItemRepository.save(cartItem);
         }
     }
-
-//    @Override
-//    public Page<CartItem> findAll(Integer pageNumber, Integer pageSize, String orderBy, String orderDir) {
-//        Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-//        Pageable pageable = PageRequest.of(pageNumber-1 , pageSize, Sort.by(direction, orderBy));
-//
-//        return cartItemRepository.findAll(pageable);
-//    }
 
 }
