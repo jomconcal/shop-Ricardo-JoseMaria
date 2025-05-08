@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS cart_item (
                                          updatingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
                                          product_id BIGINT NOT NULL,
                                          FOREIGN KEY (product_id) REFERENCES products(id),
-                                         CONSTRAINT UNIQUE_PRODUCT_ID UNIQUE (product_id),
                                          user_id BIGINT NOT NULL,
                                          FOREIGN KEY (user_id) REFERENCES app_users(user_id)
 );

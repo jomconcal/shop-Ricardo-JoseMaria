@@ -31,7 +31,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItem save(CartItem cartItem) {
-        Optional<CartItem> previousCartItem = cartItemRepository.findByProductId(cartItem.getProduct().getId());
+        Optional<CartItem> previousCartItem = cartItemRepository.findByProductIdAndAppUser(cartItem.getProduct().getId(),cartItem.getAppUser());
         if (previousCartItem.isPresent()) {
             int quantity = cartItem.getQuantity();
             cartItem = previousCartItem.get();
@@ -64,8 +64,8 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void removeProductFromCart(Long productId) {
         AppUser user = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        CartItem cartItem = cartItemRepository.findByProductId(productId).orElseThrow();
-        if(user.equals(cartItem.getAppUser())){
+        CartItem cartItem = cartItemRepository.findByProductIdAndAppUser(productId,user).orElseThrow();
+        if(!user.equals(cartItem.getAppUser())){
             throw new ItemNotBelongingToUserException(user.getEmail()+ " cannot delete this item ");
         }
         cartItemRepository.delete(cartItem);
