@@ -4,10 +4,12 @@ import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.LoginUserDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.RegisterUserDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.dto.app.JwtTokensDto;
 import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.entities.AppUser;
+import es.iesclaradelrey.da2d1e2425.shopricardojosemaria.errors.WrongCredentialsException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -81,7 +83,11 @@ public class AuthServiceImpl implements AuthService {
         // Internamente, la autenticación usa el AuthenticationProvider que a su vez usa el servicio
         // AppUserDetailsService y el PasswordEncoder.
         // Lanzará excepciones si no existe el usuario o si la contraseña no es correcta.
-        authenticationManager.authenticate(authenticationToken);
+        try {
+            authenticationManager.authenticate(authenticationToken);
+        } catch (AuthenticationException e) {
+            throw new WrongCredentialsException("Wrong credentials");
+        }
         // Obtenemos el usuario usando el servicio de usuarios.
         AppUser appUser = appUserService.findByEmail(loginUserDto.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User %s not found", loginUserDto.getEmail())));

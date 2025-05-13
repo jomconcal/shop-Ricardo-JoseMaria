@@ -23,4 +23,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> illegalArgument(IllegalArgumentException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
+    @ExceptionHandler(WrongCredentialsException.class)
+    public ResponseEntity<String> wrongCredentials(WrongCredentialsException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
 }
