@@ -47,7 +47,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf ->
-                        csrf.ignoringRequestMatchers("/api/cart","/admin/**"))
+                        csrf.ignoringRequestMatchers("/api/cart"))
                 .headers(heather ->
                         heather.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth

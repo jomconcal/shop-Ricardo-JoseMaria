@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -67,7 +66,6 @@ public class ProductAdminController {
         Collection<Category> categoryList = categoryService.findAll();
 
         model.addAttribute("categoryList", categoryList);
-//        model.addAttribute("product", addProductDto);
         model.addAttribute("textButton", "Add");
         model.addAttribute("title", "Add new product");
 
@@ -77,10 +75,6 @@ public class ProductAdminController {
         }
 
         try {
-
-//            if (new Random().nextBoolean()) {
-//                throw new RuntimeException("Error");
-//            }
 
             productService.createProduct(addProductDto);
             attributes.addFlashAttribute("message", "Product added successfully");
@@ -125,9 +119,6 @@ public class ProductAdminController {
         model.addAttribute("title", "Edit Product");
         model.addAttribute("textButton", "Update");
         try{
-//            if (new Random().nextBoolean()) {
-//                throw new RuntimeException("Error");
-//            }
             if(bindingResult.hasErrors()) {
                 System.out.println(bindingResult.getAllErrors());
                 return "admin/newProduct";
@@ -161,15 +152,9 @@ public class ProductAdminController {
     public String postDeleteCategory(@PathVariable Long idProduct,
                                      @Valid @ModelAttribute("product") DeleteProductDto deleteProductDto,
                                      BindingResult bindingResult,
-                                     RedirectAttributes attributes,Model model) {
-
-//        System.out.println(deleteCategoryDto);
-//        model.addAttribute("category", deleteCategoryDto);
-
+                                     RedirectAttributes attributes) {
         try{
-            if (new Random().nextBoolean()) {
-                throw new RuntimeException("Error");
-            }
+
             productService.deleteProduct(idProduct);
             attributes.addFlashAttribute("message", "Product deleted successfully");
             return "redirect:/admin/products";

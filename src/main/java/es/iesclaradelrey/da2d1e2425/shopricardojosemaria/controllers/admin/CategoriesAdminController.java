@@ -61,9 +61,7 @@ public class CategoriesAdminController {
 
 
         try {
-            if(new Random().nextBoolean()){
-                throw new RuntimeException("Error");
-            }
+
             if (bindingResult.hasErrors()) {
                 return "admin/newCategory";
             }
@@ -142,9 +140,9 @@ public class CategoriesAdminController {
 //        model.addAttribute("category", deleteCategoryDto);
 
         try{
-            if (new Random().nextBoolean()) {
-                throw new RuntimeException("Error");
-            }
+//            if (new Random().nextBoolean()) {
+//                throw new RuntimeException("Error");
+//            }
             categoryService.deleteCategory(idCategory);
             attributes.addFlashAttribute("message", "Category deleted successfully");
             return "redirect:/admin/categories";

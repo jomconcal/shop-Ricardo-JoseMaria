@@ -24,6 +24,7 @@
 </div>
 
 <form method="POST" th:object="${category}" class="container mt-4">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <div th:if="${#fields.hasGlobalErrors()}">
         <ul>
             <li th:each="error : ${#fields.globalErrors()}" th:text="${error}"></li>
