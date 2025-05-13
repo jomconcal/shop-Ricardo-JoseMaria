@@ -143,7 +143,7 @@ public class ProductAdminController {
             bindingResult.reject("", e.getMessage());
             return "admin/newProduct";
         }
-        attributes.addFlashAttribute("message", "Category updated successfully");
+        attributes.addFlashAttribute("message", "Product updated successfully");
         return "redirect:/admin/products";
     }
 
