@@ -39,4 +39,10 @@ public class GlobalExceptionHandler {
         ProblemDetail problem= ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT,e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
     }
+
+    @ExceptionHandler(ItemNotBelongingToUserException.class)
+    public ResponseEntity<ProblemDetail> itemNotBelongingToUser(ItemNotBelongingToUserException e) {
+        ProblemDetail problem= ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT,e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
+    }
 }

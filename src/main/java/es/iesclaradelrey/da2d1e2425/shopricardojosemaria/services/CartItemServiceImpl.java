@@ -64,7 +64,9 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void removeProductFromCart(Long productId) {
         AppUser user = appUserService.currentUser().orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        CartItem cartItem = cartItemRepository.findByProductIdAndAppUser(productId,user).orElseThrow();
+        CartItem cartItem = cartItemRepository.findByProductIdAndAppUser(productId,user).orElseThrow(()->
+                new ItemNotBelongingToUserException(user.getEmail() + " cannot delete this item ")
+        );
         if(!user.equals(cartItem.getAppUser())){
             throw new ItemNotBelongingToUserException(user.getEmail()+ " cannot delete this item ");
         }
